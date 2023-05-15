@@ -1,0 +1,1 @@
+//este es footer que deberia contener el logo, links a sobre quienes somos, un link a reservas, por si no ven el de arriba, tambien podria tener un link a whatsapp, direccion, saraza
