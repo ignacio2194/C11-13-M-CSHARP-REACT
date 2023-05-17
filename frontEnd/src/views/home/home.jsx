@@ -1,4 +1,5 @@
 import Eventos from "../especialDay/especialDay"
+import Footer from "../../components/footer/footer"
 
 const Home = () => {
   
@@ -10,7 +11,7 @@ const Home = () => {
     <Eventos />
     <h3>SUCURSALES</h3>
     <h3>RESEÑAS</h3>
-    <h3>FOOTER</h3>
+    <Footer/>
     </div>
   )
 }
