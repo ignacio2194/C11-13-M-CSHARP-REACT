@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 import logo from './logo.svg';
 import './App.css';
 
@@ -19,18 +18,6 @@ function App() {
           Learn React
         </a>
       </header>
-=======
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Form from "../src/components/Form/Form";
-import Hero from "./components/hero/hero";
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Hero />
-        <Form />
-      </BrowserRouter>
->>>>>>> Stashed changes
     </div>
   );
 }
