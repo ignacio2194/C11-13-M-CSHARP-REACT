@@ -10,17 +10,35 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { gapi } from "gapi-script";
 
 const theme = createTheme();
+const clientId = "226311912125-tpmbf5oplf7hbop4j78rvpj04tl7mjoe.apps.googleusercontent.com";
 
-export default function SignIn() {
+const SignIn = () => {
   const [UserData, setUserData] = useState({ email: "", password: "" });
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(UserData);
   };
 
+  const handlecallbackFunction = () => {
+    // Lógica para manejar el callback de Google Identity Toolkit
+  };
+
+  useEffect(() => {
+    window.google.accounts.id.initialize({
+      client_id: clientId,
+      callback: handlecallbackFunction,
+    });
+
+    window.google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      theme: "outline",
+      size: "large",
+    });
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -114,9 +132,11 @@ export default function SignIn() {
                 <hr />
               </Box>
             </Box>
+            <div id="signInDiv"></div>
           </Box>
         </Box>
       </Container>
     </ThemeProvider>
   );
-}
+};
+export default SignIn;
