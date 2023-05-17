@@ -1,5 +1,6 @@
-// import Form from '../src/components/Form/Form'
-import Home from "./views/home/index.jsx"
+
+  // import Form from '../src/components/Form/Form'
+import Home from "./views/home/home.jsx"
 
 function App() {
   return (
@@ -11,4 +12,3 @@ function App() {
 }
 
 export default App;
-
