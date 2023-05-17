@@ -1,17 +1,29 @@
 import Eventos from "../especialDay/especialDay"
 import Footer from "../../components/footer/footer"
+import Navbar from "../../components/navbar/navbar"
+import { useRef } from "react";
+import { Box } from "@mui/material";
 
 const Home = () => {
-  
+  const menu = useRef(null);
+  const events = useRef(null);
+  const sucursales = useRef(null);
+
   return (
     <div>
-    <h1>NAVBAR</h1> 
-    <h2>HERO</h2>
-    <h3>MENU CON SUS RESPECTIVOS MENU Y DELIVERY </h3>
-    <Eventos />
-    <h3>SUCURSALES</h3>
-    <h3>RESEÑAS</h3>
-    <Footer/>
+      <Navbar menu={menu} events={events} sucursales={sucursales} />
+      <h2>HERO</h2>
+      <Box ref={menu} id="menu" sx={{ minHeight: "100vh", width: "100vw" }}>
+        MENÚ
+      </Box>
+      <Box ref={events} id="events" sx={{ minHeight: "100vh", width: "100vw" }}>
+        <Eventos />
+      </Box>
+      <Box ref={sucursales} id="sucursales" sx={{ minHeight: "100vh", width: "100vw" }}>
+        SUCURSALES
+      </Box>
+      <h3>RESEÑAS</h3>
+      <Footer />
     </div>
   )
 }
