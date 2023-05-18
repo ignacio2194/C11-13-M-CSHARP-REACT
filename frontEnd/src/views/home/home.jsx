@@ -23,7 +23,7 @@ const Home = () => {
         SUCURSALES
       </Box>
       <h3>RESEÑAS</h3>
-      <Footer />
+      <Footer/>
     </div>
   )
 }
