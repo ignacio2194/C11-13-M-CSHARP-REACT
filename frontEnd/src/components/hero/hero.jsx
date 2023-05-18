@@ -43,9 +43,9 @@ const SmallButton = styled(Button)(({ theme }) => ({
 }));
 
 const Hero = () => (
-  <Container maxWidth="lg" disableGutters>
+  <Container maxWidth="xlg" disableGutters>
     <ImageContainer>
-      <BackgroundImage src={image} alt="img" />
+      <BackgroundImage src={image} alt="img"/>
       <TextContainer>
         <Typography variant="h5" component="span" sx={{ fontSize: 'clamp(10px, 2vw, 14px)', lineHeight: '1.2', maxWidth: '100%', whiteSpace: 'normal', wordWrap: 'break-word' }}>
           Vive una experiencia gastronómica única<br />que despierta tus sentidos y te transporta a tierras auténticas llenas de tradición
