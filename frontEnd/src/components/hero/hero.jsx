@@ -1,6 +1,6 @@
 import { styled } from '@mui/system';
 import { Button, Container, Grid, Typography } from '@mui/material';
-import image from '../../img/salmon2.jpg';
+import image from '../../img/AdobeStock_552068932.jpeg';
 
 // Estilos del contenedor principal
 const ContentWrapper = styled('div')(({ theme }) => ({
@@ -16,9 +16,12 @@ const ContentWrapper = styled('div')(({ theme }) => ({
 
 // Estilos del contenedor de la imagen
 const ImageContainer = styled('div')({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'flex-start',
+  position: 'absolute',
+  width: '100%',
+  height: '10%',
+  top: 0,
+  left: 0,
+  zIndex: -1,
 });
 
 // Estilos del botón
@@ -58,7 +61,7 @@ const Hero = () => (
         {/* Contenedor de la imagen */}
         <ImageContainer>
           {/* Imagen */}
-          <img src={image} alt="img" style={{ width: '100%', paddingTop: '15px' }} />
+          <img src={image} alt="img" style={{ width: '100%', height: "150%", paddingTop: '15px' }} />
         </ImageContainer>
       </Grid>
     </Grid>
