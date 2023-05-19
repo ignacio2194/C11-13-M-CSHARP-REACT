@@ -1,6 +1,7 @@
 import Eventos from "../especialDay/especialDay"
 import Footer from "../../components/footer/footer"
 import Navbar from "../../components/navbar/navbar"
+import Hero from "../../components/hero/hero"
 import { useRef } from "react";
 import { Box } from "@mui/material";
 
@@ -12,7 +13,7 @@ const Home = () => {
   return (
     <div>
       <Navbar menu={menu} events={events} sucursales={sucursales} />
-      <h2>HERO</h2>
+      <Hero />
       <Box ref={menu} id="menu" sx={{ minHeight: "100vh", width: "100vw" }}>
         MENÚ
       </Box>
