@@ -14,7 +14,8 @@ import React, { useState, useEffect } from "react";
 import GoogleBtn from "../googleButton/GoogleBtn";
 
 const theme = createTheme();
-const clientId = "226311912125-tpmbf5oplf7hbop4j78rvpj04tl7mjoe.apps.googleusercontent.com";
+const clientId =
+  "226311912125-tpmbf5oplf7hbop4j78rvpj04tl7mjoe.apps.googleusercontent.com";
 
 const SignIn = () => {
   const [UserData, setUserData] = useState({ email: "", password: "" });
@@ -23,8 +24,6 @@ const SignIn = () => {
     event.preventDefault();
     console.log(UserData);
   };
-
-
 
   return (
     <ThemeProvider theme={theme}>
@@ -36,17 +35,32 @@ const SignIn = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            backgroundColor: "#FFD7BD",
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             {/* <LockOutlinedIcon /> */}
           </Avatar>
-          <Typography variant="h3" sx={{ textAlign: "center" }}>
+          <Typography
+            variant="h3"
+            sx={{
+              textAlign: "center",
+              fontFamily: "Balsamiq Sans, cursive",
+              fontWeight: "700",
+            }}
+          >
             ¡Bienvenido!
           </Typography>
           <Typography
             variant="body1"
-            sx={{ textAlign: "center", marginTop: "10px" }}
+            sx={{
+              textAlign: "center",
+              marginTop: "10px",
+              fontFamily: "Open Sans",
+              fontWeight: 400,
+              fontSize: '25px',
+              lineHeight: '40px',
+            }}
           >
             Ingresa tus datos para acceder a tu cuenta
           </Typography>
@@ -78,21 +92,21 @@ const SignIn = () => {
               autoComplete="current-password"
               onChange={(e) => setUserData({ [e.target.name]: e.target.value })}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, backgroundColor: "#855D44" }}
             >
               Sign In
             </Button>
             <Grid container justifyContent="center">
               <Grid item xs={12} textAlign="center">
-                <Typography variant="body2">¿No tienes cuenta?</Typography>
+                <Typography variant="body2" sx={{display:'inline-block',marginRight:'10px'}}>¿No tienes cuenta?</Typography>
                 <Link href="#" variant="body2">
                   {"Crear cuenta"}
                 </Link>
@@ -119,9 +133,8 @@ const SignIn = () => {
                 <hr />
               </Box>
             </Box>
-          
           </Box>
-          <GoogleBtn/>
+          <GoogleBtn />
         </Box>
       </Container>
     </ThemeProvider>
