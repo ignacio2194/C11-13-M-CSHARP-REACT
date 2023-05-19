@@ -23,15 +23,9 @@ function App() {
         <Route path="/sucursales" element={<Sucursales />} />
         <Route path="/login" element={<Login />} />
         <Route path="/crear-cuenta" element={<CrearCuenta />} />
-        <Route
-          path="/recuperar-password"
-          element={<RecuperarPassword />}
-        />
+        <Route path="/recuperar-password" element={<RecuperarPassword />} />
         <Route path="/reservas" element={<Reservas />} />
-        <Route
-          path="/detalles-pedido"
-          element={<Details />}
-        />
+        <Route path="/detalles-pedido" element={<Details />}/>
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
       <Footer />
