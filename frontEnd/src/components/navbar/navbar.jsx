@@ -14,7 +14,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import NavListDrawerResponsive from "./navListDrawerResponsive.jsx";
 
-export default function Navbar({ menu, events, sucursales }) {
+export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -66,11 +66,11 @@ export default function Navbar({ menu, events, sucursales }) {
               <MenuIcon />
             </IconButton>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Box>
+              <Box sx={{ display: "flex", gap: "16px" }}>
                 <NavLink
                   to="/"
                   style={({ isActive }) => isActive
-                    ? { color: "white", backgroundColor: "black", padding: "4px" }
+                    ? { color: "white", backgroundColor: "black" }
                     : {}
                   }
                 >
@@ -79,7 +79,7 @@ export default function Navbar({ menu, events, sucursales }) {
                 <NavLink
                   to="/menu"
                   style={({ isActive }) => isActive
-                    ? { color: "white", backgroundColor: "black", padding: "4px" }
+                    ? { color: "white", backgroundColor: "black" }
                     : {}
                   }
                 >
@@ -88,7 +88,7 @@ export default function Navbar({ menu, events, sucursales }) {
                 <NavLink
                   to="/eventos"
                   style={({ isActive }) => isActive
-                    ? { color: "white", backgroundColor: "black", padding: "4px" }
+                    ? { color: "white", backgroundColor: "black" }
                     : {}
                   }
                 >
@@ -97,7 +97,7 @@ export default function Navbar({ menu, events, sucursales }) {
                 <NavLink
                   to="/sucursales"
                   style={({ isActive }) => isActive
-                    ? { color: "white", backgroundColor: "black", padding: "4px" }
+                    ? { color: "white", backgroundColor: "black" }
                     : {}
                   }
                 >
@@ -106,7 +106,7 @@ export default function Navbar({ menu, events, sucursales }) {
                 <NavLink
                   to="/login"
                   style={({ isActive }) => isActive
-                    ? { color: "white", backgroundColor: "black", padding: "4px" }
+                    ? { color: "white", backgroundColor: "black" }
                     : {}
                   }
                 >
