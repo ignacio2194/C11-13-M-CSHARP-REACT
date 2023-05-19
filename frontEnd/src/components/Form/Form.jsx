@@ -10,12 +10,10 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import GoogleBtn from "../googleButton/GoogleBtn";
 
 const theme = createTheme();
-const clientId =
-  "226311912125-tpmbf5oplf7hbop4j78rvpj04tl7mjoe.apps.googleusercontent.com";
 
 const SignIn = () => {
   const [UserData, setUserData] = useState({ email: "", password: "" });
@@ -122,7 +120,7 @@ const SignIn = () => {
                 </Link>
               </Grid>
             </Grid>
-            <Box display="flex" alignItems="center">
+            <Box display="flex" alignItems="center" justifyContent="center">
               <Box flex={1}>
                 <hr />
               </Box>
@@ -132,10 +130,13 @@ const SignIn = () => {
               <Box flex={1}>
                 <hr />
               </Box>
+            
             </Box>
+            <GoogleBtn /> 
           </Box>
-          <GoogleBtn />
+     
         </Box>
+    
       </Container>
     </ThemeProvider>
   );

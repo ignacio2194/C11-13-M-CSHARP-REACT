@@ -1,8 +1,10 @@
-import Form from '../../components/Form/Form'
+import Form from "../../components/Form/Form";
 
 const Login = () => {
   return (
-    <Form />
-  )
-}
-export default Login
+    <div>
+      <Form />
+    </div>
+  );
+};
+export default Login;
