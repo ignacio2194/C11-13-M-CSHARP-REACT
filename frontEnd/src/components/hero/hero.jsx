@@ -1,67 +1,61 @@
 import { styled } from '@mui/system';
-import { Button, Container, Grid, Typography } from '@mui/material';
-import image from '../../img/salmon2.jpg';
+import { createTheme, Button, Container, Grid, Typography } from '@mui/material';
+import image from '../../img/hero-foto.png';
 
-// Estilos del contenedor principal
-const ContentWrapper = styled('div')(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  textAlign: 'center',
-  [theme.breakpoints.up('sm')]: {
-    alignItems: 'center',
-  },
-}));
+const theme = createTheme();
 
-// Estilos del contenedor de la imagen
 const ImageContainer = styled('div')({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'flex-start',
+  position: 'relative',
+  width: '100%',
+  overflow: 'hidden', // Oculta cualquier contenido que se desborde del contenedor
+  margin: 0, // Elimina los márgenes por defecto
 });
 
-// Estilos del botón
-const SmallButton = styled(Button)(({ theme }) => ({
-  padding: theme.spacing(1, 2),
-  fontSize: '40%',
-}));
+const BackgroundImage = styled('img')({
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+});
 
-// Estilos del contenedor de los botones
+const TextContainer = styled('div')({
+  position: 'absolute',
+  bottom: '10px', // Alineación a 10px del borde inferior
+  left: '5%',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: theme.spacing(0.5), // Espacio reducido entre líneas del texto
+  color: 'white', // Cambio de color de texto a blanco
+  textAlign: 'left', // Alineación del párrafo a la izquierda
+  width: '50%', // Anchura del contenedor de texto
+});
+
 const ButtonContainer = styled('div')(({ theme }) => ({
   display: 'flex',
-  justifyContent: 'center',
-  marginTop: theme.spacing(2),
-  gap: theme.spacing(2), // Agrega espacio entre los botones
+  justifyContent: 'flex-start',
+  gap: theme.spacing(1), // Espacio entre botones
+  marginTop: theme.spacing(1), // Espacio superior
+}));
+
+const SmallButton = styled(Button)(({ theme }) => ({
+  padding: theme.spacing(0.5, 1),
+  fontSize: 'clamp(10px, 1.5vw, 14px)',
 }));
 
 const Hero = () => (
-  <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', maxWidth: 400, flexDirection: 'row', width: '400px', paddingTop: '50px' }}>
-    <Grid container spacing={0}>
-      <Grid item xs={12} sm={6}>
-        {/* Contenido de la columna izquierda */}
-        <ContentWrapper>
-          {/* Título */}
-          <Typography variant="h5" component="span" sx={{ fontSize: '180%' }}>
-            Sabores de la Tierra
-          </Typography>
-          {/* Contenedor de los botones */}
-          <ButtonContainer>
-            {/* Botón Reservar */}
-            <SmallButton variant="contained">Reservar</SmallButton>
-            {/* Botón Delivery */}
-            <SmallButton variant="contained">Delivery</SmallButton>
-          </ButtonContainer>
-        </ContentWrapper>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        {/* Contenedor de la imagen */}
-        <ImageContainer>
-          {/* Imagen */}
-          <img src={image} alt="img" style={{ width: '100%', paddingTop: '15px' }} />
-        </ImageContainer>
-      </Grid>
-    </Grid>
+  <Container maxWidth="xlg" disableGutters>
+    <ImageContainer>
+      <BackgroundImage src={image} alt="img"/>
+      <TextContainer>
+        <Typography variant="h5" component="span" sx={{ fontSize: 'clamp(10px, 2vw, 14px)', lineHeight: '1.2', maxWidth: '100%', whiteSpace: 'normal', wordWrap: 'break-word' }}>
+          Vive una experiencia gastronómica única<br />que despierta tus sentidos y te transporta a tierras auténticas llenas de tradición
+        </Typography>
+        <ButtonContainer>
+          <SmallButton variant="contained">Reservar</SmallButton>
+          <SmallButton variant="contained">Delivery</SmallButton>
+        </ButtonContainer>
+      </TextContainer>
+    </ImageContainer>
   </Container>
 );
 

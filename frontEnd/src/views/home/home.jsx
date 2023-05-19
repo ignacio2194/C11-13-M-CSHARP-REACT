@@ -1,30 +1,19 @@
 import Eventos from "../especialDay/especialDay"
-import Footer from "../../components/footer/footer"
-import Navbar from "../../components/navbar/navbar"
-import { useRef } from "react";
-import { Box } from "@mui/material";
+import Hero from "../../components/hero/hero"
+import Menu from "../../components/menu/menu";
+import Sucursales from "../../components/sucursales/sucursales";
+import Resenias from "../../components/resenias/resenias";
 
 const Home = () => {
-  const menu = useRef(null);
-  const events = useRef(null);
-  const sucursales = useRef(null);
-
   return (
-    <div>
-      <Navbar menu={menu} events={events} sucursales={sucursales} />
-      <h2>HERO</h2>
-      <Box ref={menu} id="menu" sx={{ minHeight: "100vh", width: "100vw" }}>
-        MENÚ
-      </Box>
-      <Box ref={events} id="events" sx={{ minHeight: "100vh", width: "100vw" }}>
-        <Eventos />
-      </Box>
-      <Box ref={sucursales} id="sucursales" sx={{ minHeight: "100vh", width: "100vw" }}>
-        SUCURSALES
-      </Box>
-      <h3>RESEÑAS</h3>
-      <Footer/>
-    </div>
+    <>
+      <Hero />
+      <Menu />
+      <Eventos />
+      <Sucursales />
+      <Resenias />
+    </>
   )
 }
-export default Home
+
+export default Home;

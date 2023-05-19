@@ -18,11 +18,11 @@ const Footer = () => {
             <span style={{ margin: '0 8px' }}>Menú</span>
           </Link>
           |
-          <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+          <Link to="/eventos" style={{ textDecoration: 'none', color: 'white' }}>
             <span style={{ margin: '0 8px' }}>Eventos</span>
           </Link>
           |
-          <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
+          <Link to="/sucursales" style={{ textDecoration: 'none', color: 'white' }}>
             <span style={{ marginLeft: '8px' }}>Sucursales</span>
           </Link>
         </Typography>
@@ -43,8 +43,10 @@ const Footer = () => {
           <Typography variant="body2" style={{ marginRight: '8px' }}>
             Síguenos:
           </Typography>
-          <FacebookIcon style={{ marginRight: '4px' }} />
-          <InstagramIcon />
+          <a href="https://www.facebook.com/" target="_blank" style={{ textDecoration: 'none', color: 'white' }}>
+            <FacebookIcon style={{ marginRight: '4px' }} /></a>
+            <a href="https://www.instagram.com/" target="_blank" style={{ textDecoration: 'none', color: 'white' }}>
+            <InstagramIcon /></a>
         </Box>
       </Box>
       <hr style={{ margin: '0', border: 'none', borderTop: '1px solid white' }} />

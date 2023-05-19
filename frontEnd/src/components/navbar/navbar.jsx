@@ -1,6 +1,5 @@
 import {
   AppBar,
-  Button,
   Drawer,
   IconButton,
   Toolbar,
@@ -13,22 +12,13 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import ScrollToTop from "./scrollToTop";
 import NavListDrawerResponsive from "./navListDrawerResponsive.jsx";
 
-export default function Navbar({ menu, events, sucursales }) {
+export default function Navbar() {
   const [open, setOpen] = useState(false);
-
-  const scrollToSection = (elementRef) => {
-    window.scrollTo({
-      top: elementRef.current.offsetTop,
-      behavior: "smooth"
-    });
-  };
 
   return (
     <>
-      <ScrollToTop />
       <AppBar position="static">
         <Stack
           direction="row"
@@ -76,24 +66,51 @@ export default function Navbar({ menu, events, sucursales }) {
               <MenuIcon />
             </IconButton>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Box>
-                <NavLink to="#menu" onClick={() => scrollToSection(menu)}>
-                  <Button sx={{ color: "#fff" }}>
-                    <Typography>Menú</Typography>
-                  </Button>
+              <Box sx={{ display: "flex", gap: "16px" }}>
+                <NavLink
+                  to="/"
+                  style={({ isActive }) => isActive
+                    ? { color: "white", backgroundColor: "black" }
+                    : {}
+                  }
+                >
+                  <Typography>Inicio</Typography>
                 </NavLink>
-                <NavLink to="#events" onClick={() => scrollToSection(events)}>
-                  <Button sx={{ color: "#fff" }}>
-                    <Typography>Eventos</Typography>
-                  </Button>
+                <NavLink
+                  to="/menu"
+                  style={({ isActive }) => isActive
+                    ? { color: "white", backgroundColor: "black" }
+                    : {}
+                  }
+                >
+                  <Typography>Menú</Typography>
                 </NavLink>
-                <NavLink to="#sucursales" onClick={() => scrollToSection(sucursales)}>
-                  <Button sx={{ color: "#fff" }}>
-                    <Typography>Sucursales</Typography>
-                  </Button>
+                <NavLink
+                  to="/eventos"
+                  style={({ isActive }) => isActive
+                    ? { color: "white", backgroundColor: "black" }
+                    : {}
+                  }
+                >
+                  <Typography>Eventos</Typography>
                 </NavLink>
-                <NavLink to="/login" >
-                  <Button variant="contained">Iniciar Sesión</Button>
+                <NavLink
+                  to="/sucursales"
+                  style={({ isActive }) => isActive
+                    ? { color: "white", backgroundColor: "black" }
+                    : {}
+                  }
+                >
+                  <Typography>Sucursales</Typography>
+                </NavLink>
+                <NavLink
+                  to="/login"
+                  style={({ isActive }) => isActive
+                    ? { color: "white", backgroundColor: "black" }
+                    : {}
+                  }
+                >
+                  <Typography>Iniciar Sesíon</Typography>
                 </NavLink>
               </Box>
             </Box>
@@ -108,9 +125,6 @@ export default function Navbar({ menu, events, sucursales }) {
       >
         <NavListDrawerResponsive
           onClick={() => setOpen(false)}
-          menu={menu}
-          events={events}
-          sucursales={sucursales}
         />
       </Drawer>
     </>

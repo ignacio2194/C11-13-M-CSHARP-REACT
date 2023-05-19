@@ -1,6 +1,10 @@
-const CardMenu = () => {
+export default function CardMenu() {
+
+    
+
   return (
-    <div>ESTE VAN A SER LAS CARDS DEL MENU, SU CORRESPONDIENTE FILTRADO POR CATEGORIA Y SU PAGINADO.</div>
+    <div>
+         
+    </div>
   )
 }
-export default CardMenu
