@@ -3,29 +3,31 @@ import { AppBar, Toolbar, Typography, Box } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import logo from '../../img/logo-sabores@2x.png';
-import { Link } from 'react-router-dom';
+import scrollToSection from '../../utils/scrollToSection';
 
-const Footer = () => {
+const Footer = ({ menu, events, sucursales }) => {
   return (
     <AppBar position="static" style={{ backgroundColor: '#835c44', padding: '50px' }}>
       <Toolbar>
-        <Typography variant="body1" style={{ flexGrow: 1, textAlign: 'center' }}>
-          <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
-            <span style={{ marginRight: '8px' }}>Inicio</span>
-          </Link>
+        <Box style={{ display: "flex", gap: 8, margin: "auto" }}>
+          <Box
+            onClick={() => scrollToSection(menu)}
+          >
+            <Typography>Menú</Typography>
+          </Box>
           |
-          <Link to="/menu" style={{ textDecoration: 'none', color: 'white'}}>
-            <span style={{ margin: '0 8px' }}>Menú</span>
-          </Link>
+          <Box
+            onClick={() => scrollToSection(events)}
+          >
+            <Typography>Eventos</Typography>
+          </Box>
           |
-          <Link to="/eventos" style={{ textDecoration: 'none', color: 'white' }}>
-            <span style={{ margin: '0 8px' }}>Eventos</span>
-          </Link>
-          |
-          <Link to="/sucursales" style={{ textDecoration: 'none', color: 'white' }}>
-            <span style={{ marginLeft: '8px' }}>Sucursales</span>
-          </Link>
-        </Typography>
+          <Box
+            onClick={() => scrollToSection(sucursales)}
+          >
+            <Typography>Sucursales</Typography>
+          </Box>
+        </Box>
       </Toolbar>
       <Box display="flex" justifyContent="center" style={{ padding: '30px' }}>
         <img src={logo} alt="Logo" style={{ height: '100px' }} />
@@ -43,9 +45,9 @@ const Footer = () => {
           <Typography variant="body2" style={{ marginRight: '8px' }}>
             Síguenos:
           </Typography>
-          <a href="https://www.facebook.com/" target="_blank" style={{ textDecoration: 'none', color: 'white' }}>
+          <a href="https://www.facebook.com/" target="_blank" style={{ textDecoration: 'none', color: 'white' }} rel="noreferrer">
             <FacebookIcon style={{ marginRight: '4px' }} /></a>
-            <a href="https://www.instagram.com/" target="_blank" style={{ textDecoration: 'none', color: 'white' }}>
+          <a href="https://www.instagram.com/" target="_blank" style={{ textDecoration: 'none', color: 'white' }} rel="noreferrer">
             <InstagramIcon /></a>
         </Box>
       </Box>
