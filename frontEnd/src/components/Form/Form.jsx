@@ -10,144 +10,156 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useState } from "react";
 import GoogleBtn from "../googleButton/GoogleBtn";
-
+import "../Form/Form.css";
+import Navbar from "../navbar/navbar";
+import Footer from "../footer/footer";
 const theme = createTheme();
 
 const SignIn = () => {
   const [UserData, setUserData] = useState({ email: "", password: "" });
-
+  const clientID =
+    "226311912125-tpmbf5oplf7hbop4j78rvpj04tl7mjoe.apps.googleusercontent.com";
+  const URL = "http://localhost:3000";
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(UserData);
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: "#FFD7BD",
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            {/* <LockOutlinedIcon /> */}
-          </Avatar>
-          <Typography
-            variant="h3"
-            sx={{
-              textAlign: "center",
-              fontFamily: "Balsamiq Sans, cursive",
-              fontWeight: "700",
-            }}
-          >
-            ¡Bienvenido!
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              textAlign: "center",
-              marginTop: "10px",
-              fontFamily: "Open Sans",
-              fontWeight: 400,
-              fontSize: "25px",
-              lineHeight: "40px",
-            }}
-          >
-            Ingresa tus datos para acceder a tu cuenta
-          </Typography>
+    <>
+      <Navbar />
+      {/* <NavListDrawerResponsive/> */}
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
           <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              backgroundColor: "#FFD7BD",
+            }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={(e) =>   setUserData((prevState) => ({
-    ...prevState,
-    [e.target.name]: e.target.value,
-  }))
-}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={(e) =>   setUserData((prevState) => ({
-    ...prevState,
-    [e.target.name]: e.target.value,
-  }))
-}
-            />
-            {/* <FormControlLabel
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              {/* <LockOutlinedIcon /> */}
+            </Avatar>
+            <Typography
+              variant="h3"
+              sx={{
+                textAlign: "center",
+                fontFamily: "Balsamiq Sans, cursive",
+                fontWeight: "700",
+              }}
+            >
+              ¡Bienvenido!
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                textAlign: "center",
+                marginTop: "10px",
+                fontFamily: "Open Sans",
+                fontWeight: 400,
+                fontSize: "25px",
+                lineHeight: "40px",
+              }}
+            >
+              Ingresa tus datos para acceder a tu cuenta
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={(e) =>
+                  setUserData((prevState) => ({
+                    ...prevState,
+                    [e.target.name]: e.target.value,
+                  }))
+                }
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={(e) =>
+                  setUserData((prevState) => ({
+                    ...prevState,
+                    [e.target.name]: e.target.value,
+                  }))
+                }
+              />
+              {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             /> */}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: "#855D44" }}
-            >
-              Sign In
-            </Button>
-            <Grid container justifyContent="center">
-              <Grid item xs={12} textAlign="center">
-                <Typography
-                  variant="body2"
-                  sx={{ display: "inline-block", marginRight: "10px" }}
-                >
-                  ¿No tienes cuenta?
-                </Typography>
-                <Link href="#" variant="body2">
-                  {"Crear cuenta"}
-                </Link>
-              </Grid>
-              <Grid
-                item
-                xs={12}
-                textAlign="center"
-                sx={{ marginBottom: "10px" }}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, backgroundColor: "#855D44" }}
               >
-                <Link href="#" variant="body2">
-                  {"¿Olvidaste tu usuario y/o contraseña?"}
-                </Link>
+                Sign In
+              </Button>
+              <Grid container justifyContent="center">
+                <Grid item xs={12} textAlign="center">
+                  <Typography
+                    variant="body2"
+                    sx={{ display: "inline-block", marginRight: "10px" }}
+                  >
+                    ¿No tienes cuenta?
+                  </Typography>
+                  <Link href="#" variant="body2">
+                    {"Crear cuenta"}
+                  </Link>
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  textAlign="center"
+                  sx={{ marginBottom: "10px" }}
+                >
+                  <Link href="#" variant="body2">
+                    {"¿Olvidaste tu usuario y/o contraseña?"}
+                  </Link>
+                </Grid>
               </Grid>
-            </Grid>
-            <Box display="flex" alignItems="center" justifyContent="center">
-              <Box flex={1}>
-                <hr />
+              <Box display="flex" alignItems="center" justifyContent="center">
+                <Box flex={1}>
+                  <hr />
+                </Box>
+                <Typography variant="body1" align="center" sx={{ px: 1 }}>
+                  Ingresa con
+                </Typography>
+                <Box flex={1}>
+                  <hr />
+                </Box>
               </Box>
-              <Typography variant="body1" align="center" sx={{ px: 1 }}>
-                Ingresa con
-              </Typography>
-              <Box flex={1}>
-                <hr />
-              </Box>
+              <GoogleBtn
+                style={{ display: "flex", justifyContent: "center" }}
+              />
             </Box>
-            <GoogleBtn />
           </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
-
+        </Container>
+        <Footer />
+      </ThemeProvider>
+    </>
   );
 };
 export default SignIn;

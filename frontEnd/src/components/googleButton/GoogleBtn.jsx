@@ -4,8 +4,8 @@ const GoogleBtn = () => {
 const clientID ='226311912125-tpmbf5oplf7hbop4j78rvpj04tl7mjoe.apps.googleusercontent.com'
 const URL ='http://localhost:3000'
   return (
-    <div>
-  <div
+    <>
+   <div
       id="g_id_onload"
       data-client_id={clientID}
       data-context="signin"
@@ -24,7 +24,7 @@ const URL ='http://localhost:3000'
       data-locale="es-419"
       data-logo_alignment="left"
     ></div>
-    </div>
+  </>
   )
 }
 
