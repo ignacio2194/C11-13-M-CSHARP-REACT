@@ -11,6 +11,7 @@ import RecuperarPassword from "./components/Form/RecuperarPassword";
 import Reservas from "./components/reservas/reservas";
 import Details from "./views/details/details";
 
+
 function App() {
   
   return (
@@ -34,6 +35,7 @@ function App() {
         />
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
+     
       <Footer />
     </div>
   );

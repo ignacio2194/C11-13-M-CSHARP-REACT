@@ -1,3 +1,5 @@
+import GoogleBtn from "../googleButton/GoogleBtn";
+
 const Menu = () => {
   return (
     <section

@@ -2,8 +2,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -56,8 +54,8 @@ const SignIn = () => {
               marginTop: "10px",
               fontFamily: "Open Sans",
               fontWeight: 400,
-              fontSize: '25px',
-              lineHeight: '40px',
+              fontSize: "25px",
+              lineHeight: "40px",
             }}
           >
             Ingresa tus datos para acceder a tu cuenta
@@ -77,7 +75,11 @@ const SignIn = () => {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={(e) => setUserData({ [e.target.name]: e.target.value })}
+              onChange={(e) =>   setUserData((prevState) => ({
+    ...prevState,
+    [e.target.name]: e.target.value,
+  }))
+}
             />
             <TextField
               margin="normal"
@@ -88,7 +90,11 @@ const SignIn = () => {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={(e) => setUserData({ [e.target.name]: e.target.value })}
+              onChange={(e) =>   setUserData((prevState) => ({
+    ...prevState,
+    [e.target.name]: e.target.value,
+  }))
+}
             />
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -104,7 +110,12 @@ const SignIn = () => {
             </Button>
             <Grid container justifyContent="center">
               <Grid item xs={12} textAlign="center">
-                <Typography variant="body2" sx={{display:'inline-block',marginRight:'10px'}}>¿No tienes cuenta?</Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ display: "inline-block", marginRight: "10px" }}
+                >
+                  ¿No tienes cuenta?
+                </Typography>
                 <Link href="#" variant="body2">
                   {"Crear cuenta"}
                 </Link>
@@ -130,15 +141,13 @@ const SignIn = () => {
               <Box flex={1}>
                 <hr />
               </Box>
-            
             </Box>
-            <GoogleBtn /> 
+            <GoogleBtn />
           </Box>
-     
         </Box>
-    
       </Container>
     </ThemeProvider>
+
   );
 };
 export default SignIn;
