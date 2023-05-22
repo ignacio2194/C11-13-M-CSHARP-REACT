@@ -1,62 +1,71 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
+import React from 'react';
+import { AppBar, Toolbar, Typography, Box } from '@mui/material';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import logo from '../../img/logo-sabores@2x.png';
+import scrollToSection from '../../utils/scrollToSection';
 
-export default function Footer() {
+const Footer = ({ menu, events, sucursales }) => {
   return (
-    <Box
-      component="footer"
-      sx={{
-        py: 3,
-        px: 2,
-        mt: 'auto',
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light'
-            ? theme.palette.grey[200]
-            : theme.palette.grey[800],
-      }}
-    >
-      <Container
-        maxWidth="sm"
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <div>
-          {/* Logo */}
-          <img src="/ruta/al/logo.png" alt="Logo" />
-        </div>
-        <div
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flex: 1,
-          }}
-        >
-          {/* Enlaces centrales */}
-          <Link  color="inherit" underline="none" sx={{ mx: 2 }}>
-            About us
-          </Link>
-          <Link  color="inherit" underline="none" sx={{ mx: 2 }}>
-            Reservas
-          </Link>
-          {/* Link "WhatsApp" */}
-          <Link color="inherit" underline="none" sx={{ mx: 2 }}>
-            WhatsApp
-          </Link>
-        </div>
-        <div>
-          {/* Dirección */}
-          <Typography variant="body2" sx={{ textAlign: 'right' }}>
-            Calle Falsa 1234
+    <AppBar position="static" style={{ backgroundColor: '#835c44', padding: '50px' }}>
+      <Toolbar>
+        <Box style={{ display: "flex", gap: 8, margin: "auto" }}>
+          <Box
+            onClick={() => scrollToSection(menu)}
+          >
+            <Typography>Menú</Typography>
+          </Box>
+          |
+          <Box
+            onClick={() => scrollToSection(events)}
+          >
+            <Typography>Eventos</Typography>
+          </Box>
+          |
+          <Box
+            onClick={() => scrollToSection(sucursales)}
+          >
+            <Typography>Sucursales</Typography>
+          </Box>
+        </Box>
+      </Toolbar>
+      <Box display="flex" justifyContent="center" style={{ padding: '30px' }}>
+        <img src={logo} alt="Logo" style={{ height: '100px' }} />
+      </Box>
+      <Box display="flex" justifyContent="space-between" alignItems="center" style={{ marginBottom: '10px' }}>
+        <Box display="flex" alignItems="center" style={{ marginTop: '30px' }}>
+          <Typography variant="body2" style={{ marginRight: '30px' }}>
+            Av. Vicente Suárez 165, Col. Condesa, Cuauhtémoc C.P. 06140 CDMX
           </Typography>
-        </div>
-      </Container>
-    </Box>
+          <Typography variant="body2" style={{ marginRight: '8px' }}>
+            Tel +52 11 1010-2020
+          </Typography>
+        </Box>
+        <Box display="flex" alignItems="center" style={{ marginTop: '30px' }}>
+          <Typography variant="body2" style={{ marginRight: '8px' }}>
+            Síguenos:
+          </Typography>
+          <a href="https://www.facebook.com/" target="_blank" style={{ textDecoration: 'none', color: 'white' }} rel="noreferrer">
+            <FacebookIcon style={{ marginRight: '4px' }} /></a>
+          <a href="https://www.instagram.com/" target="_blank" style={{ textDecoration: 'none', color: 'white' }} rel="noreferrer">
+            <InstagramIcon /></a>
+        </Box>
+      </Box>
+      <hr style={{ margin: '0', border: 'none', borderTop: '1px solid white' }} />
+      <Box display="flex" justifyContent="space-between" alignItems="center" style={{ marginTop: '10px' }}>
+        <Box display="flex" alignItems="center">
+          <Typography variant="body2" style={{ marginTop: '8px' }}>
+            Sabores de la Tierra ® 2023
+          </Typography>
+        </Box>
+        <Box display="flex" alignItems="center">
+          <Typography variant="body2" style={{ marginRight: '8px' }}>
+            Aviso de Privacidad
+          </Typography>
+        </Box>
+      </Box>
+    </AppBar>
   );
-}
+};
+
+export default Footer;

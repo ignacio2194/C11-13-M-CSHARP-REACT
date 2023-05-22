@@ -2,12 +2,24 @@ import CardMenu from "../cardMenu/cardMenu"
 import Menulegend from "../menulegend/menulegend"
 import './menu.css'
 
-export default function Menu() {
+const Menu = () => {
   return (
-    <div className="menucontainer" >
-       <Menulegend />
-       <CardMenu/>
-       
-    </div>
-  )
-}
+    <section
+      style={{
+        padding:"0px",
+        margin:"0px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        color: "black",
+        backgroundColor: "#eaf681",
+        flexDirection:"column"
+      }}
+    >
+      <Menulegend />
+      <CardMenu/>
+    </section>
+  );
+};
+
+export default Menu;

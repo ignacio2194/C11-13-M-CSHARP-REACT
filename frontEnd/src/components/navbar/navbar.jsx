@@ -1,34 +1,25 @@
 import {
   AppBar,
-  Button,
   Drawer,
   IconButton,
   Toolbar,
   Typography,
   Stack,
-  Divider
+  Divider,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import ScrollToTop from "./scrollToTop";
 import NavListDrawerResponsive from "./navListDrawerResponsive.jsx";
+import scrollToSection from "../../utils/scrollToSection.js";
 
 export default function Navbar({ menu, events, sucursales }) {
   const [open, setOpen] = useState(false);
 
-  const scrollToSection = (elementRef) => {
-    window.scrollTo({
-      top: elementRef.current.offsetTop,
-      behavior: "smooth"
-    });
-  };
-
   return (
-    <>
-      <ScrollToTop />
+    <nav style={{ position: "sticky", top: "0", right: "0", zIndex: "9", width: "100%" }}>
       <AppBar position="static">
         <Stack
           direction="row"
@@ -76,24 +67,26 @@ export default function Navbar({ menu, events, sucursales }) {
               <MenuIcon />
             </IconButton>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Box>
-                <NavLink to="#menu" onClick={() => scrollToSection(menu)}>
-                  <Button sx={{ color: "#fff" }}>
-                    <Typography>Menú</Typography>
-                  </Button>
-                </NavLink>
-                <NavLink to="#events" onClick={() => scrollToSection(events)}>
-                  <Button sx={{ color: "#fff" }}>
-                    <Typography>Eventos</Typography>
-                  </Button>
-                </NavLink>
-                <NavLink to="#sucursales" onClick={() => scrollToSection(sucursales)}>
-                  <Button sx={{ color: "#fff" }}>
-                    <Typography>Sucursales</Typography>
-                  </Button>
-                </NavLink>
-                <NavLink to="/login" >
-                  <Button variant="contained">Iniciar Sesión</Button>
+              <Box sx={{ display: "flex", gap: "16px" }}>
+                <Box
+                  onClick={() => scrollToSection(menu)}
+                >
+                  <Typography>Menú</Typography>
+                </Box>
+                <Box
+                  onClick={() => scrollToSection(events)}
+                >
+                  <Typography>Eventos</Typography>
+                </Box>
+                <Box
+                  onClick={() => scrollToSection(sucursales)}
+                >
+                  <Typography>Sucursales</Typography>
+                </Box>
+                <NavLink
+                  to="/login"
+                >
+                  <Typography>Iniciar Sesíon</Typography>
                 </NavLink>
               </Box>
             </Box>
@@ -113,6 +106,6 @@ export default function Navbar({ menu, events, sucursales }) {
           sucursales={sucursales}
         />
       </Drawer>
-    </>
+    </nav>
   );
 }

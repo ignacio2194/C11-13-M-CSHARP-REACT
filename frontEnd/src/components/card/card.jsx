@@ -9,8 +9,8 @@ const CardWrapper = styled('div')(({ theme }) => ({
 }));
 
 const Image = styled('img')(({ theme, large, square, altt }) => ({
-  width: large ? '109%' : '1%',
-  height: altt ? '1%' : "150%",
+  width: large ? '100%' : '1%',
+  height: altt ? '2%' : "100%",
   transform: large ? 'scale(0.9)' : 'scale(1)',
   objectFit: square ? 'cover' : 'contain',
   borderRadius: square ? '0' : null,

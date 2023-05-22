@@ -95,7 +95,7 @@ const CardMenu = () => {
         {promocion.map((e, index) => (
           <Grid
             item
-            xs={4}
+            xs={3}
             key={e.dish}
             style={{ padding: "0px", margin: "0px" }}
           >
