@@ -2,12 +2,12 @@
 
 import React from 'react';
 
-function detailUser() {
+const DetailUser = () => {
   return (
     <div>
-      <h1>¡Hola Tengo que mostrar el detalle de los usuarios!</h1>
+      <h1>¡Hola Soy el detalle de usuario!</h1>
     </div>
   );
 }
 
-export default detailUser;
+export default DetailUser;

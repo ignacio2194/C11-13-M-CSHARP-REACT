@@ -1,12 +1,12 @@
 //MUESTRA TODOS LOS USUARIOS REGISTRADOS Y SU CORRESPONDIENTE LINK AL DETAIL DEL USER
 import React from 'react';
 
-function allUsers() {
+const AllUsers = () => {
   return (
     <div>
-      <h1>¡Hola Tengo que mostar todos los usuarios existentes!</h1>
+      <h1>¡Hola Soy todes les usuaries!</h1>
     </div>
   );
 }
 
-export default allUsers;
+export default AllUsers;

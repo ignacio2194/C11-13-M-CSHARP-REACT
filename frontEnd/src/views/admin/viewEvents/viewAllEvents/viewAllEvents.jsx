@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-function viewAllEvents() {
+const ViewAllEvents = () => {
   return (
     <div>
       <h1>¡Hola yo tengo que mostrar todos los eventos existentes y tener un link a la creacion de eventos nuevos y linditos!</h1>
@@ -10,4 +10,4 @@ function viewAllEvents() {
   );
 }
 
-export default viewAllEvents;
+export default ViewAllEvents;

@@ -8,16 +8,16 @@
 //IMAGEN
 
 import React, { useState, useEffect } from "react";
-import {useDispatch} from 'react-redux';
-import {useNavigate, useParams} from 'react-router-dom';
-import axios from "axios";
+// import {useDispatch} from 'react-redux';
+// import {useNavigate, useParams} from 'react-router-dom';
+// import axios from "axios";
 
-function ModifyMenuForm() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const {id} = useParams();
+const ModifyMenuForm = () => {
+    // const dispatch = useDispatch();
+    // const navigate = useNavigate();
+    // const {id} = useParams();
 
-    const [ form, setForm]= useState
+    const [ form, setForm]= useState ({})
 
 
   
@@ -110,10 +110,7 @@ function ModifyMenuForm() {
           onChange={handleChange}
         />
       </div>
-      <div>
-        <label>Imagen:</label>
-        <input type="file" name="image" onChange={handleChange} />
-      </div>
+      
       <button type="submit">Enviar</button>
     </form>
   );
