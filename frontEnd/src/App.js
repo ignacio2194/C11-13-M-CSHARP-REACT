@@ -3,7 +3,7 @@ import Home from "./views/home/home";
 import Login from "./components/Form/Form"
 import CrearCuenta from "./components/Form/CrearCuenta";
 import RecuperarPassword from "./components/Form/RecuperarPassword";
-import Details from "./views/details/Details";
+import Details from "./views/details/details";
 import Reservas from "./views/reservas/Reservas";
 import MuiThemeProvider from "./theme";
 
