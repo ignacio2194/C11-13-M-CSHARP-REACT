@@ -8,9 +8,9 @@ const theme = createTheme();
 // Estilos para el contenedor de la imagen
 const ImageContainer = styled('div')({
   position: 'relative',
-  width: '100%',
+  height: 'auto',
   overflow: 'hidden',
-  margin: 0,
+  objectFit: 'contain',
 });
 
 // Estilos para la imagen de fondo

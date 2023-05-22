@@ -9,16 +9,16 @@ const CardWrapper = styled('div')(({ theme }) => ({
 }));
 
 const Image = styled('img')(({ theme, large, square, altt }) => ({
-  width: large ? '100%' : '100%',
-  height: altt ? 'auto' : "50%",
+  width: large ? '109%' : '1%',
+  height: altt ? '1%' : "150%",
   transform: large ? 'scale(0.9)' : 'scale(1)',
   objectFit: square ? 'cover' : 'contain',
-  borderRadius: square ? '10px' : null,
+  borderRadius: square ? '0' : null,
 }));
 
 // Estilos para el texto del plato
 const DishText = styled(Typography)(({ theme }) => ({
-  fontSize: '2.2vw',
+  fontSize: '3vw',
   marginTop: '-2vw'
 }));
 
@@ -30,12 +30,17 @@ const DishText = styled(Typography)(({ theme }) => ({
  * @param {boolean} props.square - Indica si la imagen debe ser más cuadrada
  * @returns {JSX.Element} Elemento de tarjeta
  */
-function Card({ dish, image, large, square, altt}) {
+function Card({ dish, image, large, square, category}) {
+
+  const handleClick = () => {
+    category(dish);
+  };
+
   return (
-    <CardWrapper>
+    <CardWrapper onClick={category ? handleClick : null}>
       <Grid container direction="column" alignItems="center">
         <Grid item>
-          <Image src={image} alt="" large={large} square={square} altt={altt}/>
+          <Image src={image} alt="" large={large} square={square}/>
         </Grid>
         <Grid item>
           <DishText variant="body1">{dish}</DishText>
@@ -46,14 +51,3 @@ function Card({ dish, image, large, square, altt}) {
 }
 
 export default Card;
-{/* <CardWrapper>
-        <Typography variant="h6" component="h3">
-          {props.dish}
-        </Typography>
-        <Typography variant="subtitle1" component="h4">
-          {props.description}
-        </Typography>
-        <Price variant="body1" component="h5">
-          Price: {props.price}
-        </Price>
-      </CardWrapper> */}

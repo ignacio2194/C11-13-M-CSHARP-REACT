@@ -1,8 +1,8 @@
-import Eventos from "../especialDay/especialDay"
-import Footer from "../../components/footer/footer"
-import Navbar from "../../components/navbar/navbar"
-import Hero from "../../components/hero/hero"
-import Menu from "../../components/menu/menu"
+import Eventos from "../especialDay/especialDay";
+import Footer from "../../components/footer/footer";
+import Navbar from "../../components/navbar/navbar";
+import Hero from "../../components/hero/hero";
+import Menu from "../../components/menu/menu";
 import { useRef } from "react";
 import { Box } from "@mui/material";
 
@@ -13,20 +13,26 @@ const Home = () => {
 
   return (
     <div>
+     
+      
       <Navbar menu={menu} events={events} sucursales={sucursales} />
       <Hero />
       <Box ref={menu} id="menu" sx={{ minHeight: "100vh", width: "100vw" }}>
-        <Menu/>
+        <Menu />
       </Box>
       <Box ref={events} id="events" sx={{ minHeight: "100vh", width: "100vw" }}>
         <Eventos />
       </Box>
-      <Box ref={sucursales} id="sucursales" sx={{ minHeight: "100vh", width: "100vw" }}>
+      <Box
+        ref={sucursales}
+        id="sucursales"
+        sx={{ minHeight: "100vh", width: "100vw" }}
+      >
         SUCURSALES
       </Box>
       <h3>RESEÑAS</h3>
       <Footer />
     </div>
-  )
-}
-export default Home
+  );
+};
+export default Home;

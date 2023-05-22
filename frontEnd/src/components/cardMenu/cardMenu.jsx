@@ -1,10 +1,8 @@
-import image from "../../img/AdobeStock_552068932.jpeg";
 import { useState } from "react";
-import { Grid, Button } from "@mui/material";
-
+import { Grid } from "@mui/material";
 import Card from "../card/card";
-
-import './cardMenu.css'
+import Dishmenu from "../dishmenu/dishmenu";
+import image from "../../img/AdobeStock_552068932.jpeg";
 
 const promocion = [
   {
@@ -51,24 +49,30 @@ const categories = [
 const CardMenu = () => {
   const [selectedOption, setSelectedOption] = useState(true);
 
+  const [categorytype, setCategorytype] = useState("menu");
+
   const handleClick = () => {
-    setSelectedOption(prevOption => !prevOption);
+    setSelectedOption((prevOption) => !prevOption);
   };
 
-  const Cul = () => {
-    console.log("hola");
+  const handleCategory = (dish) => {
+    console.log(dish);
+    setCategorytype(dish);
+    console.log(categorytype);
   };
 
   return (
     <div>
-      <Grid container spacing={2} justifyContent="center" height="30px">
+      <Grid container spacing={2} justifyContent="center">
         <Grid item>
-        <div
+          <div
             variant="contained"
             onClick={handleClick}
             disabled={selectedOption}
             style={{
-              textDecoration: selectedOption ?"underline" : "",
+              textDecoration: selectedOption ? "underline" : "",
+              fontSize: "1.5rem",
+              marginBottom: "30px",
             }}
           >
             Menú
@@ -76,10 +80,10 @@ const CardMenu = () => {
         </Grid>
         <Grid item>
           <div
-            
             onClick={handleClick}
             style={{
-              textDecoration: !selectedOption ? "underline" : ""
+              textDecoration: !selectedOption ? "underline" : "",
+              fontSize: "1.5rem",
             }}
           >
             Delivery
@@ -87,37 +91,53 @@ const CardMenu = () => {
         </Grid>
       </Grid>
 
-      <Grid
-        container
-        spacing={3}
-        justifyContent="center"
-        alignItems="center"
-        style={{ marginTop: "40px", height: "25vw" }}
-      >
+      <Grid container spacing={3} justifyContent="center" alignItems="center">
         {promocion.map((e, index) => (
-          <Grid item xs={4} key={e.dish}>
-            {selectedOption && (
-              <Card image={e.image} dish={e.dish} large={index < 3} square={false} altt={false} />
+          <Grid
+            item
+            xs={4}
+            key={e.dish}
+            style={{ padding: "0px", margin: "0px" }}
+          >
+            {selectedOption && categorytype === "menu" && (
+              <Card
+                image={e.image}
+                dish={e.dish}
+                large={index < 3}
+                square={false}
+              />
             )}
           </Grid>
         ))}
       </Grid>
 
-      <div style={{ marginTop: "20px" }}>
-        <Grid container spacing={2} justifyContent="center">
-          {categories.map((e, index) => (
-            <Grid item xs={4} key={e.dish} height="20vw" onClick={Cul}>
-              <Card
-                image={e.image}
-                dish={e.dish}
-                square={index >= 0 && index <= 5}
-                large={(index >= 0 && index <= 5) || index < 3}
-                altt={index >= 0 && index <= 5}
-                style={{ marginTop: "10px" }}
-              />
-            </Grid>
-          ))}
-        </Grid>
+      <Grid style={{ paddingTop: "15px", padding: "5px" }}>
+        {categorytype === "menu" && (
+          <Grid
+            container
+            spacing={0}
+            justifyContent="center"
+            alignItems={"center"}
+          >
+            {categories.map((e, index) => (
+              <Grid item xs={4} key={e.dish}>
+                <Card
+                  image={e.image}
+                  dish={e.dish}
+                  square={index >= 0 && index <= 5}
+                  large={(index >= 0 && index <= 5) || index < 3}
+                  altt={index >= 0 && index <= 5}
+                  category={handleCategory}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        )}
+      </Grid>
+      <div>
+        {categorytype !== "menu" && (
+          <Dishmenu dish={categorytype} status={selectedOption} />
+        )}
       </div>
     </div>
   );
