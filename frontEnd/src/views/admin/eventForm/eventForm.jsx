@@ -10,10 +10,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 
-const dispatch = useDispatch();
+
 //import axios from 'axios';
 
-const eventForm = () => {
+const EventForm = () => {
+  const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     amount: 0,
@@ -66,7 +67,7 @@ const eventForm = () => {
 //   };
 
   return (
-    <form onSubmit={handleSubmit}>
+     <form>
       <label>
         Cantidad:
         <input
@@ -94,7 +95,7 @@ const eventForm = () => {
         <input
           type="text"
           name="hour"
-          value={evento.hora}
+          value={form.hour}
           onChange={handleInputChange}
         />
         {error.hour && <span>{error.hour}</span>}
@@ -149,4 +150,4 @@ const eventForm = () => {
   );
 };
 
-export default eventForm;
+export default EventForm;

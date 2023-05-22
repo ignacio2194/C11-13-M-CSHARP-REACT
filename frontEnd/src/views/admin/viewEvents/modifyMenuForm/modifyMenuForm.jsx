@@ -12,10 +12,12 @@ import {useDispatch} from 'react-redux';
 import {useNavigate, useParams} from 'react-router-dom';
 import axios from "axios";
 
-function MenuForm() {
+function ModifyMenuForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {id} = useParams();
+
+    const [ form, setForm]= useState
 
 
   
@@ -54,7 +56,7 @@ function MenuForm() {
   //   }, []);
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <div>
         <label>Nombre: </label>
         <input
@@ -117,4 +119,4 @@ function MenuForm() {
   );
 }
 
-export default MenuForm;
+export default ModifyMenuForm;
