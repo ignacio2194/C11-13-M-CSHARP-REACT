@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 // import axios from "axios";
 
-function categoryForm() {
+function CategoryForm() {
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({
@@ -46,9 +46,9 @@ function categoryForm() {
 
   return (
     <div>
-      <form onSubmit={submitHandler}>
+      <form>
         <div>
-          <button className={style.button}> Create Category!</button>
+          <button> Create Category!</button>
         </div>
         <div>
           <h3>
@@ -91,4 +91,4 @@ function categoryForm() {
   );
 }
 
-export default categoryForm;
+export default CategoryForm;

@@ -10,7 +10,7 @@
 
 import React, { useState } from 'react';
 
-function menuForm() {
+function MenuForm() {
   const [form, setForm] = useState({
     name: '',
     description: '',
@@ -47,36 +47,36 @@ function menuForm() {
 
 
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    await axios
-    .post("http://localhost:3001/menu", form)
-    .then((response)=> alert ("Product Created"))
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   await axios
+  //   .post("http://localhost:3001/menu", form)
+  //   .then((response)=> alert ("Product Created"))
         
 
-    // Reiniciamos  los valores del formulario después del envío
-    setForm({
-      name: '',
-      description: '',
-      price: '',
-      country: '',
-      category: '',
-      stock: '',
-      image: null,
-    });
-  };
+  //   // Reiniciamos  los valores del formulario después del envío
+  //   setForm({
+  //     name: '',
+  //     description: '',
+  //     price: '',
+  //     country: '',
+  //     category: '',
+  //     stock: '',
+  //     image: null,
+  //   });
+  // };
 
   
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <div>
         <label>Nombre: </label>
         <input
           type="text"
           name="name"
           value={form.name}
-          onChange={handleChange}
+          // onChange={handleChange}
         />
       </div>
       <div>
@@ -84,7 +84,7 @@ function menuForm() {
         <textarea
           name="description"
           value={form.description}
-          onChange={handleChange}
+          // onChange={handleChange}
         ></textarea>
       </div>
       <div>
@@ -93,7 +93,7 @@ function menuForm() {
           type="number"
           name="price"
           value={form.price}
-          onChange={handleChange}
+          // onChange={handleChange}
         />
       </div>
       <div>
@@ -102,7 +102,7 @@ function menuForm() {
           type="text"
           name="country"
           value={form.country}
-          onChange={handleChange}
+          // onChange={handleChange}
         />
       </div>
       <div>
@@ -111,7 +111,7 @@ function menuForm() {
           type="text"
           name="category"
           value={form.category}
-          onChange={handleChange}
+          // onChange={handleChange}
         />
       </div>
       <div>
@@ -120,7 +120,7 @@ function menuForm() {
           type="number"
           name="stock"
           value={form.stock}
-          onChange={handleChange}
+          // onChange={handleChange}
         />
       </div>
       <div>
@@ -128,7 +128,7 @@ function menuForm() {
         <input
           type="file"
           name="image"
-          onChange={handleChange}
+          // onChange={handleChange}
         />
       </div>
       <button type="submit">Enviar</button>
@@ -136,6 +136,6 @@ function menuForm() {
   );
 }
 
-export default menuForm;
+export default MenuForm;
 
 
