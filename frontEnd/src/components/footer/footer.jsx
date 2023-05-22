@@ -4,6 +4,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import logo from '../../img/logo-sabores@2x.png';
 import scrollToSection from '../../utils/scrollToSection';
+import GoogleBtn from '../googleButton/GoogleBtn';
 
 const Footer = ({ menu, events, sucursales }) => {
   return (

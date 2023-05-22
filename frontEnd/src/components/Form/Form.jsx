@@ -27,7 +27,7 @@ const SignIn = () => {
 
   return (
     <>
-      <Navbar />
+
       {/* <NavListDrawerResponsive/> */}
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
