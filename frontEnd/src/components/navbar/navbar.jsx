@@ -46,7 +46,7 @@ export default function Navbar({ menu, events, sucursales }) {
             <Typography>EN</Typography>
           </Stack>
         </Stack>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box sx={{ backgroundColor: "custom.lightBrown", display: "flex", justifyContent: "space-between" }}>
           <Box
             sx={{
               display: "flex",

@@ -1,17 +1,35 @@
+import React from 'react';
+import fondoSucursales from '../../img/fondo-sucursales.png';
+import './sucursales.module.css';
+
 const Sucursales = () => {
   return (
-    <section
+    <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "100vh",
-        color: "white",
-        backgroundColor: "#ea88f9"
+        backgroundImage: `url(${fondoSucursales})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
       }}
     >
-      Sección para las sucursales
-    </section>
+      <h1 style={{ textAlign: 'center', color: '#ffffff', marginTop: '20px', fontFamily:'Parisienne, cursive', fontSize:'70px', fontWeight: 'normal' }}>Nuestras sucursales</h1>
+          <div style={{ marginTop: '150px' }}>
+            <h2 style={{ textAlign: 'center', color: '#ffffff', fontSize:'50px' }}>Condesa</h2>
+            <p style={{ textAlign: 'center', color: '#ffffff', fontSize:'20px' }}>
+              Av. Vicente Suárez 165,
+              <br />
+              Col. Condesa, Cuauhtémoc C.P. 06140
+              <br />
+              Ciudad de México, CDMX
+            </p>
+            <p style={{ textAlign: 'center', color: '#ffffff', fontSize:'25px' }}>Cómo llegar</p>
+          </div>
+    </div>
   );
 };
 
