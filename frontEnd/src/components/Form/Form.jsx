@@ -2,17 +2,18 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import "../Form/Form.css";
 import Footer from "../footer/footer";
 import jwt_decode from "jwt-decode";
+import CrearCuenta from "./CrearCuenta";
 const theme = createTheme();
 
 const SignIn = () => {
@@ -29,13 +30,13 @@ const SignIn = () => {
         const decoded = jwt_decode(token);
         console.log(decoded);
       } catch (error) {
-        console.error('Error al decodificar el token:', error);
+        console.error("Error al decodificar el token:", error);
       }
     }
   }, [token]);
   return (
     <>
-      {/* <NavListDrawerResponsive/> */}
+
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -132,7 +133,7 @@ const SignIn = () => {
                   >
                     ¿No tienes cuenta?
                   </Typography>
-                  <Link href="#" variant="body2">
+                  <Link to="/crear-cuenta" variant="body2">
                     {"Crear cuenta"}
                   </Link>
                 </Grid>
@@ -142,7 +143,7 @@ const SignIn = () => {
                   textAlign="center"
                   sx={{ marginBottom: "10px" }}
                 >
-                  <Link href="#" variant="body2">
+                  <Link to="/recuperar-password" variant="body2">
                     {"¿Olvidaste tu usuario y/o contraseña?"}
                   </Link>
                 </Grid>
@@ -160,15 +161,13 @@ const SignIn = () => {
               </Box>
             </Box>
             {/* botonsito de google */}
-            <Box>
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-              setToken(credentialResponse.credential)
-              }}
-        
-            />
+            <Box sx={{ marginBottom: 15 }}>
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  setToken(credentialResponse.credential);
+                }}
+              />
             </Box>
-          
           </Box>
         </Container>
         <Footer />
