@@ -3,8 +3,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 import Map from "./Map";
 import schema from "../../utils/validateReservations";
-import CircularStatic from "./Spinner";
-import { useNavigate } from "react-router-dom"
+import { useState } from "react";
+import Ticket from "./Ticket";
+import Spinner from "./Spinner";
+import { useNavigate } from "react-router-dom";
+import logo from '../../img/logo-sabores@2x.png';
+import BadgeAvatars from "./Avatar";
 
 const PERSONS_OPTIONS = [
   { text: "Una persona", value: 1 },
@@ -33,27 +37,29 @@ const Reservas = () => {
 
   const navigate = useNavigate();
 
+  const [open, setOpen] = useState(false);
+
+
   const onSubmit = async (data) => {
     console.log('data submitted: ', data);
     await sleep(5000);
     reset();
-    navigate("/detalles-pedido")
+    setOpen(true);
   };
 
   return (
     <Box component="section">
-      <Container maxWidth="lg">
-        <Typography variant="h6" sx={{ textAlign: "center", fontWight: "bold", fontSize: "50px" }}>
+      <Box sx={{ backgroundColor: "primary.main", width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "40px 60px" }}>
+        <img src={logo} alt="Logo" style={{ width: "150px", height: "auto" }} onClick={() => navigate("/")} />
+        <BadgeAvatars />
+      </Box>
+      <Container maxWidth="lg" sx={{ margin: "auto" }}>
+        <Typography variant="h3" sx={{ textAlign: "center", fontWight: "bold", fontSize: "50px", marginTop: "32px" }}>
           Reservación
         </Typography>
         <Box>
           {isSubmitting ? (
-            <Box sx={{ width: "100vw", height: "60vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
-              <Box sx={{ textAlign: "center" }}>
-                <CircularStatic />
-                <Typography variant="h5" mt={4}>Generando tu ticket uwu</Typography>
-              </Box>
-            </Box>
+            <Spinner />
           ) : (
             <Stack
               direction={{ xs: "column", sm: "row" }}
@@ -62,24 +68,22 @@ const Reservas = () => {
               spacing={{ xs: 1, sm: 2, md: 4 }}
             >
               <Box>
-                <Typography variant="body1" sx={{ textAlign: "left" }}>
-                  Tu sucursal más cercana
+                <Typography variant="h4" sx={{ textAlign: "left" }}>
+                  Condesa
                 </Typography>
                 <Typography
-                  variant="body2"
-                  sx={{ textAlign: "left", lineHeight: "1.6em", width: "100%" }}
+                  variant="body1"
+                  sx={{ textAlign: "left", lineHeight: "1.6em", width: "100%", margin: "16px 0" }}
                 >
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Numquam commodi asperiores dolorem dignissimos, nisi, architecto
-                  voluptatum quidem quo inventore sed impedit natus, praesentium
-                  omnis rerum. Dolores minima necessitatibus autem porro?
+                  Av. Vicente Suárez 165, Col. Condesa, Cuauhtémoc C.P. 06140
+                  Ciudad de México, CDMX
                 </Typography>
                 <Box sx={{ width: "100%", height: "500px" }}>
                   <Map />
                 </Box>
               </Box>
               <Box sx={{ width: "100%", p: 2 }}>
-                <Typography variant="body1" sx={{ textAlign: "left" }}>
+                <Typography variant="h4" sx={{ textAlign: "left" }}>
                   Realizá tu reservación
                 </Typography>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -137,12 +141,13 @@ const Reservas = () => {
                       </Select>
                     )}
                   />
-                  <Button disabled={isSubmitting} type="submit" variant="contained" fullWidth my={4}>Reservar ahora</Button>
+                  <Button disabled={isSubmitting} type="submit" variant="contained" fullWidth sx={{ marginTop: "24px" }}>Reservar ahora</Button>
                 </form>
               </Box>
             </Stack>
           )}
-          <Box>
+          <Ticket open={open} setOpen={setOpen} />
+          <Box sx={{ marginBottom: "32px" }}>
             <Typography variant="body1" sx={{ textAlign: "left" }}>
               Elige otra sucursal
             </Typography>
