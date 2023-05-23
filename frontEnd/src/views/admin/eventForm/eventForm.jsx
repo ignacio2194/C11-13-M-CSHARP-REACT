@@ -8,13 +8,13 @@
 //STOCKEVENTO
 
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 
 //import axios from 'axios';
 
 const EventForm = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     amount: 0,

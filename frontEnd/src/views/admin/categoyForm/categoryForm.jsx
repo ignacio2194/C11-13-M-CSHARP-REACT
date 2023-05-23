@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 // import axios from "axios";
 
-function CategoryForm() {
-  const dispatch = useDispatch();
+const CategoryForm = () => {
+  // const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     name: "",

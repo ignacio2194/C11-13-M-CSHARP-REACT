@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-function detailMenu() {
+const DetailMenu = () =>{
   return (
     <div>
       <h1>¡Hola soy el detalle del menú por item!</h1>
@@ -10,4 +10,4 @@ function detailMenu() {
   );
 }
 
-export default detailMenu;
+export default DetailMenu;
