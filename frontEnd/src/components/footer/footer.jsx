@@ -5,6 +5,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import logo from '../../img/logo-sabores@2x.png';
 import scrollToSection from '../../utils/scrollToSection';
 
+
 const Footer = ({ menu, events, sucursales }) => {
   return (
     <AppBar position="static" style={{ backgroundColor: '#835c44', padding: '50px' }}>
