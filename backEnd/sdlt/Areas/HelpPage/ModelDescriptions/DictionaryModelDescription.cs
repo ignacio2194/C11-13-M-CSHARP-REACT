@@ -1,6 +1,0 @@
-namespace sdlt.Areas.HelpPage.ModelDescriptions
-{
-    public class DictionaryModelDescription : KeyValuePairModelDescription
-    {
-    }
-}

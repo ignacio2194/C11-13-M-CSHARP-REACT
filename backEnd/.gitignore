@@ -2,3 +2,8 @@
 packages
 sdlt/bin/*
 sdlt/obj/*
+sdlt/Areas/HelpPage/*
+sdlt/Content/*
+sdlt/Scripts/*
+sdlt/fonts/*
+sdlt/Views/*
