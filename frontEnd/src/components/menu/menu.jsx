@@ -1,18 +1,23 @@
-import GoogleBtn from "../googleButton/GoogleBtn";
+import CardMenu from "../cardMenu/cardMenu"
+import Menulegend from "../menulegend/menulegend"
+import './menu.css'
 
 const Menu = () => {
   return (
     <section
       style={{
+        padding:"0px",
+        margin:"0px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "100vh",
         color: "black",
-        backgroundColor: "#eaf681"
+        backgroundColor: "#eaf681",
+        flexDirection:"column"
       }}
     >
-      Sección Menú
+      <Menulegend />
+      <CardMenu/>
     </section>
   );
 };

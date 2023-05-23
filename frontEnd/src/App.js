@@ -3,14 +3,14 @@ import Home from "./views/home/home";
 import Login from "./components/Form/Form"
 import CrearCuenta from "./components/Form/CrearCuenta";
 import RecuperarPassword from "./components/Form/RecuperarPassword";
-import Reservas from "./components/reservas/reservas";
 import Details from "./views/details/details";
+import Reservas from "./views/reservas/Reservas";
+import MuiThemeProvider from "./theme";
 
 
 function App() {
-
   return (
-    <div className="App">
+    <MuiThemeProvider>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -20,7 +20,7 @@ function App() {
         <Route path="/detalles-pedido" element={<Details />} />
         <Route path="*" element={<Navigate to="/" replace={true} />} />
       </Routes>
-    </div>
+    </MuiThemeProvider>
   );
 }
 

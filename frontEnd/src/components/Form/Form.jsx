@@ -8,26 +8,33 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React, { useState } from "react";
-import GoogleBtn from "../googleButton/GoogleBtn";
+import React, { useState,useEffect } from "react";
+import { GoogleLogin } from "@react-oauth/google";
 import "../Form/Form.css";
-import Navbar from "../navbar/navbar";
 import Footer from "../footer/footer";
+import jwt_decode from "jwt-decode";
 const theme = createTheme();
 
 const SignIn = () => {
   const [UserData, setUserData] = useState({ email: "", password: "" });
-  const clientID =
-    "226311912125-tpmbf5oplf7hbop4j78rvpj04tl7mjoe.apps.googleusercontent.com";
-  const URL = "http://localhost:3000";
+  const [token, setToken] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(UserData);
   };
-
+  useEffect(() => {
+    if (token) {
+      try {
+        const decoded = jwt_decode(token);
+        console.log(decoded);
+      } catch (error) {
+        console.error('Error al decodificar el token:', error);
+      }
+    }
+  }, [token]);
   return (
     <>
-
       {/* <NavListDrawerResponsive/> */}
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
@@ -151,10 +158,17 @@ const SignIn = () => {
                   <hr />
                 </Box>
               </Box>
-              <GoogleBtn
-                style={{ display: "flex", justifyContent: "center" }}
-              />
             </Box>
+            {/* botonsito de google */}
+            <Box>
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+              setToken(credentialResponse.credential)
+              }}
+        
+            />
+            </Box>
+          
           </Box>
         </Container>
         <Footer />
