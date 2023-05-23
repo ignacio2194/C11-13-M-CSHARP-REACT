@@ -9,6 +9,7 @@
 
 
 import React, { useState } from 'react';
+import style from "./menuForm.module.css"
 
 function MenuForm() {
   const [form, setForm] = useState({
@@ -18,7 +19,7 @@ function MenuForm() {
     country: '',
     category: '',
     stock: '',
-    image: null,
+    
   });
 
   const [error, setError] = useState({
@@ -28,7 +29,7 @@ function MenuForm() {
     country: '',
     category: '',
     stock: '',
-    image: null,
+    
   });
 
   function validate(input){
@@ -40,19 +41,23 @@ function MenuForm() {
     if (!input.country) error.country = "Insert a Country";
     if (!input.category) error.category = "Insert a Category";
     if (!input.stock) error.stock = "Insert a Stock";
-    if (!input.image) error.image = "Insert an Image";
+   
 
     return error;  
   }
+  const handleForm = (event) => {
+    setError(validate({ ...form, [event.target.name]: event.target.value }));
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
 
 
 
-  // const handleSubmit = async (event) => {
+   const handleSubmit = async (event) => {
   //   event.preventDefault();
   //   await axios
   //   .post("http://localhost:3001/menu", form)
   //   .then((response)=> alert ("Product Created"))
-        
+   }   
 
   //   // Reiniciamos  los valores del formulario después del envío
   //   setForm({
@@ -69,14 +74,14 @@ function MenuForm() {
   
 
   return (
-    <form>
+    <form className={style.container}>
       <div>
         <label>Nombre: </label>
         <input
           type="text"
           name="name"
           value={form.name}
-          // onChange={handleChange}
+          onChange={handleForm}
         />
       </div>
       <div>
@@ -84,7 +89,7 @@ function MenuForm() {
         <textarea
           name="description"
           value={form.description}
-          // onChange={handleChange}
+          onChange={handleForm}
         ></textarea>
       </div>
       <div>
@@ -93,7 +98,7 @@ function MenuForm() {
           type="number"
           name="price"
           value={form.price}
-          // onChange={handleChange}
+          onChange={handleForm}
         />
       </div>
       <div>
@@ -102,7 +107,7 @@ function MenuForm() {
           type="text"
           name="country"
           value={form.country}
-          // onChange={handleChange}
+          onChange={handleForm}
         />
       </div>
       <div>
@@ -111,7 +116,7 @@ function MenuForm() {
           type="text"
           name="category"
           value={form.category}
-          // onChange={handleChange}
+          onChange={handleForm}
         />
       </div>
       <div>
@@ -120,17 +125,10 @@ function MenuForm() {
           type="number"
           name="stock"
           value={form.stock}
-          // onChange={handleChange}
+          onChange={handleForm}
         />
       </div>
-      <div>
-        <label>Imagen:</label>
-        <input
-          type="file"
-          name="image"
-          // onChange={handleChange}
-        />
-      </div>
+     
       <button type="submit">Enviar</button>
     </form>
   );
