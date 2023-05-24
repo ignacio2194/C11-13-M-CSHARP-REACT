@@ -1,4 +1,4 @@
-using sdlt.Models;
+﻿using sdlt.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,37 +7,34 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
-namespace SDLTdb.Controllers
+namespace sdlt.Controllers
 {
-    [RoutePrefix("api/Categorias")]
-    public class CategoriasController : ApiController
+    [RoutePrefix("api/Eventos")]
+    public class EventosController : ApiController
     {
         private SDLTDb db = new SDLTDb();
         // GET: Categorias/GetAll
         [HttpGet]
         [Route("GetAll")]
         //[Authorize(Roles = "User,Administrator")]
-        public IQueryable<Categoria> GetAll()
+        public IQueryable<Evento> GetAll()
         {
-            return db.Categoria;
+            return db.Evento;
         }
 
         // GET: Categorias/Get
         [HttpGet]
-        [Route("GetCategoria")]
-        public Categoria GetCategoria([FromUri] int? id)
+        [Route("GetEvento")]
+        public Evento GetEvento([FromUri] int? id)
         {
-            Categoria puedeCategoriaPa = db.Categoria.First(m => m.CategoriaId == id);
-            if (puedeCategoriaPa is null)
+            Evento puedeEventoPa = db.Evento.First(m => m.EventoId == id);
+            if (puedeEventoPa is null)
             {
-                return new Categoria
-                {
-                    Descripcion = "No se encontró Categoría"
-                };
+                return null;
             }
             else
             {
-                return puedeCategoriaPa;
+                return puedeEventoPa;
             }
         }
 
@@ -45,14 +42,14 @@ namespace SDLTdb.Controllers
         //[Authorize(Roles = "admin")]
         [HttpPost]
         [Route("Create")]
-        public async Task<IHttpActionResult> Create(Categoria categoria)
+        public async Task<IHttpActionResult> Create(Evento evento)
         {
-            if (categoria != null)
+            if (evento != null)
             {
-                var categoriaNueva = db.Categoria.Add(categoria);
+                var eventoNuevo = db.Evento.Add(evento);
 
                 await db.SaveChangesAsync();
-                return Content(HttpStatusCode.Created, categoriaNueva);
+                return Content(HttpStatusCode.Created, eventoNuevo);
             }
             return Content(HttpStatusCode.BadRequest, "Compruebe los requerimientos");
         }

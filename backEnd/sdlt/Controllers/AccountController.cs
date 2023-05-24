@@ -54,7 +54,7 @@ namespace sdlt.Controllers
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
-        [Authorize(Roles = "User,Administrator")]
+        //[Authorize(Roles = "User,Administrator")]
         public UserInfoViewModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
@@ -139,7 +139,7 @@ namespace sdlt.Controllers
 
         // POST api/Account/SetPassword
         [Route("SetPassword")]
-        [Authorize(Roles = "User")]
+        //[Authorize(Roles = "User,Administrator")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -197,7 +197,7 @@ namespace sdlt.Controllers
 
         // POST api/Account/RemoveLogin
         [Route("RemoveLogin")]
-        [Authorize(Roles = "User")]
+        //[Authorize(Roles = "User,Administrator")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -347,10 +347,26 @@ namespace sdlt.Controllers
 
             return Ok();
         }
-   
+        // POST api/Account/Register
+        //[AllowAnonymous]
+        //[Route("RegisterGoogle")]
+        //public async Task<IHttpActionResult> RegisterGoogle(UserDto userModel)
+        //{
+        //    SDLTDb db = new SDLTDb();
+        //    User newUser = new User()
+        //    {
+        //        Email = userModel.Email,
+        //        UserName = userModel.Email
+        //    };
+        //    db.AspNetUsers.Add(newUser);
+    
+
+        //    return Ok();
+        //}
+
         [HttpGet]
         [Route("GetAllRoles")]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         public IQueryable<IdentityRole> GetAllRoles()
         {
             var context = new ApplicationDbContext();
@@ -363,7 +379,7 @@ namespace sdlt.Controllers
 
         [HttpGet]
         [Route("GetAllUsers")]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         public IQueryable<User> GetAllUsers()
         {
             SDLTDb context = new SDLTDb();
@@ -374,7 +390,7 @@ namespace sdlt.Controllers
 
         [HttpPost]
         [Route("assignRol")]
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         public async Task<IHttpActionResult> AssignRol(UserAssignRolDto rolDto)
         {
             var elUser = UserManager.FindByName(rolDto.UserName);

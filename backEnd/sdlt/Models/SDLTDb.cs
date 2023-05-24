@@ -26,6 +26,7 @@ namespace sdlt.Models
         public virtual DbSet<RegionPais> RegionPais { get; set; }
         public virtual DbSet<Reserva> Reserva { get; set; }
         public virtual DbSet<Restaurante> Restaurante { get; set; }
+        public virtual DbSet<ReservacionEnEvento> ReservacionEnEvento { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -41,20 +42,21 @@ namespace sdlt.Models
                 .Property(e => e.Reseña)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.AspNetUserClaims)
-                .WithRequired(e => e.AspNetUsers)
-                .HasForeignKey(e => e.UserId);
+            // comentable
+            //modelBuilder.Entity<User>()
+            //    .HasMany(e => e.AspNetUserClaims)
+            //    .WithRequired(e => e.AspNetUsers)
+            //    .HasForeignKey(e => e.UserId);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.AspNetUserLogins)
-                .WithRequired(e => e.AspNetUsers)
-                .HasForeignKey(e => e.UserId);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(e => e.AspNetUserLogins)
+            //    .WithRequired(e => e.AspNetUsers)
+            //    .HasForeignKey(e => e.UserId);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.AspNetUserRoles)
-                .WithRequired(e => e.AspNetUsers)
-                .HasForeignKey(e => e.UserId);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(e => e.AspNetUserRoles)
+            //    .WithRequired(e => e.AspNetUsers)
+            //    .HasForeignKey(e => e.UserId);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.Reserva)
@@ -77,6 +79,10 @@ namespace sdlt.Models
             modelBuilder.Entity<Comida>()
                 .Property(e => e.Nombre)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<ReservacionEnEvento>()
+               .Property(e => e.Precio)
+               .HasColumnType("Decimal");
 
             modelBuilder.Entity<Evento>()
                 .Property(e => e.Nombre)
