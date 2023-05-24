@@ -13,7 +13,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import "../Form/Form.css";
 import Footer from "../footer/footer";
 import jwt_decode from "jwt-decode";
-import CrearCuenta from "./CrearCuenta";
+
 const theme = createTheme();
 
 const SignIn = () => {
@@ -90,6 +90,7 @@ const SignIn = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                sx={{backgroundColor:'#fff'}}
                 onChange={(e) =>
                   setUserData((prevState) => ({
                     ...prevState,
@@ -106,6 +107,7 @@ const SignIn = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                sx={{backgroundColor:'#fff'}}
                 onChange={(e) =>
                   setUserData((prevState) => ({
                     ...prevState,

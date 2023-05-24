@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -11,15 +11,37 @@ import { GoogleLogin } from "@react-oauth/google";
 import "../Form/Form.css";
 import Footer from "../footer/footer";
 import jwt_decode from "jwt-decode";
+
 const CrearCuenta = () => {
   const theme = createTheme();
-  const [UserData, setUserData] = useState({ nombre:"", email: "", password: "" });
-  const [token, setToken] = useState("");
+  const [UserData, setUserData] = useState({ Nombre:"", email: "", password: "" });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(UserData);
+  const [UserDataGoogle, setUserDataGoogle] = useState({ Nombre:"", email: ""});
+  const [token, setToken] = useState(""); 
+
+  const handleSubmit =  async (event) => {
+    event.preventDefault()
+     const data =  await fetch('https://sdlt.azurewebsites.net/api/Account/Register')
+    console.log("ESTO ES LA DATA",data)
+
   };
+  useEffect(() => {
+    if (token) {
+      try {
+        const decoded = jwt_decode(token);
+        console.log(decoded);
+        const {name,email} = decoded 
+        setUserDataGoogle({
+          Nombre:name,
+          email:email,
+        })
+       
+      } catch (error) {
+        console.error("Error al decodificar el token:", error);
+      }
+    }
+  }, [token]);
+
   return (
     <>
     <ThemeProvider theme={theme}>
