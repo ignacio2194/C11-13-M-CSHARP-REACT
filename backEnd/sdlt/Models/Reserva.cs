@@ -1,5 +1,6 @@
 namespace sdlt.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -9,28 +10,27 @@ namespace sdlt.Models
     [Table("Reserva")]
     public partial class Reserva
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Reserva()
         {
-            Evento = new HashSet<Evento>();
+            ReservacionEnEvento = new HashSet<ReservacionEnEvento>();
         }
-
-        public int ReservaId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public int? ReservaId { get; set; }
 
         public DateTime FechaHora { get; set; }
 
         public decimal? Precio { get; set; }
 
-        public int? StockNormal { get; set; }
-
-        public int? StockEvento { get; set; }
-
         [StringLength(128)]
+        [ForeignKey("AspNetUsers")]
         public string UserId { get; set; }
 
+        [JsonIgnore]
+        [ForeignKey("UserId")]
         public virtual User AspNetUsers { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Evento> Evento { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<ReservacionEnEvento> ReservacionEnEvento { get; set; }
     }
 }

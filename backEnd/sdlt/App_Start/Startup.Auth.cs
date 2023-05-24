@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Identity;
@@ -61,8 +61,8 @@ namespace sdlt
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
-            //    ClientId = "38444697532-vkadqaltco70epap600lniqb3ak1hms7.apps.googleusercontent.com",
-            //    ClientSecret = "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"
+            //    ClientId = "",
+            //    ClientSecret = ""
             //});
         }
     }
