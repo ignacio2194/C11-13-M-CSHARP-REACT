@@ -1,18 +1,18 @@
 {
   "dependencies": {
-    "mssql2": {
+    "mssql1": {
       "restored": true,
-      "restoreTime": "2023-05-24T04:23:31.9627207Z"
+      "restoreTime": "2023-05-24T06:05:04.1009819Z"
     }
   },
   "parameters": {
-    "mssql2.subscriptionId": {
-      "Name": "mssql2.subscriptionId",
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
       "Type": "subscription",
       "Value": "7d4bd24a-e820-4161-8c37-648bad46d702"
     },
-    "mssql2.resourceGroupName": {
-      "Name": "mssql2.resourceGroupName",
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
       "Type": "resourceGroup",
       "Value": "sdlt-resource"
     }
