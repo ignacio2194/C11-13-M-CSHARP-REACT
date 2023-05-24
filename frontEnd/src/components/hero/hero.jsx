@@ -1,7 +1,7 @@
 import { styled } from '@mui/system';
 import { createTheme, Button, Container, Typography } from '@mui/material';
 import image from '../../img/hero-foto.png';
-
+import {Link} from 'react-router-dom'
 // Creación del tema de Material-UI
 const theme = createTheme();
 
@@ -58,7 +58,9 @@ const Hero = () => (
           Vive una experiencia gastronómica única<br />que despierta tus sentidos y te transporta a tierras auténticas llenas de tradición
         </Typography>
         <ButtonContainer>
+        <Link to='/reservas'>
           <SmallButton variant="contained">Reservar</SmallButton>
+        </Link>
           <SmallButton variant="contained">Delivery</SmallButton>
         </ButtonContainer>
       </TextContainer>
