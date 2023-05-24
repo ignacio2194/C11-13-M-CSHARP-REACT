@@ -66,7 +66,7 @@ namespace SDLTdb.Controllers
 
         [HttpPut]
         [Route("Modify")]
-        [Authorize]
+        //[Authorize]
         public async Task<IHttpActionResult> Modify(MenuItem menu)
         {
             db.Entry(menu).State = EntityState.Modified;
@@ -75,7 +75,7 @@ namespace SDLTdb.Controllers
         }
         [HttpGet]
         [Route("Delete{id}")]
-        [Authorize]
+        //[Authorize]
         public async Task<IHttpActionResult> Delete([FromUri] int? id)
         {
             if (id == null)

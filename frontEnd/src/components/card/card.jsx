@@ -8,10 +8,9 @@ const CardWrapper = styled('div')(({ theme }) => ({
   marginBottom: theme.spacing(0),
 }));
 
-const Image = styled('img')(({ theme, large, square, altt }) => ({
-  width: large ? '100%' : '1%',
-  height: altt ? '2%' : "100%",
-  transform: large ? 'scale(0.9)' : 'scale(1)',
+const Image = styled('img')(({ theme, large, square, reduceSize }) => ({
+  width: (large && reduceSize) ? '10%' : '100%', // Reducir el tamaño solo si large y reduceSize son verdaderos
+  transform: large ? 'scale(0.95)' : 'scale(1)',
   objectFit: square ? 'cover' : 'contain',
   borderRadius: square ? '0' : null,
 }));

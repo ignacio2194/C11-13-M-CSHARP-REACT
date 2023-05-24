@@ -1,5 +1,6 @@
 namespace sdlt.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,10 @@ namespace sdlt.Models
     [Table("Evento")]
     public partial class Evento
     {
+        public Evento()
+        {
+            ReservacionEnEvento = new HashSet<ReservacionEnEvento>();
+        }
         public int EventoId { get; set; }
 
         [StringLength(65)]
@@ -19,15 +24,12 @@ namespace sdlt.Models
 
         [StringLength(200)]
         public string ImagenUrl { get; set; }
-
-        public int? MenuId { get; set; }
-
-        public int? ReservaId { get; set; }
-
-        public int? RestauranteId { get; set; }
-
-        public virtual Reserva Reserva { get; set; }
-
+        [ForeignKey("Restaurante")]
+        public virtual int? RestauranteId { get; set; }
+        [ForeignKey("RestauranteId")]
+        [JsonIgnore]
         public virtual Restaurante Restaurante { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<ReservacionEnEvento> ReservacionEnEvento { get; set; }
     }
 }

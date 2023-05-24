@@ -40,7 +40,7 @@ namespace SDLTdb.Controllers
 
 
         // POST: Bebidas/Create
-        [Authorize]
+        //[Authorize(Roles ="Administrator")]
         [HttpPost]
         [Route("Create")]
         public async Task<IHttpActionResult> Create(Comida comida)
@@ -55,7 +55,7 @@ namespace SDLTdb.Controllers
                     await db.SaveChangesAsync();
                     return Content(HttpStatusCode.Created, comidaNueva);
                 }
-                return Content(HttpStatusCode.BadRequest, "Compruebe los requerimientos. No es un ítemmenúID válido a ser insertado como bebida");
+                return Content(HttpStatusCode.BadRequest, "Compruebe los requerimientos. No es un ítemmenúID válido a ser insertado como comida");
             }
             return Content(HttpStatusCode.BadRequest, "Compruebe los requerimientos");
         }

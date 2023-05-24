@@ -16,7 +16,7 @@ namespace SDLTdb.Controllers
         // GET: Categorias/GetAll
         [HttpGet]
         [Route("GetAll")]
-        [Authorize(Roles = "User,Administrator")]
+        //[Authorize(Roles = "User,Administrator")]
         public IQueryable<Categoria> GetAll()
         {
             return db.Categoria;
@@ -25,33 +25,44 @@ namespace SDLTdb.Controllers
         // GET: Categorias/Get
         [HttpGet]
         [Route("GetCategoria")]
-        public async Task<IHttpActionResult> GetCategoria([FromUri] int? id)
+        public Categoria GetCategoria([FromUri] int? id)
         {
             Categoria puedeCategoriaPa = db.Categoria.First(m => m.CategoriaId == id);
             if (puedeCategoriaPa is null)
             {
-                return Content(HttpStatusCode.NotFound, "El id no es válido.");
+                return new Categoria
+                {
+                    Descripcion = "No se encontró Categoría"
+                };
             }
             else
             {
-                return Content(HttpStatusCode.OK, puedeCategoriaPa);
+                return puedeCategoriaPa;
             }
         }
 
         // POST: Categorias/Create
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         [HttpPost]
         [Route("Create")]
         public async Task<IHttpActionResult> Create(Categoria categoria)
         {
             if (categoria != null)
             {
-                var comidaNueva = db.Categoria.Add(categoria);
+                var categoriaNueva = db.Categoria.Add(categoria);
 
                 await db.SaveChangesAsync();
-                return Content(HttpStatusCode.Created, comidaNueva);
+                return Content(HttpStatusCode.Created, categoriaNueva);
             }
             return Content(HttpStatusCode.BadRequest, "Compruebe los requerimientos");
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
