@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import style from "./categoryForm.module.css"
 // import { useDispatch } from "react-redux";
 // import axios from "axios";
 
@@ -24,12 +25,7 @@ const CategoryForm = () => {
     return error;
   }
 
-  const handlerCategory = (event) => {
-    setForm({
-      ...form,
-      [event.target.name]: [...form[event.target.name], event.target.value]
-    });
-  };
+
 
   const handleForm = (event) => {
     setError(validate({ ...form, [event.target.name]: event.target.value }));
@@ -46,9 +42,9 @@ const CategoryForm = () => {
 
   return (
     <div>
-      <form>
+      <form className={style.container}>
         <div>
-          <button> Create Category!</button>
+          <button> Crear Categoría!</button>
         </div>
         <div>
           <h3>
@@ -65,18 +61,20 @@ const CategoryForm = () => {
         </div>
 
         <div>
-          <h3>
-            <label>Imagen:</label>
-          </h3>
+  <h3>
+    <label>Imagen:</label>
+  </h3>
 
-          <input
-            type={"text"}
-            value={form.image}
-            onChange={handleForm}
-            name="image"
-          />
-          {error.image && <span>{error.image}</span>}
-        </div>
+  
+
+  <input
+    type="file"
+    value={form.image}
+    onChange={handleForm}
+    name="image"
+  />
+  {error.image && <span>{error.image}</span>}
+</div>  
 
         <div>
           <button

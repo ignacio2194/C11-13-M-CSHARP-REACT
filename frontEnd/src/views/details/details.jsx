@@ -1,34 +1,47 @@
-import { Box, Button, Paper, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import BasicTable from "./Table";
+import MediaCard from "./Card";
+import logo from '../../img/logo-sabores@2x.png';
+import { useNavigate } from "react-router-dom";
+import BadgeAvatars from "../reservas/Avatar";
 
 const Details = () => {
+  const navigate = useNavigate();
+
   return (
     <Box>
-      <Typography variant="h6">Tu reserva fue exitosa</Typography>
-      <Typography variant="body2">Aquí te dejamos tu ticket de reservación</Typography>
-      <Typography variant="body2">Logo</Typography>
-      <Paper>
-        <Typography variant="h6">Sabores de la Tierra</Typography>
-        <Stack>
-          <Box>
-            <Typography variant="body1">Naruto Usumaki</Typography>
-          </Box>
-          <Box>
-            {/* <Typography variant="body1">Fecha: {formData.date.toLocaleDateString()}</Typography> */}
-          </Box>
-          <Box>
-            {/* <Typography variant="body1">Reservación: {formData.numPeople} {formData.numPeople == 1 ? "persona" : "personas"}</Typography> */}
-          </Box>
-          <Box>
-            {/* <Typography variant="body1">Hora: {formData.hour}</Typography> */}
-          </Box>
-        </Stack>
-        <Box>
-          <Typography variant="body1">Sucursal A</Typography>
-          <Typography variant="body2">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iure voluptates, fuga eaque omnis deserunt aliquam nam, eius eum neque delectus consequuntur excepturi numquam quia et.</Typography>
+      <Box sx={{ backgroundColor: "primary.main", width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "40px 60px" }}>
+        <img src={logo} alt="Logo" style={{ width: "150px", height: "auto" }} onClick={() => navigate("/")} />
+        <BadgeAvatars />
+      </Box>
+      <Box>
+        <Typography variant="h4" sx={{ textAlign: "center", my: 8 }}>Detalles de pedidos</Typography>
+        <BasicTable />
+        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", margin: "auto", p: "24px" }}>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            justifyContent="space-between"
+            alignItems="center"
+            spacing={4}
+          >
+            <Button variant="contained">
+              Eliminar pedido
+            </Button>
+            <Button variant="contained">
+              Pagar
+            </Button>
+          </Stack>
         </Box>
-      </Paper>
-      <Button variant="contained" fullWidth>Enviar al email</Button>
-      <Button variant="contained" fullWidth>Google Calendar</Button>
+        <Box>
+          <Typography variant="h4" sx={{ textAlign: "center", marginTop: "16px" }}>¿Quieres agregar otro platillo?</Typography>
+          <Box sx={{ display: "flex", justifyContent: "center", flexFlow: "wrap", gap: "16px", marginTop: "24px" }}>
+            <MediaCard urlImage="https://minichef.net/wp-content/uploads/2020/05/empanadas.jpg" namePlato="Empanadas" />
+            <MediaCard urlImage="https://fegasacruz.org/wp-content/uploads/2020/10/El-consumo-de-carne.jpg" namePlato="Carnes" />
+            <MediaCard urlImage="https://www.chismestoday.com/wp-content/uploads/2019/07/Beneficios-del-Vino-Tinto.jpg" namePlato="Vinos" />
+            <MediaCard urlImage="https://img.theculturetrip.com/1440x/smart/wp-content/uploads/2020/02/p3wdfm-1.jpg" namePlato="Sushi" />
+          </Box>
+        </Box>
+      </Box>
     </Box>
   )
 }

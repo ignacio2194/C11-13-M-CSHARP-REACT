@@ -2,7 +2,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { icon } from "leaflet";
 import markerRestaurant from "../../assets/icons/restaurant_position.png";
-import markerClient from "../../assets/icons/restaurant_position.png";
+import markerClient from "../../assets/icons/client_position.png";
 import { Typography } from "@mui/material";
 
 const Map = () => {
@@ -19,9 +19,9 @@ const Map = () => {
   return (
     <>
       <MapContainer
-        style={{ width: "100%", height: "100%" }}
+        style={{ width: "620px", height: "410px" }}
         zoom={13}
-        center={[-34.63529, -58.36271]}
+        center={[19.413471, -99.175697]}
         scrollWheelZoom={false}
         fadeAnimation={true}
         markerZoomAnimation={true}
@@ -30,14 +30,14 @@ const Map = () => {
           attribution="CyclOSM" // from http://leaflet-extras.github.io/leaflet-providers/preview/
           url="https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png"
         />
-        <Marker position={[-34.63529, -58.36271]} icon={customMarkerRestaurant}>
+        <Marker position={[19.413471, -99.175697]} icon={customMarkerRestaurant}>
           <Popup>
-            <Typography>Acá queda el restaurante, loko</Typography>
+            <Typography>Sabores De La Tierra</Typography>
           </Popup>
         </Marker>
-        <Marker position={[-34.63169, -58.36980]} icon={customMarkerClient}>
+        <Marker position={[19.411791, -99.171377]} icon={customMarkerClient}>
           <Popup>
-            <Typography>Acá está el cliente, supuestamente xd</Typography>
+            <Typography>Cliente con ganas de hacer una reserva</Typography>
           </Popup>
         </Marker>
       </MapContainer>
