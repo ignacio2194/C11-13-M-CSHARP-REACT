@@ -13,29 +13,30 @@ import cat6 from "../../img/categorias/menu6.jpg";
 const promocion = image;
 
 const categories = [
+  
   {
     image: cat1,
-    dish: "Entradas",
+    dish: "Entradas ",
   },
   {
     image: cat2,
-    dish: "Ensalada",
+    dish: "Ensalada ",
   },
   {
     image: cat3,
-    dish: "Sopas",
+    dish: "Sopas ",
   },
   {
     image: cat4,
-    dish: "Pescados y Mariscos",
+    dish: "Pescados y Mariscos ",
   },
   {
     image: cat5,
-    dish: "Carnes",
+    dish: "Carnes ",
   },
   {
     image: cat6,
-    dish: "Postres",
+    dish: "Postres ",
   },
 ];
 
@@ -48,9 +49,8 @@ const CardMenu = () => {
     setSelectedOption((prevOption) => !prevOption);
   };
 
-  const handleClickMenu=()=>{
-    setSelectedOption((prevOption) => !prevOption);
-    setCategorytype('menu')
+  const handleClickMenu=(e)=>{
+    setCategorytype(e)
   }
 
   const handleCategory = (dish) => {
@@ -128,8 +128,7 @@ const CardMenu = () => {
       </Grid>
       <div>
         {categorytype !== "menu" && (
-          <Dishmenu dish={categorytype} status={selectedOption} click={handleClickMenu}/>
-          
+          <Dishmenu dish={categorytype} status={selectedOption} click={handleClickMenu} list={categories}/>
         )}
       </div>
     </div>

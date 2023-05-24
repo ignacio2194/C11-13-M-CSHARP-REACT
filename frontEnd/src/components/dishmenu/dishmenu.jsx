@@ -1,7 +1,7 @@
 import { Checkbox } from "@mui/material";
 import { useState } from "react";
 
-export default function Dishmenu({ dish, status, click}) {
+export default function Dishmenu({ dish, status, click, list }) {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -12,17 +12,21 @@ export default function Dishmenu({ dish, status, click}) {
     <div>
       <div style={{ textAlign: "center" }}>
         <hr />
-        <label>{dish}</label>
+        <label style={{ fontWeight: "bold" }}>{dish}</label>
         <hr />
       </div>
-      <button onClick={click}>
-        Volver
-      </button>
-      {!status && <Checkbox
-        checked={isChecked}
-        onChange={handleCheckboxChange}
-      />}
-
+      {!status && (
+        <Checkbox checked={isChecked} onChange={handleCheckboxChange} />
+      )}
+      <label onClick={() => click('menu')}>Menú </label>
+      {list.map((e, index) => (
+        <label key={index} onClick={() => click(e.dish)}
+        style={e.dish === dish ? { fontWeight: "bold" } : null}
+>
+  {e.dish}
+          
+        </label>
+      ))}
     </div>
   );
 }
