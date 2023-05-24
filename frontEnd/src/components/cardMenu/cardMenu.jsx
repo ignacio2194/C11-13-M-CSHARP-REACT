@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Grid } from "@mui/material";
 import Card from "../card/card";
 import Dishmenu from "../dishmenu/dishmenu";
-import image from "../../img/AdobeStock_552068932.jpeg";
+import image from "../../img/AdobeStock_552068932.jpg";
 import cat1 from "../../img/categorias/menu1.jpg";
 import cat2 from "../../img/categorias/menu2.jpg";
 import cat3 from "../../img/categorias/menu3.jpg";
@@ -48,6 +48,11 @@ const CardMenu = () => {
     setSelectedOption((prevOption) => !prevOption);
   };
 
+  const handleClickMenu=()=>{
+    setSelectedOption((prevOption) => !prevOption);
+    setCategorytype('menu')
+  }
+
   const handleCategory = (dish) => {
     console.log(dish);
     setCategorytype(dish);
@@ -88,12 +93,12 @@ const CardMenu = () => {
 
       
       <Grid container spacing={3} justifyContent="center" alignItems="center">
-        <Card
+        {selectedOption && <Card
           image={promocion}
           large={true}
           square={false}
           style={{ height: promocionHeight }} // Agrega el estilo de altura a la imagen promocion
-        />
+        />}
       
       </Grid>
 
@@ -123,7 +128,8 @@ const CardMenu = () => {
       </Grid>
       <div>
         {categorytype !== "menu" && (
-          <Dishmenu dish={categorytype} status={selectedOption} />
+          <Dishmenu dish={categorytype} status={selectedOption} click={handleClickMenu}/>
+          
         )}
       </div>
     </div>
