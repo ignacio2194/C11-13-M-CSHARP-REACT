@@ -1,7 +1,7 @@
 import { Checkbox } from "@mui/material";
 import { useState } from "react";
 
-export default function Dishmenu({ dish, status }) {
+export default function Dishmenu({ dish, status, click}) {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleCheckboxChange = () => {
@@ -15,10 +15,14 @@ export default function Dishmenu({ dish, status }) {
         <label>{dish}</label>
         <hr />
       </div>
+      <button onClick={click}>
+        Volver
+      </button>
       {!status && <Checkbox
         checked={isChecked}
         onChange={handleCheckboxChange}
       />}
+
     </div>
   );
 }
