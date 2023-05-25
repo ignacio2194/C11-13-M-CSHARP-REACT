@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Grid } from "@mui/material";
 import Card from "../card/card";
+
+import BackgroundImg from "../../img/hojas.svg";
 import Dishmenu from "../dishmenu/dishmenu";
 import image from "../../img/AdobeStock_552068932.jpg";
 import cat1 from "../../img/categorias/menu1.jpg";
@@ -13,7 +15,6 @@ import cat6 from "../../img/categorias/menu6.jpg";
 const promocion = image;
 
 const categories = [
-  
   {
     image: cat1,
     dish: "Entradas ",
@@ -49,9 +50,9 @@ const CardMenu = () => {
     setSelectedOption((prevOption) => !prevOption);
   };
 
-  const handleClickMenu=(e)=>{
-    setCategorytype(e)
-  }
+  const handleClickMenu = (e) => {
+    setCategorytype(e);
+  };
 
   const handleCategory = (dish) => {
     console.log(dish);
@@ -62,7 +63,13 @@ const CardMenu = () => {
 
   const promocionHeight = "5px";
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${BackgroundImg})` ,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
       <Grid container spacing={2} justifyContent="center">
         <Grid item>
           <div
@@ -91,15 +98,15 @@ const CardMenu = () => {
         </Grid>
       </Grid>
 
-      
       <Grid container spacing={3} justifyContent="center" alignItems="center">
-        {selectedOption && <Card
-          image={promocion}
-          large={true}
-          square={false}
-          style={{ height: promocionHeight }} // Agrega el estilo de altura a la imagen promocion
-        />}
-      
+        {selectedOption && (
+          <Card
+            image={promocion}
+            large={true}
+            square={false}
+            style={{ height: promocionHeight }} // Agrega el estilo de altura a la imagen promocion
+          />
+        )}
       </Grid>
 
       <Grid style={{ paddingTop: "15px", padding: "5px" }}>
@@ -109,7 +116,6 @@ const CardMenu = () => {
             spacing={0}
             justifyContent="center"
             alignItems={"center"}
-            
           >
             {categories.map((e, index) => (
               <Grid item xs={4} key={e.dish}>
@@ -128,7 +134,12 @@ const CardMenu = () => {
       </Grid>
       <div>
         {categorytype !== "menu" && (
-          <Dishmenu dish={categorytype} status={selectedOption} click={handleClickMenu} list={categories}/>
+          <Dishmenu
+            dish={categorytype}
+            status={selectedOption}
+            click={handleClickMenu}
+            list={categories}
+          />
         )}
       </div>
     </div>

@@ -12,7 +12,7 @@ const Menu = () => {
         justifyContent: "center",
         alignItems: "center",
         color: "black",
-        backgroundColor: "#eaf681",
+        backgroundColor: "#FFD7BD",
         flexDirection:"column"
       }}
     >
