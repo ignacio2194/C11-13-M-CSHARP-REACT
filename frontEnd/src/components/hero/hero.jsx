@@ -61,7 +61,7 @@ const Hero = () => (
         <Link to='/reservas'>
           <SmallButton variant="contained">Reservar</SmallButton>
         </Link>
-          <SmallButton variant="contained">Delivery</SmallButton>
+          
         </ButtonContainer>
       </TextContainer>
     </ImageContainer>

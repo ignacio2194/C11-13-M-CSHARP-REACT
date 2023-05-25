@@ -18,7 +18,7 @@ export default function Dishmenu({ dish, status, click, list }) {
       {!status && (
         <Checkbox checked={isChecked} onChange={handleCheckboxChange} />
       )}
-      <label onClick={() => click('menu')}>Menú </label>
+      <label onClick={() => click('menu')}>Categorias </label>
       {list.map((e, index) => (
         <label key={index} onClick={() => click(e.dish)}
         style={e.dish === dish ? { fontWeight: "bold" } : null}
