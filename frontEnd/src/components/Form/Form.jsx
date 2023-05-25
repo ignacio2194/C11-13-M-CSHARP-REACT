@@ -11,9 +11,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useState, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import "../Form/Form.css";
-import Footer from "../footer/footer";
 import jwt_decode from "jwt-decode";
-import CrearCuenta from "./CrearCuenta";
+import FooterSecondary from "../footerSecondary/FooterSecondary";
+import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
 const theme = createTheme();
 
 const SignIn = () => {
@@ -36,7 +36,7 @@ const SignIn = () => {
   }, [token]);
   return (
     <>
-
+      <NavbarSecondary />
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -170,8 +170,8 @@ const SignIn = () => {
             </Box>
           </Box>
         </Container>
-        <Footer />
       </ThemeProvider>
+      <FooterSecondary />
     </>
   );
 };

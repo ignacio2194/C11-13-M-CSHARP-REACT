@@ -3,7 +3,7 @@ import BasicTable from "./Table";
 import MediaCard from "./Card";
 import logo from '../../img/logo-sabores@2x.png';
 import { useNavigate } from "react-router-dom";
-import BadgeAvatars from "../reservas/Avatar";
+import BadgeAvatars from "../../components/avatar/Avatar";
 
 const Details = () => {
   const navigate = useNavigate();
