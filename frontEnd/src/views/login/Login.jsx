@@ -1,9 +1,11 @@
-import Form from "../../components/Form/Form";
+// import Form from "../../components/Form/Form";
+import AccountCreated from "../../components/accountCreated/accountCreated";
 
 const Login = () => {
   return (
     <div>
-      <Form />
+      {/* <Form /> */}
+      <AccountCreated />
     </div>
   );
 };
