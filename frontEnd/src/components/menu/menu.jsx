@@ -6,6 +6,7 @@ const Menu = () => {
   return (
     <section
       style={{
+        
         padding:"0px",
         margin:"0px",
         display: "flex",

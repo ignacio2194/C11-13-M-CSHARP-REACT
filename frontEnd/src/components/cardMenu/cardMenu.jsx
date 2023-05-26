@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 import Card from "../card/card";
 
-import BackgroundImg from "../../img/hojas.svg";
+import BackgroundImg from "../../img/romero.png";
 import Dishmenu from "../dishmenu/dishmenu";
 import image from "../../img/AdobeStock_552068932.jpg";
 import cat1 from "../../img/categorias/menu1.jpg";
@@ -11,6 +11,8 @@ import cat3 from "../../img/categorias/menu3.jpg";
 import cat4 from "../../img/categorias/menu4.jpg";
 import cat5 from "../../img/categorias/menu5.jpg";
 import cat6 from "../../img/categorias/menu6.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { getImgCat } from "../../store/actions/imgcategories";
 
 const promocion = image;
 
@@ -42,9 +44,20 @@ const categories = [
 ];
 
 const CardMenu = () => {
+      
   const [selectedOption, setSelectedOption] = useState(true);
   const [categorytype, setCategorytype] = useState("menu");
   const [reduceImageSize, setReduceImageSize] = useState(true); // Nueva variable de estado
+  const dispatch = useDispatch()
+
+
+  const dataImg = useSelector((state) => state.imgcategories.data)
+
+
+  useEffect(() => {
+    dispatch(getImgCat())
+    console.log('pepepeeee',dataImg)
+  }, [dispatch]);
 
   const handleClick = () => {
     setSelectedOption((prevOption) => !prevOption);
@@ -65,7 +78,7 @@ const CardMenu = () => {
   return (
     <div
       style={{
-        backgroundImage: `url(${BackgroundImg})` ,
+        backgroundImage: `url(${BackgroundImg})`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}

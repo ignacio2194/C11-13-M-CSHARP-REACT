@@ -1,5 +1,6 @@
 import { Checkbox } from "@mui/material";
 import { useState } from "react";
+import BackgroundImg from '../../img/romero.png'
 
 export default function Dishmenu({ dish, status, click, list }) {
   const [isChecked, setIsChecked] = useState(false);
@@ -9,7 +10,13 @@ export default function Dishmenu({ dish, status, click, list }) {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${BackgroundImg})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
       <div style={{ textAlign: "center" }}>
         <hr />
         <label style={{ fontWeight: "bold" }}>{dish}</label>
