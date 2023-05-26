@@ -1,68 +1,93 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import Card from "../card/card";
-import Dishmenu from "../dishmenu/dishmenu";
-import image from "../../img/AdobeStock_552068932.jpeg";
 
-const promocion = [
-  {
-    image,
-    dish: "papa",
-  },
-  {
-    image,
-    dish: "pera",
-  },
-  {
-    image,
-    dish: "zanahoria",
-  },
-];
+
+import { getImgCat } from "../../store/actions/imgcategories";
+
+
+import BackgroundImg from "../../img/romero.png";
+import Dishmenu from "../dishmenu/dishmenu";
+import image from "../../img/AdobeStock_552068932.jpg";
+import cat1 from "../../img/categorias/menu1.jpg";
+import cat2 from "../../img/categorias/menu2.jpg";
+import cat3 from "../../img/categorias/menu3.jpg";
+import cat4 from "../../img/categorias/menu4.jpg";
+import cat5 from "../../img/categorias/menu5.jpg";
+import cat6 from "../../img/categorias/menu6.jpg";
+
+
+
+const promocion = image;
 
 const categories = [
   {
-    image,
-    dish: "Entradas",
+    image: cat1,
+    dish: "Entradas ",
   },
   {
-    image,
-    dish: "Ensalada",
+    image: cat2,
+    dish: "Ensalada ",
   },
   {
-    image,
-    dish: "Sopas",
+    image: cat3,
+    dish: "Sopas ",
   },
   {
-    image,
-    dish: "Pescados y Mariscos",
+    image: cat4,
+    dish: "Pescados y Mariscos ",
   },
   {
-    image,
-    dish: "Carnes",
+    image: cat5,
+    dish: "Carnes ",
   },
   {
-    image,
-    dish: "Postres",
+    image: cat6,
+    dish: "Postres ",
   },
 ];
 
 const CardMenu = () => {
+      
   const [selectedOption, setSelectedOption] = useState(true);
-
   const [categorytype, setCategorytype] = useState("menu");
+  const [reduceImageSize, setReduceImageSize] = useState(true); // Nueva variable de estado
+  const dispatch = useDispatch()
+
+
+  const dataImg = useSelector((state) => state.imgcategories.data)
+
+
+  useEffect(() => {
+    dispatch(getImgCat())
+    console.log('pepepeeee',dataImg)
+  }, [dispatch]);
 
   const handleClick = () => {
     setSelectedOption((prevOption) => !prevOption);
+  };
+
+  const handleClickMenu = (e) => {
+    setCategorytype(e);
   };
 
   const handleCategory = (dish) => {
     console.log(dish);
     setCategorytype(dish);
     console.log(categorytype);
+    setReduceImageSize(true);
   };
 
+  const promocionHeight = "5px";
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${BackgroundImg})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
       <Grid container spacing={2} justifyContent="center">
         <Grid item>
           <div
@@ -92,23 +117,14 @@ const CardMenu = () => {
       </Grid>
 
       <Grid container spacing={3} justifyContent="center" alignItems="center">
-        {promocion.map((e, index) => (
-          <Grid
-            item
-            xs={3}
-            key={e.dish}
-            style={{ padding: "0px", margin: "0px" }}
-          >
-            {selectedOption && categorytype === "menu" && (
-              <Card
-                image={e.image}
-                dish={e.dish}
-                large={index < 3}
-                square={false}
-              />
-            )}
-          </Grid>
-        ))}
+        {selectedOption && (
+          <Card
+            image={promocion}
+            large={true}
+            square={false}
+            style={{ height: promocionHeight }} // Agrega el estilo de altura a la imagen promocion
+          />
+        )}
       </Grid>
 
       <Grid style={{ paddingTop: "15px", padding: "5px" }}>
@@ -124,10 +140,10 @@ const CardMenu = () => {
                 <Card
                   image={e.image}
                   dish={e.dish}
-                  square={index >= 0 && index <= 5}
-                  large={(index >= 0 && index <= 5) || index < 3}
-                  altt={index >= 0 && index <= 5}
+                  square={index >= 0 && index <= 3}
+                  large={(index >= 0 && index <= 5) || index <= 3}
                   category={handleCategory}
+                  reduceSize={reduceImageSize} // Pasar el valor de reduceImageSize como prop
                 />
               </Grid>
             ))}
@@ -136,7 +152,12 @@ const CardMenu = () => {
       </Grid>
       <div>
         {categorytype !== "menu" && (
-          <Dishmenu dish={categorytype} status={selectedOption} />
+          <Dishmenu
+            dish={categorytype}
+            status={selectedOption}
+            click={handleClickMenu}
+            list={categories}
+          />
         )}
       </div>
     </div>

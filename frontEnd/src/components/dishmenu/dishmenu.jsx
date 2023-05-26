@@ -1,24 +1,53 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Checkbox } from "@mui/material";
-import { useState } from "react";
+import { getDish } from "../../store/actions/imgcategories";
 
-export default function Dishmenu({ dish, status }) {
+import BackgroundImg from '../../img/romero.png'
+
+export default function Dishmenu({ dish, status, click, list }) {
   const [isChecked, setIsChecked] = useState(false);
+
+  const dispatch = useDispatch()
+  const data = useSelector((state)=>state)
+
+  console.log(data)
+
+  useEffect(() => {
+        dispatch(getDish())
+  }, [dispatch]);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
+  
+  
 
   return (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${BackgroundImg})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
       <div style={{ textAlign: "center" }}>
         <hr />
-        <label>{dish}</label>
+        <label style={{ fontWeight: "bold" }}>{dish}</label>
         <hr />
       </div>
-      {!status && <Checkbox
-        checked={isChecked}
-        onChange={handleCheckboxChange}
-      />}
+      {!status && (
+        <Checkbox checked={isChecked} onChange={handleCheckboxChange} />
+      )}
+      <label onClick={() => click('menu')}>Categorias </label>
+      {list.map((e, index) => (
+        <label key={index} onClick={() => click(e.dish)}
+        style={e.dish === dish ? { fontWeight: "bold" } : null}
+>
+  {e.dish}
+          
+        </label>
+      ))}
     </div>
   );
 }
