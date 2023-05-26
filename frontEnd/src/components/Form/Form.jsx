@@ -1,5 +1,6 @@
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import axios from 'axios'
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
@@ -11,19 +12,29 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useState, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import "../Form/Form.css";
-import Footer from "../footer/footer";
 import jwt_decode from "jwt-decode";
+import FooterSecondary from "../footerSecondary/FooterSecondary";
+import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
 
 const theme = createTheme();
 
 const SignIn = () => {
-  const [UserData, setUserData] = useState({ email: "", password: "" });
+  const [UserData, setUserData] = useState({ Email: "", Password: "",ConfirmPassword:"" });
   const [token, setToken] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit =  async (event) => {
     event.preventDefault();
     console.log(UserData);
+    try {
+      const api ='https://sdlt2.azurewebsites.net/api/Account/Register'
+      const data = await axios.post(api ,UserData)
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
   };
+
+
   useEffect(() => {
     if (token) {
       try {
@@ -36,7 +47,7 @@ const SignIn = () => {
   }, [token]);
   return (
     <>
-
+      <NavbarSecondary />
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -82,6 +93,7 @@ const SignIn = () => {
               sx={{ mt: 1 }}
             >
               <TextField
+            
                 margin="normal"
                 required
                 fullWidth
@@ -90,7 +102,7 @@ const SignIn = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                sx={{backgroundColor:'#fff'}}
+                sx={{backgroundColor:'#fff' ,border: 0}}
                 onChange={(e) =>
                   setUserData((prevState) => ({
                     ...prevState,
@@ -115,10 +127,6 @@ const SignIn = () => {
                   }))
                 }
               />
-              {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
               <Button
                 type="submit"
                 fullWidth
@@ -172,8 +180,8 @@ const SignIn = () => {
             </Box>
           </Box>
         </Container>
-        <Footer />
       </ThemeProvider>
+      <FooterSecondary />
     </>
   );
 };

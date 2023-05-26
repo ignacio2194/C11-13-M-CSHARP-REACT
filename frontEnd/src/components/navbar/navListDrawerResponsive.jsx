@@ -1,4 +1,5 @@
 import {
+  Button,
   List,
   Typography,
 } from "@mui/material";
@@ -8,10 +9,10 @@ import scrollToSection from "../../utils/scrollToSection";
 
 export default function NavListDrawerResponsive({ onClick, menu, events, sucursales }) {
   return (
-    <Box sx={{ backgroundColor: "custom.lightBrown", width: "100%", m: "auto", p: 2 }} onClick={onClick} >
+    <Box sx={{ backgroundColor: "custom.lightBrown", width: "100%", m: "auto" }} onClick={onClick} >
       <nav aria-label="main mailbox folders">
         <List>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: "16px", textAlign: "center" }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "16px", textAlign: "center", color: "white" }}>
             <Box
               onClick={() => scrollToSection(menu)}
             >
@@ -30,7 +31,7 @@ export default function NavListDrawerResponsive({ onClick, menu, events, sucursa
             <NavLink
               to="/login"
             >
-              <Typography>Iniciar Sesíon</Typography>
+              <Button variant="contained" sx={{ backgroundColor: "custom.yellow", color: "black" }}>Iniciar Sesión</Button>
             </NavLink>
           </Box>
         </List>
