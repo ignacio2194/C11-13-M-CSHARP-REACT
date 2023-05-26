@@ -1,6 +1,6 @@
-import Eventos from "../especialDay/especialDay"
 import Hero from "../../components/hero/hero"
 import Menu from "../../components/menu/menu";
+import SeccionEventos from "../../components/seccionEventos/seccionEventos";
 import Sucursales from "../../components/sucursales/sucursales";
 import Resenias from "../../components/resenias/resenias";
 import Navbar from "../../components/navbar/navbar"
@@ -21,7 +21,7 @@ const Home = () => {
         <Menu />
       </Box>
       <Box ref={events}>
-        <Eventos />
+        <SeccionEventos/>
       </Box>
       <Box ref={sucursales}>
         <Sucursales />

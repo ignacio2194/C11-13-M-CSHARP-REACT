@@ -1,41 +1,14 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Box } from '@mui/material';
+import { AppBar, Typography, Box } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import logo from '../../img/logo-sabores@2x.png';
-import scrollToSection from '../../utils/scrollToSection';
 
-
-const Footer = ({ menu, events, sucursales }) => {
+const FooterMinimalista = () => {
   return (
-    <AppBar position="static" style={{ backgroundColor: '#835c44', padding: '50px' }}>
-      <Toolbar>
-        <Box style={{ display: "flex", gap: 8, margin: "auto" }}>
-          <Box
-            onClick={() => scrollToSection(menu)}
-          >
-            <Typography>Menú</Typography>
-          </Box>
-          |
-          <Box
-            onClick={() => scrollToSection(events)}
-          >
-            <Typography>Eventos</Typography>
-          </Box>
-          |
-          <Box
-            onClick={() => scrollToSection(sucursales)}
-          >
-            <Typography>Sucursales</Typography>
-          </Box>
-        </Box>
-      </Toolbar>
-      <Box display="flex" justifyContent="center" style={{ padding: '30px' }}>
-        <img src={logo} alt="Logo" style={{ height: '100px' }} />
-      </Box>
+    <AppBar position="static" style={{ backgroundColor: '#835c44', padding: '30px' }}>
       <Box display="flex" justifyContent="space-between" alignItems="center" style={{ marginBottom: '10px' }}>
-        <Box display="flex" alignItems="center" style={{ marginTop: '30px' }}>
-        <Typography variant="body2" style={{ marginRight: '10px' }}>
+        <Box display="flex" alignItems="center">
+          <Typography variant="body2" style={{ marginRight: '10px' }}>
             Av. Vicente Suárez 165, Col. Condesa, Cuauhtémoc
           </Typography>
           <Typography variant="body2" style={{ marginRight: '10px' }}>
@@ -48,7 +21,7 @@ const Footer = ({ menu, events, sucursales }) => {
             Tel +52 11 1010-2020
           </Typography>
         </Box>
-        <Box display="flex" alignItems="center" style={{ marginTop: '30px' }}>
+        <Box display="flex" alignItems="center" >
           <Typography variant="body2" style={{ marginRight: '8px' }}>
             Síguenos:
           </Typography>
@@ -75,4 +48,4 @@ const Footer = ({ menu, events, sucursales }) => {
   );
 };
 
-export default Footer;
+export default FooterMinimalista;

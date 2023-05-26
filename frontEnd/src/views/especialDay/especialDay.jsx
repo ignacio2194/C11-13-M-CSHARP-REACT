@@ -1,6 +1,9 @@
 //ESTE VA A SER EL componente de los eventos
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Box } from '@mui/material';
+
+
 
 const Eventos = () => {
   const navigate = useNavigate();
@@ -16,18 +19,11 @@ const Eventos = () => {
   //según el diseño deberían renderizar dos, en el caso de ser más
   //habría que hacer que se puedan mostrar el resto siguiendo el diseño.
   //este código será modificado
+
   return (
-    <div>
-        <h1>EVENTOS</h1>
-      <div onClick={handleReserva}>
-        <h3>EVENTO UNO</h3>
-      </div>
-      <div onClick={handleReserva}>
-        <h3>EVENTO DOS</h3>
-      </div>
-    </div>
+    <Box>
+    </Box>
   );
 }
 
 export default Eventos;
-

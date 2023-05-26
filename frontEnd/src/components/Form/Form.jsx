@@ -11,7 +11,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useState, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import "../Form/Form.css";
-import Footer from "../footer/footer";
+import FooterMinimalista from "../footerMinimalista/footerMinimalista";
 import jwt_decode from "jwt-decode";
 import CrearCuenta from "./CrearCuenta";
 const theme = createTheme();
@@ -170,7 +170,7 @@ const SignIn = () => {
             </Box>
           </Box>
         </Container>
-        <Footer />
+        <FooterMinimalista/>
       </ThemeProvider>
     </>
   );
