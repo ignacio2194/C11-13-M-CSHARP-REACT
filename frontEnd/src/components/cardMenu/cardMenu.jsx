@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import Card from "../card/card";
+
+
+import { getImgCat } from "../../store/actions/imgcategories";
+
 
 import BackgroundImg from "../../img/romero.png";
 import Dishmenu from "../dishmenu/dishmenu";
@@ -11,8 +16,8 @@ import cat3 from "../../img/categorias/menu3.jpg";
 import cat4 from "../../img/categorias/menu4.jpg";
 import cat5 from "../../img/categorias/menu5.jpg";
 import cat6 from "../../img/categorias/menu6.jpg";
-import { useDispatch, useSelector } from "react-redux";
-import { getImgCat } from "../../store/actions/imgcategories";
+
+
 
 const promocion = image;
 

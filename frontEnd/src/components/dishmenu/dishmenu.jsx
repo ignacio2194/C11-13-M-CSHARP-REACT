@@ -1,13 +1,27 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Checkbox } from "@mui/material";
-import { useState } from "react";
+import { getDish } from "../../store/actions/imgcategories";
+
 import BackgroundImg from '../../img/romero.png'
 
 export default function Dishmenu({ dish, status, click, list }) {
   const [isChecked, setIsChecked] = useState(false);
 
+  const dispatch = useDispatch()
+  const data = useSelector((state)=>state)
+
+  console.log(data)
+
+  useEffect(() => {
+        dispatch(getDish())
+  }, [dispatch]);
+
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
+  
+  
 
   return (
     <div
