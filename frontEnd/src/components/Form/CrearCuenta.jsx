@@ -16,8 +16,8 @@ import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import Icon from "@mui/material/Icon";
-import CheckIcon from '@mui/icons-material/Check';
+import ValidatePass from "../../utils/ValidatePass";
+import confirmPass from "../../utils/confirmPass";
 const CrearCuenta = () => {
   const theme = createTheme();
   const [UserData, setUserData] = useState({
@@ -32,9 +32,19 @@ const CrearCuenta = () => {
   });
 
   const [token, setToken] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [ConfirmpasswordError, setConfirmpasswordError] = useState("");
   const navigate = useNavigate();
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    // Validar la contraseña utilizando la función de validación
+    if (!ValidatePass.isValidSync(UserData.Password)) {
+      setPasswordError("La contraseña no es valida, por favor agregue mayus, numeros y un caracter especial");
+      return;
+    }
+ 
     try {
       const api = "https://sdlt2.azurewebsites.net/api/Account/Register";
       const data = await axios.post(api, {
@@ -42,7 +52,12 @@ const CrearCuenta = () => {
         Password: `${UserData.Password}`,
         ConfirmPassword: `${UserData.ConfirmPassword}`,
       });
-
+      
+      await confirmPass.validate({
+        password: UserData.Password,
+        confirmPassword: UserData.ConfirmPassword
+      });
+ 
       if (data.status === 200) {
         toast.success("¡Su cuenta se creo correctamente! ", {
           position: "top-center",
@@ -57,7 +72,7 @@ const CrearCuenta = () => {
         navigate("/");
       }
     } catch (error) {
-      toast.error("Hubo un problema, por favor intete mas tarde.", {
+      toast.error("Error interno, por favor intente más tarde.", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -69,11 +84,11 @@ const CrearCuenta = () => {
       });
     }
   };
+  
   useEffect(() => {
     if (token) {
       try {
         const decoded = jwt_decode(token);
-        console.log(decoded);
         const { name, email } = decoded;
         setUserDataGoogle({
           Nombre: name,
@@ -157,15 +172,15 @@ const CrearCuenta = () => {
                 id="password"
                 autoComplete="current-password"
                 sx={{ backgroundColor: "#fff" }}
-                onChange={(e) =>
+                onChange={(e) => {
                   setUserData((prevState) => ({
                     ...prevState,
                     [e.target.name]: e.target.value,
-                  }))
-                }
-                InputProps={{
-                  endAdornment: <Icon className="material-icons"><CheckIcon style={{display:"none"}}/></Icon>,
+                  }));
+        
                 }}
+                error={Boolean(passwordError)}
+                helperText={passwordError}
               />
               <TextField
                 margin="normal"
@@ -183,6 +198,8 @@ const CrearCuenta = () => {
                     [e.target.name]: e.target.value,
                   }))
                 }
+                error={Boolean(passwordError)}
+                helperText={passwordError}
               />
               <TextField
                 margin="normal"
@@ -223,7 +240,7 @@ const CrearCuenta = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2, backgroundColor: "#855D44" }}
-                disabled
+               
               >
                 Quiero crear mi cuenta
               </Button>

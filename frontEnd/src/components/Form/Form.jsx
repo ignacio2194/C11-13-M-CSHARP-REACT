@@ -33,6 +33,7 @@ const SignIn = () => {
       console.log(error)
     }
   };
+  
 
 
   useEffect(() => {
@@ -171,12 +172,15 @@ const SignIn = () => {
               </Box>
             </Box>
             {/* botonsito de google */}
-            <Box sx={{ marginBottom: 15 }}>
+            <Box sx={{ marginTop: 3 }}>
+              <Box>
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   setToken(credentialResponse.credential);
                 }}
               />
+              </Box>
+             
             </Box>
           </Box>
         </Container>
