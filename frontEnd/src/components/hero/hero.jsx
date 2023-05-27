@@ -1,9 +1,7 @@
 import { styled } from '@mui/system';
-import { createTheme, Button, Container, Typography } from '@mui/material';
+import {  Button, Container, Typography } from '@mui/material';
 import image from '../../img/hero-foto.png';
 import {Link} from 'react-router-dom'
-// Creación del tema de Material-UI
-const theme = createTheme();
 
 // Estilos para el contenedor de la imagen
 const ImageContainer = styled('div')({
@@ -21,18 +19,7 @@ const BackgroundImage = styled('img')({
 });
 
 // Estilos para el contenedor de texto superpuesto
-const TextContainer = styled('div')({
-  position: 'absolute',
-  bottom: '10px',
-  left: '5%',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  gap: theme.spacing(0.5),
-  color: 'white',
-  textAlign: 'left',
-  width: '50%',
-});
+
 
 // Estilos para el contenedor de botones
 const ButtonContainer = styled('div')(({ theme }) => ({
@@ -40,12 +27,38 @@ const ButtonContainer = styled('div')(({ theme }) => ({
   justifyContent: 'flex-start',
   gap: theme.spacing(1),
   marginTop: theme.spacing(1),
+  
+  
 }));
 
 // Estilos para el botón pequeño
 const SmallButton = styled(Button)(({ theme }) => ({
   padding: theme.spacing(0.5, 1),
-  fontSize: 'clamp(10px, 1.5vw, 14px)',
+  fontSize: '1.125rem',
+  backgroundColor: '#FBE19D',
+  color: '#000000',
+  fontFamily:"open sans",
+  width: '200px',
+}));
+
+const TextContainer = styled('div')({
+  position: 'absolute',
+  bottom: '3%',
+  left: '5%',
+  width: '50%',
+  textAlign: 'left',
+  marginBottom:"5%"
+
+});
+
+// Estilos para el contenedor de texto y botón
+const TextButtonContainer = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.spacing(5),
+  marginBottom: '10%',
+  marginLeft:"8%",
+  width:"70%"
 }));
 
 // Componente Hero
@@ -54,18 +67,18 @@ const Hero = () => (
     <ImageContainer>
       <BackgroundImage src={image} alt="img" />
       <TextContainer>
-        <Typography variant="h5" component="span" sx={{ fontSize: 'clamp(10px, 2vw, 14px)', lineHeight: '1.2', maxWidth: '100%', whiteSpace: 'normal', wordWrap: 'break-word' }}>
-          Vive una experiencia gastronómica única<br />que despierta tus sentidos y te transporta a tierras auténticas llenas de tradición
-        </Typography>
-        <ButtonContainer>
-        <Link to='/reservas'>
-          <SmallButton variant="contained">Reservar</SmallButton>
-        </Link>
-          
-        </ButtonContainer>
+        <TextButtonContainer>
+          <Typography variant="h5" component="span" sx={{ lineHeight: '1.2', maxWidth: '100%', whiteSpace: 'normal', wordWrap: 'break-word', fontSize: '2.5rem', color: '#FFFFFF' }}>
+            Sumérgete en una experiencia gastronómica sin igual que cautiva tus sentidos.
+          </Typography>
+          <ButtonContainer>
+            <Link to='/reservas'>
+              <SmallButton>Reservar</SmallButton>
+            </Link>
+          </ButtonContainer>
+        </TextButtonContainer>
       </TextContainer>
     </ImageContainer>
   </Container>
 );
-
 export default Hero;

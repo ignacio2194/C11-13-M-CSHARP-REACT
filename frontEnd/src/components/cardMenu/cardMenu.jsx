@@ -3,13 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Grid } from "@mui/material";
 import Card from "../card/card";
 
-
 import { getImgCat } from "../../store/actions/imgcategories";
-
 
 import BackgroundImg from "../../img/romero.png";
 import Dishmenu from "../dishmenu/dishmenu";
-import image from "../../img/AdobeStock_552068932.jpg";
+import image from "../../img/Promocion banner.png";
 import cat1 from "../../img/categorias/menu1.jpg";
 import cat2 from "../../img/categorias/menu2.jpg";
 import cat3 from "../../img/categorias/menu3.jpg";
@@ -17,51 +15,49 @@ import cat4 from "../../img/categorias/menu4.jpg";
 import cat5 from "../../img/categorias/menu5.jpg";
 import cat6 from "../../img/categorias/menu6.jpg";
 
-
-
 const promocion = image;
 
 const categories = [
   {
+    CategoriaId: 2,
     image: cat1,
-    dish: "Entradas ",
+    dish: "Entradas",
   },
   {
+    CategoriaId: 3,
     image: cat2,
-    dish: "Ensalada ",
+    dish: "Ensalada",
   },
   {
+    CategoriaId: 4,
     image: cat3,
-    dish: "Sopas ",
+    dish: "Sopas",
   },
   {
+    CategoriaId: 5,
     image: cat4,
-    dish: "Pescados y Mariscos ",
+    dish: "Pescados y Mariscos",
   },
   {
+    CategoriaId: 6,
     image: cat5,
-    dish: "Carnes ",
+    dish: "Carnes",
   },
   {
+    CategoriaId: 7,
     image: cat6,
-    dish: "Postres ",
+    dish: "Postres",
   },
 ];
 
 const CardMenu = () => {
-      
   const [selectedOption, setSelectedOption] = useState(true);
   const [categorytype, setCategorytype] = useState("menu");
-  const [reduceImageSize, setReduceImageSize] = useState(true); // Nueva variable de estado
-  const dispatch = useDispatch()
-
-
-  const dataImg = useSelector((state) => state.imgcategories.data)
-
+  const dispatch = useDispatch();
+  const dataImg = useSelector((state) => state.imgcategories.data);
 
   useEffect(() => {
-    dispatch(getImgCat())
-    console.log('pepepeeee',dataImg)
+    dispatch(getImgCat());
   }, [dispatch]);
 
   const handleClick = () => {
@@ -73,13 +69,9 @@ const CardMenu = () => {
   };
 
   const handleCategory = (dish) => {
-    console.log(dish);
     setCategorytype(dish);
-    console.log(categorytype);
-    setReduceImageSize(true);
   };
 
-  const promocionHeight = "5px";
   return (
     <div
       style={{
@@ -88,7 +80,17 @@ const CardMenu = () => {
         backgroundSize: "cover",
       }}
     >
-      <Grid container spacing={2} justifyContent="center">
+      <Grid
+        display="flex"
+        width="100%"
+        marginTop="15%"
+        container
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="row"
+        gap="15%"
+        paddingBottom="10%"
+      >
         <Grid item>
           <div
             variant="contained"
@@ -96,8 +98,7 @@ const CardMenu = () => {
             disabled={selectedOption}
             style={{
               textDecoration: selectedOption ? "underline" : "",
-              fontSize: "1.5rem",
-              marginBottom: "30px",
+              fontSize: "1.25rem", paddingRight:"25%", fontFamily:"open sans"
             }}
           >
             Menú
@@ -108,48 +109,39 @@ const CardMenu = () => {
             onClick={handleClick}
             style={{
               textDecoration: !selectedOption ? "underline" : "",
-              fontSize: "1.5rem",
+              fontSize: "1.25rem",
             }}
           >
             Delivery
           </div>
         </Grid>
       </Grid>
-
-      <Grid container spacing={3} justifyContent="center" alignItems="center">
+      <Grid container spacing={1} justifyContent="center" alignItems="center">
         {selectedOption && (
-          <Card
-            image={promocion}
-            large={true}
-            square={false}
-            style={{ height: promocionHeight }} // Agrega el estilo de altura a la imagen promocion
-          />
+          <img src={promocion} alt="promocion" style={{ height: "20vw" }} />
         )}
       </Grid>
-
-      <Grid style={{ paddingTop: "15px", padding: "5px" }}>
-        {categorytype === "menu" && (
-          <Grid
-            container
-            spacing={0}
-            justifyContent="center"
-            alignItems={"center"}
-          >
-            {categories.map((e, index) => (
-              <Grid item xs={4} key={e.dish}>
-                <Card
-                  image={e.image}
-                  dish={e.dish}
-                  square={index >= 0 && index <= 3}
-                  large={(index >= 0 && index <= 5) || index <= 3}
-                  category={handleCategory}
-                  reduceSize={reduceImageSize} // Pasar el valor de reduceImageSize como prop
-                />
-              </Grid>
-            ))}
-          </Grid>
-        )}
-      </Grid>
+      {categorytype === "menu" && (
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="center"
+          spacing={2}
+          sx={{ margin: "auto", maxWidth: "1250px", paddingTop: "10%" }}
+        >
+          {categories.map((e, index) => (
+            <Grid item xs={12} sm={6} md={4} key={e.dish}>
+              <Card
+                image={e.image}
+                dish={e.dish}
+                CategoriaId={e.CategoriaId}
+                category={handleCategory}
+                large={window.innerWidth >= 428} // Establece large a true en iPhones 12 y dispositivos más grandes
+              />
+            </Grid>
+          ))}
+        </Grid>
+      )}
       <div>
         {categorytype !== "menu" && (
           <Dishmenu

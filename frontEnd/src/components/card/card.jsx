@@ -1,25 +1,33 @@
-
-import { styled } from '@mui/system';
-import { Typography, Grid } from '@mui/material';
-
-
-// Estilos para el contenedor de la tarjeta
-const CardWrapper = styled('div')(({ theme }) => ({
-  marginBottom: theme.spacing(0),
-}));
-
-const Image = styled('img')(({ theme, large, square, reduceSize }) => ({
-  width: (large && reduceSize) ? '10%' : '100%', // Reducir el tamaño solo si large y reduceSize son verdaderos
-  transform: large ? 'scale(0.95)' : 'scale(1)',
-  objectFit: square ? 'cover' : 'contain',
-  borderRadius: square ? '0' : null,
-}));
+import { styled } from "@mui/system";
+import { Typography, Grid } from "@mui/material";
 
 // Estilos para el texto del plato
 const DishText = styled(Typography)(({ theme }) => ({
-  fontSize: '3vw',
-  marginTop: '-2vw'
+  fontSize: "1rem",
+  color: "#000",
 }));
+
+// Estilos para el contenedor de la tarjeta
+const CardContainer = styled(Grid)({
+  position: "relative",
+});
+
+// Estilos para la imagen
+const CardImage = styled("img")({
+  height: "22vw",
+  display: "block",
+});
+
+// Estilos para el contenedor del texto
+const CardTextContainer = styled(Grid)({
+  fontFamily: "Open Sans",
+  position: "absolute",
+  left: 0,
+  right: 0,
+  bottom: "-30px",
+  textAlign: "center",
+  marginBottom: "3vm"
+});
 
 /**
  * Componente de Tarjeta
@@ -29,23 +37,22 @@ const DishText = styled(Typography)(({ theme }) => ({
  * @param {boolean} props.square - Indica si la imagen debe ser más cuadrada
  * @returns {JSX.Element} Elemento de tarjeta
  */
-function Card({ dish, image, large, square, category}) {
-
+function Card({ dish, image, category, CategoriaId }) {
   const handleClick = () => {
     category(dish);
   };
 
   return (
-    <CardWrapper onClick={category ? handleClick : null}>
-      <Grid container direction="column" alignItems="center">
+    
+      <CardContainer container direction="column" alignItems="center" onClick={category ? handleClick : null} style={{ marginBottom: "10%" }}>
         <Grid item>
-          <Image src={image} alt="" large={large} square={square}/>
+          <CardImage src={image} alt="" />
         </Grid>
-        <Grid item>
-          <DishText variant="body1">{dish}</DishText>
-        </Grid>
-      </Grid>
-    </CardWrapper>
+        <CardTextContainer item>
+          <DishText variant="h3">{dish}</DishText>
+        </CardTextContainer>
+      </CardContainer>
+    
   );
 }
 
