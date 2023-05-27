@@ -14,7 +14,7 @@ const CardContainer = styled(Grid)({
 
 // Estilos para la imagen
 const CardImage = styled("img")({
-  height: "22vw",
+  width: "100%",
   display: "block",
 });
 
@@ -43,16 +43,14 @@ function Card({ dish, image, category, CategoriaId }) {
   };
 
   return (
-    
-      <CardContainer container direction="column" alignItems="center" onClick={category ? handleClick : null} style={{ marginBottom: "10%" }}>
-        <Grid item>
-          <CardImage src={image} alt="" />
-        </Grid>
-        <CardTextContainer item>
-          <DishText variant="h3">{dish}</DishText>
-        </CardTextContainer>
-      </CardContainer>
-    
+    <CardContainer container direction="column" alignItems="center" onClick={category ? handleClick : null} style={{ marginBottom: "10%" }}>
+      <Grid item>
+        <CardImage src={image} alt="" />
+      </Grid>
+      <CardTextContainer item>
+        <DishText variant="h3">{dish}</DishText>
+      </CardTextContainer>
+    </CardContainer>
   );
 }
 

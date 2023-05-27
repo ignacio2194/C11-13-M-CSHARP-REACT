@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import Card from "../card/card";
 
 import { getImgCat } from "../../store/actions/imgcategories";
@@ -14,6 +14,7 @@ import cat3 from "../../img/categorias/menu3.jpg";
 import cat4 from "../../img/categorias/menu4.jpg";
 import cat5 from "../../img/categorias/menu5.jpg";
 import cat6 from "../../img/categorias/menu6.jpg";
+import { Link } from "react-router-dom";
 
 const promocion = image;
 
@@ -127,7 +128,7 @@ const CardMenu = () => {
           justifyContent="center"
           alignItems="center"
           spacing={2}
-          sx={{ margin: "auto", maxWidth: "1250px", paddingTop: "10%" }}
+          sx={{ margin: "auto", maxWidth: "1250px", paddingTop: "10%" }}         
         >
           {categories.map((e, index) => (
             <Grid item xs={12} sm={6} md={4} key={e.dish}>
@@ -136,7 +137,6 @@ const CardMenu = () => {
                 dish={e.dish}
                 CategoriaId={e.CategoriaId}
                 category={handleCategory}
-                large={window.innerWidth >= 428} // Establece large a true en iPhones 12 y dispositivos más grandes
               />
             </Grid>
           ))}
@@ -152,6 +152,37 @@ const CardMenu = () => {
           />
         )}
       </div>
+      <Grid container justifyContent="center" marginTop="8rem" marginBottom={"8rem"}>
+      <Link to="/reservas">
+      <Grid item>
+        <Button 
+          variant="contained"
+          color="primary"
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "24px 86px",
+            gap: "4px",
+            position: "absolute",
+            width: "252px",
+            height: "75px",
+            left: "calc(50% - 252px/2)",
+            top: "2754px",
+            background: "#835C44",
+            borderRadius: "6px",
+            fontWeight: 500,
+            fontSize: "16px",
+            textTransform: "none"
+          }}
+          >
+          Reservar
+        </Button>
+      </Grid>
+      </Link>
+    </Grid>
+    
     </div>
   );
 };
