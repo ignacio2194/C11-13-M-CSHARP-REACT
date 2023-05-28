@@ -16,50 +16,51 @@ import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import ValidatePass from "../../utils/ValidatePass";
-import confirmPass from "../../utils/confirmPass";
+import validationSchema from "../../utils/validationSchema ";
 const CrearCuenta = () => {
   const theme = createTheme();
   const [UserData, setUserData] = useState({
     Email: "",
     Password: "",
     ConfirmPassword: "",
+    ConfirmEmail: "",
   });
 
   const [userDataGoogle, setUserDataGoogle] = useState({
-    Nombre: "",
-    email: "",
+  
   });
 
   const [token, setToken] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [ConfirmpasswordError, setConfirmpasswordError] = useState("");
   const navigate = useNavigate();
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Validar la contraseña utilizando la función de validación
-    if (!ValidatePass.isValidSync(UserData.Password)) {
-      setPasswordError("La contraseña no es valida, por favor agregue mayus, numeros y un caracter especial");
-      return;
-    }
- 
+
     try {
+      await validationSchema.validate(UserData, { abortEarly: false });
+
+      let confirmEmailErrors = [];
+      try {
+        await validationSchema.validateAt("ConfirmEmail", UserData);
+      } catch (error) {
+        confirmEmailErrors = error.errors;
+      }
+
+      if (confirmEmailErrors.length > 0) {
+        setPasswordError(confirmEmailErrors[0]);
+        return;
+      }
+
       const api = "https://sdlt2.azurewebsites.net/api/Account/Register";
       const data = await axios.post(api, {
         Email: `${UserData.Email}`,
         Password: `${UserData.Password}`,
         ConfirmPassword: `${UserData.ConfirmPassword}`,
       });
-      
-      await confirmPass.validate({
-        password: UserData.Password,
-        confirmPassword: UserData.ConfirmPassword
-      });
- 
+
       if (data.status === 200) {
-        toast.success("¡Su cuenta se creo correctamente! ", {
+        toast.success("¡Su cuenta se creó correctamente! ", {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -72,34 +73,50 @@ const CrearCuenta = () => {
         navigate("/");
       }
     } catch (error) {
-      toast.error("Error interno, por favor intente más tarde.", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      const errorMessage = error.errors[0];
+      setPasswordError(errorMessage);
     }
   };
-  
   useEffect(() => {
     if (token) {
       try {
         const decoded = jwt_decode(token);
-        const { name, email } = decoded;
+        const {  email } = decoded;
         setUserDataGoogle({
-          Nombre: name,
-          email: email,
+          Email: email,
+          Password:'se logeo con google',
+          ConfirmPassword:'se logeo con google'
         });
+ 
+        const sendDataUser = async () => {
+          const api = "https://sdlt2.azurewebsites.net/api/Account/Register";
+          const data = await axios.post(api, {
+            Email: `${userDataGoogle.Email}`,
+            Password: `${userDataGoogle.Password}`,
+            ConfirmPassword: `${userDataGoogle.ConfirmPassword}`,
+          });
+          console.log(data.status)
+          if (data.status === 200) {
+            toast.success("¡Su cuenta se creó correctamente! ", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            navigate("/");
+          }
+        };
+        sendDataUser();
       } catch (error) {
         console.error("Error al decodificar el token:", error);
       }
     }
-  }, [token]);
-
+  }, [navigate,token,userDataGoogle.Email, userDataGoogle.ConfirmPassword, userDataGoogle.Password]);
+ 
   return (
     <>
       <NavbarSecondary />
@@ -177,7 +194,6 @@ const CrearCuenta = () => {
                     ...prevState,
                     [e.target.name]: e.target.value,
                   }));
-        
                 }}
                 error={Boolean(passwordError)}
                 helperText={passwordError}
@@ -222,7 +238,7 @@ const CrearCuenta = () => {
                 margin="normal"
                 required
                 fullWidth
-                name="Email"
+                name="ConfirmEmail"
                 label="Confirma tu correo electronico"
                 type="email"
                 id="email"
@@ -240,7 +256,6 @@ const CrearCuenta = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2, backgroundColor: "#855D44" }}
-               
               >
                 Quiero crear mi cuenta
               </Button>
