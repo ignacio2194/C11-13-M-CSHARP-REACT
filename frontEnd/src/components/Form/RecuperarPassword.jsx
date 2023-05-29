@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import FooterSecondary from "../footerSecondary/FooterSecondary";
+import FooterMinimalista from "../footerMinimalista/footerMinimalista";
 import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
 
 const RecuperarPassword = () => {
@@ -96,7 +96,7 @@ const RecuperarPassword = () => {
           </Box>
         </Container>
       </ThemeProvider>
-      <FooterSecondary />
+      <FooterMinimalista />
     </>
   );
 };
