@@ -55,7 +55,7 @@ const CardMenu = () => {
   const [selectedOption, setSelectedOption] = useState(true);
   const [categorytype, setCategorytype] = useState("menu");
   const dispatch = useDispatch();
-  const dataImg = useSelector((state) => state.imgcategories.data);
+
 
   useEffect(() => {
     dispatch(getImgCat());
@@ -99,7 +99,9 @@ const CardMenu = () => {
             disabled={selectedOption}
             style={{
               textDecoration: selectedOption ? "underline" : "",
-              fontSize: "1.25rem", paddingRight:"25%", fontFamily:"open sans"
+              fontSize: "1.25rem",
+              paddingRight: "25%",
+              fontFamily: "open sans",
             }}
           >
             Menú
@@ -128,7 +130,7 @@ const CardMenu = () => {
           justifyContent="center"
           alignItems="center"
           spacing={2}
-          sx={{ margin: "auto", maxWidth: "1250px", paddingTop: "10%" }}         
+          sx={{ margin: "auto", maxWidth: "1250px", paddingTop: "10%", paddingLeft:"25px" }}
         >
           {categories.map((e, index) => (
             <Grid item xs={12} sm={6} md={4} key={e.dish}>
@@ -152,37 +154,40 @@ const CardMenu = () => {
           />
         )}
       </div>
-      <Grid container justifyContent="center" marginTop="8rem" marginBottom={"8rem"}>
-      <Link to="/reservas">
-      <Grid item>
-        <Button 
-          variant="contained"
-          color="primary"
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "24px 86px",
-            gap: "4px",
-            position: "absolute",
-            width: "252px",
-            height: "75px",
-            left: "calc(50% - 252px/2)",
-            top: "2754px",
-            background: "#835C44",
-            borderRadius: "6px",
-            fontWeight: 500,
-            fontSize: "16px",
-            textTransform: "none"
-          }}
-          >
-          Reservar
-        </Button>
-      </Grid>
-      </Link>
-    </Grid>
-    
+      <Grid container justifyContent="center" marginTop="8rem" marginBottom="8rem">
+  <Grid item>
+    <Link to="/reservas" style={{ textDecoration: 'none' }}>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "2.67vw 9.47vw",
+          gap: "0.267vw",
+          width: "17.5vw",
+          height: "5.25vw",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          background: "#835C44",
+          borderRadius: "0.375vw",
+          textTransform: "none",
+          fontSize: "1.67vw",
+          color: "#FFFFFF", // Color de texto normal
+          "&:hover": {
+            color: "#FBE19D", // Cambia el color de texto al pasar el mouse
+            background: "#835C44", // Mantiene el color de fondo constante
+          },
+        }}
+      >
+        Reservar
+      </Button>
+    </Link>
+  </Grid>
+</Grid>
     </div>
   );
 };

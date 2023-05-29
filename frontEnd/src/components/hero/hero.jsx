@@ -29,6 +29,7 @@ const ButtonContainer = styled('div')(({ theme }) => ({
   marginTop: theme.spacing(1),
   
   
+  
 }));
 
 // Estilos para el botón pequeño
@@ -39,6 +40,7 @@ const SmallButton = styled(Button)(({ theme }) => ({
   color: '#000000',
   fontFamily:"open sans",
   width: '200px',
+  textTransform: "none",
 }));
 
 const TextContainer = styled('div')({
@@ -68,7 +70,7 @@ const Hero = () => (
       <BackgroundImage src={image} alt="img" />
       <TextContainer>
         <TextButtonContainer>
-          <Typography variant="h5" component="span" sx={{ lineHeight: '1.2', maxWidth: '100%', whiteSpace: 'normal', wordWrap: 'break-word', fontSize: '2.5rem', color: '#FFFFFF' }}>
+          <Typography variant="h5" component="span" sx={{ lineHeight: '1.2', maxWidth: '100%', whiteSpace: 'normal', wordWrap: 'break-word', fontSize: '2.5rem', color: '#FFFFFF'  }}>
             Sumérgete en una experiencia gastronómica sin igual que cautiva tus sentidos.
           </Typography>
           <ButtonContainer>
