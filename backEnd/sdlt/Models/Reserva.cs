@@ -10,27 +10,24 @@ namespace sdlt.Models
     [Table("Reserva")]
     public partial class Reserva
     {
-        public Reserva()
-        {
-            ReservacionEnEvento = new HashSet<ReservacionEnEvento>();
-        }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int? ReservaId { get; set; }
 
         public DateTime FechaHora { get; set; }
-
         public decimal? Precio { get; set; }
+        public virtual int? Cantidad { get; set; }
 
         [StringLength(128)]
         [ForeignKey("AspNetUsers")]
         public string UserId { get; set; }
-
+        [ForeignKey("Evento")]
+        public int? EventoId { get; set; }
+        [JsonIgnore]
+        [ForeignKey("EventoId")]
+        public Evento Evento { get; set; }
         [JsonIgnore]
         [ForeignKey("UserId")]
         public virtual User AspNetUsers { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<ReservacionEnEvento> ReservacionEnEvento { get; set; }
     }
 }

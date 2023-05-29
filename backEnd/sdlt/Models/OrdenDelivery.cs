@@ -1,5 +1,6 @@
 namespace sdlt.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -9,12 +10,11 @@ namespace sdlt.Models
     [Table("OrdenDelivery")]
     public partial class OrdenDelivery
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public OrdenDelivery()
         {
             DetalleOrdenDelivery = new HashSet<DetalleOrdenDelivery>();
         }
-
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int OrdenId { get; set; }
 
@@ -24,13 +24,16 @@ namespace sdlt.Models
         public DateTime? Fecha { get; set; }
 
         [StringLength(128)]
-        public string ClienteId { get; set; }
+        public virtual string ClienteId { get; set; }
 
         public int? RestauranteId { get; set; }
-
-        public virtual User AspNetUsers { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        [ForeignKey("ClienteId")]
+        public virtual User AspNetUser { get; set; }
+        [JsonIgnore]
+        [ForeignKey("RestauranteId")]
+        public virtual Restaurante Restaurante { get; set; }
+        [JsonIgnore]
         public virtual ICollection<DetalleOrdenDelivery> DetalleOrdenDelivery { get; set; }
     }
 }
