@@ -99,12 +99,13 @@ const CardMenu = () => {
             disabled={selectedOption}
             style={{
               textDecoration: selectedOption ? "underline" : "",
+              fontWeight: selectedOption ? "900" : "",
               fontSize: "1.25rem",
               paddingRight: "25%",
               fontFamily: "open sans",
             }}
           >
-            Menú
+            MENÚ
           </div>
         </Grid>
         <Grid item>
@@ -112,10 +113,12 @@ const CardMenu = () => {
             onClick={handleClick}
             style={{
               textDecoration: !selectedOption ? "underline" : "",
+              fontWeight: !selectedOption ? "900" : "",
               fontSize: "1.25rem",
+              fontFamily: "open sans",
             }}
           >
-            Delivery
+            DELIVERY
           </div>
         </Grid>
       </Grid>
