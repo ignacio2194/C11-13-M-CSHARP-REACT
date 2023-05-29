@@ -13,8 +13,8 @@ const imgCategories = createSlice({
       state.data = action.payload;
     },
     takeDish(state, action) {
-        console.log(state, action, 'iapepepe')
         state.dish = action.payload;
+        console.log(action.payload)
       },
   },
 });

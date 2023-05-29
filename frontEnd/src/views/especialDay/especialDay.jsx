@@ -1,17 +1,14 @@
 //ESTE VA A SER EL componente de los eventos
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box } from '@mui/material';
-
-
+import Eventox from "../../components/eventos/eventos";
 
 const Eventos = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleReserva = () => {
-    // Lógica para dirigirnos a la página de reserva
-    navigate("/reserva");
-  };
+  // const handleReserva = () => {
+  //   // Lógica para dirigirnos a la página de reserva
+  //   navigate("/reserva");
+  // };
 
 
   //tener en cuenta que vamos a estar haciendo un mapeo de los eventos que haya
@@ -21,8 +18,17 @@ const Eventos = () => {
   //este código será modificado
 
   return (
-    <Box>
-    </Box>
+    <div>
+        {/* <h1>EVENTOS</h1>
+      <div onClick={handleReserva}>
+        <h3>EVENTO UNO</h3>
+      </div> 
+      <div onClick={handleReserva}>
+        <h3>EVENTO DOS</h3>
+      </div> */}
+
+      <Eventox/>
+    </div>
   );
 }
 
