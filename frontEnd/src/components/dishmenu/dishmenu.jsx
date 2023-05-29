@@ -5,8 +5,10 @@ import { getDish } from "../../store/actions/imgcategories";
 
 import BackgroundImg from '../../img/romero.png'
 
-export default function Dishmenu({ dish, status, click, list }) {
+export default function Dishmenu({ dish, status, click, list, CategoriaId }) {
   const [isChecked, setIsChecked] = useState(false);
+
+  console.log(dish, "Spy el plato")
 
   const dispatch = useDispatch()
   const data = useSelector((state)=>state)
@@ -14,7 +16,7 @@ export default function Dishmenu({ dish, status, click, list }) {
   console.log(data)
 
   useEffect(() => {
-        dispatch(getDish())
+        dispatch(getDish(CategoriaId))
   }, [dispatch]);
 
   const handleCheckboxChange = () => {

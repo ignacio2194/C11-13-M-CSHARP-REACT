@@ -15,13 +15,16 @@ export function getImgCat() {
     };
   }
 
-  export function getDish() {
-    
+  export function getDish(dish) {
     return async function (dispatch) {
       try {
         var json = await axios.get(`${uri}/api/Comidas/GetAll`);
         console.log(json.data)
-        return dispatch(takeDish(json.data));
+        
+        return dispatch({
+            data:takeDish(json.data),
+            
+        });
       } catch (error) {
         console.log(error);
       }
