@@ -11,10 +11,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useState, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import "../Form/Form.css";
-<<<<<<< HEAD
-import FooterMinimalista from "../footerMinimalista/footerMinimalista";
-=======
->>>>>>> 4bb0e30fe5cac7f18daf88ad170cb39220c717c5
 import jwt_decode from "jwt-decode";
 import FooterSecondary from "../footerSecondary/FooterSecondary";
 import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
@@ -174,10 +170,6 @@ const SignIn = () => {
             </Box>
           </Box>
         </Container>
-<<<<<<< HEAD
-        <FooterMinimalista/>
-=======
->>>>>>> 4bb0e30fe5cac7f18daf88ad170cb39220c717c5
       </ThemeProvider>
       <FooterSecondary />
     </>
