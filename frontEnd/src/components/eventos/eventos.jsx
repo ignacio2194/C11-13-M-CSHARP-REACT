@@ -63,7 +63,7 @@ export default function Eventox() {
           renderCenterLeftControls={() => null}
           renderCenterRightControls={() => null}
           centerMode={true}
-          centerSlidePercentage={50.33}
+          centerSlidePercentage={30.33}
         >
           {evimg.map((item, index) => (
             <div key={index}>{renderCarouselItem(index)}</div>

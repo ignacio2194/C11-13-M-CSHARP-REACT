@@ -26,7 +26,7 @@ export default function MenuLegend() {
       <Label variant="h6" component="label">
         Menú
       </Label>
-      <Typography variant="body1" component="h3" style={{fontFamily: 'open-sans, sans-serif', fontSize:"1.5rem", width:"65%"}}>
+      <Typography variant="body1" component="h3" style={{fontFamily: 'open-sans, sans-serif', fontSize:"1.5rem", width:"60%"}}>
       Nuestro menú resalta la diversidad de sabores y técnicas tradicionales de la región, utilizando ingredientes frescos y auténticos para ofrecerte una experiencia gastronómica única.
       </Typography>
     </ContentWrapper>
