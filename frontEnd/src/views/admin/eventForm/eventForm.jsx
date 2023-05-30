@@ -1,152 +1,129 @@
-//FORMULARIO DE CREACION DE EVENTOS
-//CANTIDAD
-//DIA
-//HORA
-//DESCUENTO
-//PRECIO TOTAL?????
-//ESEVENTO
-//STOCKEVENTO
-
 import React, { useState } from 'react';
-// import { useDispatch } from "react-redux";
-
-
-//import axios from 'axios';
+import axios from 'axios';
+import { TextField, Button, Grid } from '@mui/material';
+import Dashboard from '../../admin/dashboard/dashboard';
+import './eventForm.css';
+import Navbar from '../../admin/dashboard/navBar';
 
 const EventForm = () => {
-  // const dispatch = useDispatch();
-
   const [form, setForm] = useState({
-    amount: 0,
-    day: '',
-    hour: '',
-    discount: 0,
-    totalPrice: 0,
-    nameEvent: '',
-    stockEvent: 0,
+    Nombre: '',
+    Descripcion: '',
+    RestauranteId: '',
+    Stock: '',
+    Precio: '',
   });
+
   const [error, setError] = useState({
-    amount: 0,
-    day: '',
-    hour: '',
-    discount: 0,
-    totalPrice: 0,
-    nameEvent: '',
-    stockEvent: 0,
+    Nombre: '',
+    Descripcion: '',
+    RestauranteId: '',
+    Stock: '',
+    Precio: '',
   });
 
-  function validate(input) {
-    let error = {};
-    if (!input.amount) error.amount = "Insert an amount";
-    if (!input.day) error.day = "Insert a Day";
-    if (!input.hour) error.amount = "Insert an hour";
-    if (!input.discount) error.discount = "Insert a discount";
-    if (!input.totalPrice) error.total = "Insert a Total Price";
-    if (!/^[A-Za-z]+$/.test(input.nameEvent)) error.nameEvent = "The Name is invalid";
-    if (!input.stockEvent) error.stockEvent = "Insert a Stock";
+  const validate = (input) => {
+    let errors = {};
+    if (!input.Nombre) errors.Nombre = 'Insert a Name';
+    if (!input.Descripcion) errors.Descripcion = 'Insert a Description';
+    if (!input.RestauranteId) errors.RestauranteId = 'Insert a Restaurant ID';
+    if (!input.Stock) errors.Stock = 'Insert a Stock';
+    if (!input.Precio) errors.Precio = 'Insert a Price';
 
-    return error;
-  }
-
-
+    return errors;
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setForm((prevEvent) => ({
-      ...prevEvent,
+    setForm((prevForm) => ({
+      ...prevForm,
       [name]: value,
     }));
   };
 
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-//     await axios
-//         .post("http://localhost:3001/event", form)
-//         .then((response) => alert("Event Created!"))
-//         .catch((error) => alert(error));
-//   };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.post('https://sdlt2.azurewebsites.net/api/Eventos/Create', form);
+      alert('Event Created!');
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   return (
-     <form>
-      <label>
-        Cantidad:
-        <input
-          type="number"
-          name="amount"
-          value={form.amount}
-          onChange={handleInputChange}
-        />
-        {error.amount && <span>{error.amount}</span>}
-      </label>
-      <br />
-      <label>
-        Día:
-        <input
-          type="text"
-          name="day"
-          value={form.day}
-          onChange={handleInputChange}
-        />
-        {error.day && <span>{error.day}</span>}
-      </label>
-      <br />
-      <label>
-        Hora:
-        <input
-          type="text"
-          name="hour"
-          value={form.hour}
-          onChange={handleInputChange}
-        />
-        {error.hour && <span>{error.hour}</span>}
-      </label>
-      <br />
-      <label>
-        Descuento:
-        <input
-          type="number"
-          name="discount"
-          value={form.discount}
-          onChange={handleInputChange}
-        />
-        {error.discount && <span>{error.discount}</span>}
-      </label>
-      <br />
-      <label>
-        Precio Total:
-        <input
-          type="number"
-          name="totalPrice"
-          value={form.totalPrice}
-          onChange={handleInputChange}
-        />
-        {error.totalPrice && <span>{error.totalPrice}</span>}
-      </label>
-      <br />
-      <label>
-        Nombre del Evento:
-        <input
-          type="text"
-          name="nameEvent"
-          value={form.nameEvent}
-          onChange={handleInputChange}
-        />
-        {error.nameEvent && <span>{error.nameEvent}</span>}
-      </label>
-      <br />
-      <label>
-        Stock del Evento:
-        <input
-          type="number"
-          name="stockEvent"
-          value={form.stockEvent}
-          onChange={handleInputChange}
-        />
-        {error.stockEvent && <span>{error.stockEvent}</span>}
-      </label>
-      <br />
-      <button type="submit">Crear Evento</button>
-    </form>
+    <div>
+      
+      <Dashboard />
+      <Navbar/>
+      <form onSubmit={handleSubmit} className="container">
+        <h1 className="title">Crear Evento</h1>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              label="Nombre"
+              name="Nombre"
+              value={form.Nombre}
+              onChange={handleInputChange}
+              error={!!error.Nombre}
+              helperText={error.Nombre}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Descripción"
+              name="Descripcion"
+              value={form.Descripcion}
+              onChange={handleInputChange}
+              error={!!error.Descripcion}
+              helperText={error.Descripcion}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Restaurante ID"
+              name="RestauranteId"
+              value={form.RestauranteId}
+              onChange={handleInputChange}
+              error={!!error.RestauranteId}
+              helperText={error.RestauranteId}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Stock"
+              name="Stock"
+              type="number"
+              value={form.Stock}
+              onChange={handleInputChange}
+              error={!!error.Stock}
+              helperText={error.Stock}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Precio"
+              name="Precio"
+              type="number"
+              value={form.Precio}
+              onChange={handleInputChange}
+              error={!!error.Precio}
+              helperText={error.Precio}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} className="button-container">
+            <Button type="submit" variant="contained" color="primary">
+              Crear Evento
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
+    </div>
   );
 };
 
