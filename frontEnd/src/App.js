@@ -17,6 +17,8 @@ import EventForm from "./views/admin/eventForm/eventForm";
 // import CategoryForm from "./views/admin/categoyForm/categoryForm";
 import MenuForm from "./views/admin/menuForm/menuForm";
 import AllReservas from "./views/admin/reservas/reservas";
+import AccountCreated from "./components/accountCreated/AccountCreated";
+
 
 
 function App() {
@@ -39,6 +41,7 @@ function App() {
         <Route path="/admin/eventForm" element={<EventForm />} />
         {/* <Route path="admin/createCategory" element={<CategoryForm />} /> */}
         <Route path="admin/createMenu" element={<MenuForm />} />
+        <Route path="cuenta-creada" element={<AccountCreated />} />
         <Route path="*" element={<Navigate to="/" replace={true} />} />
         <Route path="admin/allreservas" element={<AllReservas />} />
         

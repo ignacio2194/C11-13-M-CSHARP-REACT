@@ -6,13 +6,14 @@ const Menu = () => {
   return (
     <section
       style={{
+        
         padding:"0px",
         margin:"0px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         color: "black",
-        backgroundColor: "#eaf681",
+        backgroundColor: "#FFD7BD",
         flexDirection:"column"
       }}
     >

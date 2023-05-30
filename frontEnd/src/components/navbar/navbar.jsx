@@ -6,6 +6,7 @@ import {
   Typography,
   Stack,
   Divider,
+  Button,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
@@ -14,18 +15,19 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import NavListDrawerResponsive from "./navListDrawerResponsive.jsx";
 import scrollToSection from "../../utils/scrollToSection.js";
+import logo from "../../assets/images/logo.png";
 
 export default function Navbar({ menu, events, sucursales }) {
   const [open, setOpen] = useState(false);
 
   return (
     <nav style={{ position: "sticky", top: "0", right: "0", zIndex: "9", width: "100%" }}>
-      <AppBar position="static">
+      <AppBar position="static" >
         <Stack
           direction="row"
           justifyContent="space-between"
           alignItems="center"
-          p={2}
+          sx={{ height: "68px", padding: "0 28px" }}
         >
           <Box
             sx={{
@@ -39,24 +41,27 @@ export default function Navbar({ menu, events, sucursales }) {
           </Box>
           <Stack
             direction="row"
-            divider={<Divider orientation="vertical" flexItem />}
+            divider={<Divider orientation="vertical" flexItem color={"white"} />}
             spacing={2}
           >
-            <Typography>ES</Typography>
+            <Typography sx={{ fontWeight: "bold" }}>ES</Typography>
             <Typography>EN</Typography>
           </Stack>
         </Stack>
-        <Box sx={{ backgroundColor: "custom.lightBrown", display: "flex", justifyContent: "space-between" }}>
+        <Box sx={{ backgroundColor: "custom.lightBrown", display: "flex", justifyContent: "space-between", height: "133px" }}>
           <Box
             sx={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center"
+              alignItems: "center",
+              // width: "155px",
+              marginLeft: "28px",
+              width: { xs: "100px", sm: "175px" }
             }}
           >
-            <Typography ml={2}>Logo</Typography>
+            <img src={logo} alt="Logo Sabores De La Tierra" style={{ width: "100%" }} />
           </Box>
-          <Toolbar>
+          <Toolbar >
             <IconButton
               color="inherit"
               size="large"
@@ -67,26 +72,29 @@ export default function Navbar({ menu, events, sucursales }) {
               <MenuIcon />
             </IconButton>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Box sx={{ display: "flex", gap: "16px" }}>
+              <Box sx={{ display: "flex", gap: "32px" }}>
                 <Box
                   onClick={() => scrollToSection(menu)}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
                   <Typography>Menú</Typography>
                 </Box>
                 <Box
                   onClick={() => scrollToSection(events)}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
                   <Typography>Eventos</Typography>
                 </Box>
                 <Box
                   onClick={() => scrollToSection(sucursales)}
+                  sx={{ display: "flex", alignItems: "center" }}
                 >
                   <Typography>Sucursales</Typography>
                 </Box>
                 <NavLink
                   to="/login"
                 >
-                  <Typography>Iniciar Sesíon</Typography>
+                  <Button variant="contained" sx={{ backgroundColor: "custom.yellow", color: "black" }}>Iniciar Sesión</Button>
                 </NavLink>
               </Box>
             </Box>

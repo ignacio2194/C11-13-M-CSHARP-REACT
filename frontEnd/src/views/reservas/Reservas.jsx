@@ -8,7 +8,7 @@ import Ticket from "./Ticket";
 import Spinner from "./Spinner";
 import { useNavigate } from "react-router-dom";
 import logo from '../../img/logo-sabores@2x.png';
-import BadgeAvatars from "./Avatar";
+import BadgeAvatars from "../../components/avatar/Avatar";
 
 const PERSONS_OPTIONS = [
   { text: "Una persona", value: 1 },

@@ -35,10 +35,16 @@ const Footer = ({ menu, events, sucursales }) => {
       </Box>
       <Box display="flex" justifyContent="space-between" alignItems="center" style={{ marginBottom: '10px' }}>
         <Box display="flex" alignItems="center" style={{ marginTop: '30px' }}>
-          <Typography variant="body2" style={{ marginRight: '30px' }}>
-            Av. Vicente Suárez 165, Col. Condesa, Cuauhtémoc C.P. 06140 CDMX
+        <Typography variant="body2" style={{ marginRight: '10px' }}>
+            Av. Vicente Suárez 165, Col. Condesa, Cuauhtémoc
           </Typography>
-          <Typography variant="body2" style={{ marginRight: '8px' }}>
+          <Typography variant="body2" style={{ marginRight: '10px' }}>
+            C.P. 06140
+          </Typography>
+          <Typography variant="body2" style={{ marginRight: '15px' }}>
+           CDMX
+          </Typography>
+          <Typography variant="body2">
             Tel +52 11 1010-2020
           </Typography>
         </Box>
