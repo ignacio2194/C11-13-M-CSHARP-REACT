@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using sdlt.DTOs;
 using sdlt.Models;
 using sdlt.Providers;
 using sdlt.Results;
@@ -328,6 +329,10 @@ namespace sdlt.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
+            if(model.ConfirmPassword == "se registro con google" && model.Password == "se registro con google")
+            {
+
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -387,6 +392,15 @@ namespace sdlt.Controllers
             return context.AspNetUsers.AsQueryable();
         }
 
+        [HttpGet]
+        [Route("GetUserByUsername")]
+        //[Authorize(Roles = "Administrator")]
+        public User GetAllUsers([FromUri] string userName)
+        {
+            SDLTDb context = new SDLTDb();
+
+            return context.AspNetUsers.FirstOrDefault(u => u.UserName == userName);
+        }
 
         [HttpPost]
         [Route("assignRol")]

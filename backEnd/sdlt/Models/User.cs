@@ -55,20 +55,23 @@ namespace sdlt.Models
 
         [StringLength(400)]
         public string Reseña { get; set; }
+        public string ImagenUrl { get; set; }
+
+        public string NombreApellido{ get; set; }
         [JsonIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         [JsonIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         [JsonIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
         [JsonIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<Reserva> Reserva { get; set; }
         [JsonIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+     
         public virtual ICollection<OrdenDelivery> OrdenDelivery { get; set; }
     }
 }
