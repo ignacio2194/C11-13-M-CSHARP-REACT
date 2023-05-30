@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using sdlt.DTOs;
-using sdlt.Models;
+﻿using sdlt.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
