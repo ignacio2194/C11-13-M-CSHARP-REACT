@@ -16,7 +16,7 @@ namespace sdlt.Controllers
     [RoutePrefix("api")]
     public class ProductosController : ApiController
     {
-        SDLTDb db = new SDLTDb();
+        readonly SDLTDb db = new SDLTDb();
 
         [HttpGet]
         [Route("Productos/GetAll")]
@@ -35,15 +35,17 @@ namespace sdlt.Controllers
                         ProductOutDto dtoPOut;
                         while (reader.Read())
                         {
-                            dtoPOut = new ProductOutDto();
-                            dtoPOut.ProductoId = int.Parse(reader[0].ToString());
-                            dtoPOut.Nombre = reader[1].ToString();
-                            dtoPOut.Descripcion = reader[2].ToString();
-                            dtoPOut.Precio = decimal.Parse(reader[3].ToString());
-                            dtoPOut.CategoriaId = int.Parse(reader[4].ToString());
-                            dtoPOut.Categoria = reader[5].ToString();
-                            dtoPOut.Stock = int.Parse(reader[6].ToString());
-                            dtoPOut.EstaActivo = bool.Parse(reader[7].ToString());
+                            dtoPOut = new ProductOutDto
+                            {
+                                ProductoId = int.Parse(reader[0].ToString()),
+                                Nombre = reader[1].ToString(),
+                                Descripcion = reader[2].ToString(),
+                                Precio = decimal.Parse(reader[3].ToString()),
+                                CategoriaId = int.Parse(reader[4].ToString()),
+                                Categoria = reader[5].ToString(),
+                                Stock = int.Parse(reader[6].ToString()),
+                                EstaActivo = bool.Parse(reader[7].ToString())
+                            };
                             result.Add(dtoPOut);
                         }
                     }
@@ -95,15 +97,17 @@ namespace sdlt.Controllers
                         ProductOutDto dtoPOut;
                         while (reader.Read())
                         {
-                            dtoPOut = new ProductOutDto();
-                            dtoPOut.ProductoId = int.Parse(reader[0].ToString());
-                            dtoPOut.Nombre = reader[1].ToString();
-                            dtoPOut.Descripcion = reader[2].ToString();
-                            dtoPOut.Precio = decimal.Parse(reader[3].ToString());
-                            dtoPOut.CategoriaId = int.Parse(reader[4].ToString());
-                            dtoPOut.Categoria = reader[5].ToString();
-                            dtoPOut.Stock = int.Parse(reader[6].ToString());
-                            dtoPOut.EstaActivo = bool.Parse(reader[7].ToString());
+                            dtoPOut = new ProductOutDto
+                            {
+                                ProductoId = int.Parse(reader[0].ToString()),
+                                Nombre = reader[1].ToString(),
+                                Descripcion = reader[2].ToString(),
+                                Precio = decimal.Parse(reader[3].ToString()),
+                                CategoriaId = int.Parse(reader[4].ToString()),
+                                Categoria = reader[5].ToString(),
+                                Stock = int.Parse(reader[6].ToString()),
+                                EstaActivo = bool.Parse(reader[7].ToString())
+                            };
                             result.Add(dtoPOut);
                         }
                     }
