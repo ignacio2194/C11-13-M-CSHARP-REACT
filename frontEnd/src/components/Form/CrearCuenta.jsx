@@ -26,14 +26,11 @@ const CrearCuenta = () => {
     ConfirmEmail: "",
   });
 
-  const [userDataGoogle, setUserDataGoogle] = useState({
-  
-  });
-
+  const [userDataGoogle, setUserDataGoogle] = useState({});
   const [token, setToken] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
-
+ // ESTE ES LA FUNCION QUE SE EJECUTA CUANDO LLENA EL FORMULARIO DE REGISTRO
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -77,46 +74,48 @@ const CrearCuenta = () => {
       setPasswordError(errorMessage);
     }
   };
+
+
   useEffect(() => {
     if (token) {
       try {
         const decoded = jwt_decode(token);
         const {  email } = decoded;
         setUserDataGoogle({
-          Email: email,
-          Password:'se logeo con google',
-          ConfirmPassword:'se logeo con google'
+          Email: `${email}`,
+          Password:'se registro con google',
+          ConfirmPassword:'se registro con google'
         });
- 
-        const sendDataUser = async () => {
-          const api = "https://sdlt2.azurewebsites.net/api/Account/Register";
-          const data = await axios.post(api, {
-            Email: `${userDataGoogle.Email}`,
-            Password: `${userDataGoogle.Password}`,
-            ConfirmPassword: `${userDataGoogle.ConfirmPassword}`,
-          });
-          console.log(data.status)
-          if (data.status === 200) {
-            toast.success("¡Su cuenta se creó correctamente! ", {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
-            navigate("/");
-          }
-        };
-        sendDataUser();
+        sendDataUser()
       } catch (error) {
         console.error("Error al decodificar el token:", error);
       }
     }
-  }, [navigate,token,userDataGoogle.Email, userDataGoogle.ConfirmPassword, userDataGoogle.Password]);
- 
+  }, [token]);
+  
+  // ESTE ES LA FUNCION QUE SE EJECUTA CUANDO LE DAS CLICK AL BUTTON DE GOOGLE
+  const sendDataUser = async () => {
+    try {
+     const api = "https://sdlt2.azurewebsites.net/api/Account/Register";
+     const data = await axios.post(api, userDataGoogle);
+
+     if (data.status === 200) {
+       toast.success("¡Su cuenta se creó correctamente! ", {
+         position: "top-center",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "light",
+       });
+       navigate("/");
+     }
+    } catch (error) {
+     console.log(error.response)
+    }
+   };
   return (
     <>
       <NavbarSecondary />

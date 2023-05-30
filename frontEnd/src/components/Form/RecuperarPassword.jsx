@@ -9,9 +9,23 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FooterSecondary from "../footerSecondary/FooterSecondary";
 import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
+import { ToastContainer, toast } from "react-toastify";
 
 const RecuperarPassword = () => {
   const theme = createTheme();
+  const showMeMessage=(e)=>{
+e.preventDefault()
+    toast.success("¡Te enviamos los pasos para resetear tu cuenta a tu email! ", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
   return (
     <>
       <NavbarSecondary />
@@ -53,7 +67,6 @@ const RecuperarPassword = () => {
             </Typography>
             <Box
               component="form"
-              // onSubmit={handleSubmit}
               noValidate
               sx={{ mt: 1 }}
             >
@@ -63,7 +76,7 @@ const RecuperarPassword = () => {
                 fullWidth
                 id="Nombre"
                 label="Ingresa tu email"
-                name="Nombre"
+                name="Email"
                 autoComplete="Nombre"
                 autoFocus
                 sx={{ backgroundColor: '#fff' }}
@@ -74,6 +87,7 @@ const RecuperarPassword = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2, backgroundColor: "#855D44" }}
+                onClick={(e)=>showMeMessage(e)}
               >
                 RESETEAR CONTRASEÑA
               </Button>
@@ -94,6 +108,18 @@ const RecuperarPassword = () => {
             </Box>
 
           </Box>
+          <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
         </Container>
       </ThemeProvider>
       <FooterSecondary />

@@ -23,12 +23,10 @@ const SignIn = () => {
   const [token, setToken] = useState("");
 
   const handleSubmit =  async (event) => {
-    event.preventDefault();
-    console.log(UserData);
+    event.preventDefault()
     try {
       const api ='https://sdlt2.azurewebsites.net/api/Account/Register'
       const data = await axios.post(api ,UserData)
-      console.log(data)
     } catch (error) {
       console.log(error)
     }
@@ -40,7 +38,6 @@ const SignIn = () => {
     if (token) {
       try {
         const decoded = jwt_decode(token);
-        console.log(decoded);
       } catch (error) {
         console.error("Error al decodificar el token:", error);
       }
