@@ -67,7 +67,7 @@ const CrearCuenta = () => {
           progress: undefined,
           theme: "light",
         });
-        navigate("/");
+       
       }
     } catch (error) {
       const errorMessage = error.errors[0];
@@ -81,10 +81,11 @@ const CrearCuenta = () => {
       try {
         const decoded = jwt_decode(token);
         const {  email } = decoded;
+        console.log(decoded)
         setUserDataGoogle({
           Email: `${email}`,
-          Password:'se registro con google',
-          ConfirmPassword:'se registro con google'
+          Password:'MeLoguieConGoogle123456!',
+          ConfirmPassword:'MeLoguieConGoogle123456!'
         });
         sendDataUser()
       } catch (error) {
@@ -100,7 +101,7 @@ const CrearCuenta = () => {
      const data = await axios.post(api, userDataGoogle);
 
      if (data.status === 200) {
-       toast.success("¡Su cuenta se creó correctamente! ", {
+       toast.success("¡Su cuenta se creó correctamente!", {
          position: "top-center",
          autoClose: 5000,
          hideProgressBar: false,
@@ -204,7 +205,7 @@ const CrearCuenta = () => {
                 name="ConfirmPassword"
                 label=" Confirma la contraseña"
                 type="password"
-                id="password"
+                id="ConfirmPassword"
                 autoComplete="current-password"
                 sx={{ backgroundColor: "#fff" }}
                 onChange={(e) =>
@@ -240,7 +241,7 @@ const CrearCuenta = () => {
                 name="ConfirmEmail"
                 label="Confirma tu correo electronico"
                 type="email"
-                id="email"
+                id="ConfirmEmail"
                 autoComplete="current-password"
                 sx={{ backgroundColor: "#fff" }}
                 onChange={(e) =>
