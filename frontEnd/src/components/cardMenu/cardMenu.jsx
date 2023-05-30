@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useState } from "react";
 import { Grid, Button } from "@mui/material";
 import Card from "../card/card";
-
-import { getImgCat } from "../../store/actions/imgcategories";
 
 import BackgroundImg from "../../img/romero.png";
 import Dishmenu from "../dishmenu/dishmenu";
@@ -54,12 +51,14 @@ const categories = [
 const CardMenu = () => {
   const [selectedOption, setSelectedOption] = useState(true);
   const [categorytype, setCategorytype] = useState("menu");
-  const dispatch = useDispatch();
+  const [categoriaId, setCategoraId] = useState('')
 
+  console.log(categoriaId)
 
-  useEffect(() => {
-    dispatch(getImgCat());
-  }, [dispatch]);
+  const handleCategoriaId = (id) =>{
+    console.log(id)
+    setCategoraId(id)
+  }
 
   const handleClick = () => {
     setSelectedOption((prevOption) => !prevOption);
@@ -127,36 +126,43 @@ const CardMenu = () => {
           <img src={promocion} alt="promocion" style={{ height: "20vw" }} />
         )}
       </Grid>
+      <Grid container
+          justifyContent="center"
+          alignItems="center"
+          spacing={2}
+          sx={{ margin: "auto", maxWidth: "1380px", paddingTop: "10%", paddingLeft:"25px" }}>
       {categorytype === "menu" && (
         <Grid
           container
           justifyContent="center"
           alignItems="center"
           spacing={2}
-          sx={{ margin: "auto", maxWidth: "1250px", paddingTop: "10%", paddingLeft:"25px" }}
+          sx={{ margin: "auto", maxWidth: "1380px"}}
         >
           {categories.map((e, index) => (
-            <Grid item xs={12} sm={6} md={4} key={e.dish}>
+            <Grid item xs={12} sm={6} md={4} key={index} onClick={()=>handleCategoriaId(e.CategoriaId)}>
               <Card
                 image={e.image}
                 dish={e.dish}
-                CategoriaId={e.CategoriaId}
                 category={handleCategory}
               />
             </Grid>
           ))}
         </Grid>
       )}
-      <div>
+      <div style={{width:"165vh"}}>
         {categorytype !== "menu" && (
-          <Dishmenu
+          <Dishmenu 
             dish={categorytype}
             status={selectedOption}
             click={handleClickMenu}
             list={categories}
+            handleCategoriaId={handleCategoriaId}
+            categoriaId={categoriaId}
           />
         )}
       </div>
+      </Grid>
       <Grid container justifyContent="center" marginTop="8rem" marginBottom="8rem">
   <Grid item>
     <Link to="/reservas" style={{ textDecoration: 'none' }}>
@@ -189,7 +195,9 @@ const CardMenu = () => {
         Reservar
       </Button>
     </Link>
+  
   </Grid>
+
 </Grid>
     </div>
   );

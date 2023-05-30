@@ -14,7 +14,6 @@ const imgCategories = createSlice({
     },
     takeDish(state, action) {
         state.dish = action.payload;
-        console.log(action.payload)
       },
   },
 });
