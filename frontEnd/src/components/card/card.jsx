@@ -48,7 +48,8 @@ function Card({ dish, image, category, CategoriaId }) {
         <CardImage src={image} alt="" />
       </Grid>
       <CardTextContainer item>
-        <DishText variant="h3">{dish}</DishText>
+        <DishText variant="h3" fontFamily="
+Open Sans" Typography="bold">{dish}</DishText>
       </CardTextContainer>
     </CardContainer>
   );

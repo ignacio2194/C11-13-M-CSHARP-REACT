@@ -1,29 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Checkbox } from "@mui/material";
 import { getDish } from "../../store/actions/imgcategories";
+import BackgroundImg from "../../img/romero.png";
+import Dishcard from "../dishcard/dishcard";
 
-import BackgroundImg from '../../img/romero.png'
-
-export default function Dishmenu({ dish, status, click, list, CategoriaId }) {
-  const [isChecked, setIsChecked] = useState(false);
-
-  console.log(dish, "Spy el plato")
-
-  const dispatch = useDispatch()
-  const data = useSelector((state)=>state)
-
-  console.log(data)
+export default function Dishmenu({
+  dish,
+  status,
+  click,
+  list,
+  categoriaId,
+  handleCategoriaId,
+}) {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.imgcategories.dish);
 
   useEffect(() => {
-        dispatch(getDish(CategoriaId))
-  }, [dispatch]);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-  
-  
+    dispatch(getDish(dish));
+  }, [dispatch, categoriaId]);
 
   return (
     <div
@@ -38,18 +32,57 @@ export default function Dishmenu({ dish, status, click, list, CategoriaId }) {
         <label style={{ fontWeight: "bold" }}>{dish}</label>
         <hr />
       </div>
-      {!status && (
-        <Checkbox checked={isChecked} onChange={handleCheckboxChange} />
-      )}
-      <label onClick={() => click('menu')}>Categorias </label>
-      {list.map((e, index) => (
-        <label key={index} onClick={() => click(e.dish)}
-        style={e.dish === dish ? { fontWeight: "bold" } : null}
->
-  {e.dish}
-          
-        </label>
-      ))}
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap: "20px",
+          justifyContent: "center",
+        }}
+      >
+        {data.map((e, index) => (
+          <div
+            key={index}
+            style={{
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              paddingLeft: "30%",
+            }}
+          >
+            <Dishcard
+              dish={e.Nombre}
+              desc={e.Descripcion}
+              price={e.Precio}
+              status={status}
+            />
+          </div>
+        ))}
+      </div>
+
+      <hr />
+
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <label onClick={() => click("menu")}>Categorias </label>
+        {list.map((e, index) => (
+          <label
+            key={index}
+            onClick={() => {
+              handleCategoriaId(e.CategoriaId);
+              click(e.dish);
+            }}
+            style={{
+              marginLeft: "10px",
+              fontWeight: e.dish === dish ? "bold" : "normal",
+            }}
+          >
+            {e.dish}
+          </label>
+        ))}
+      </div>
+
+      <hr />
     </div>
   );
 }
