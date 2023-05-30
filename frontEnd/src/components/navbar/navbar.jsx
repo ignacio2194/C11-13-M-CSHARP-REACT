@@ -94,7 +94,7 @@ export default function Navbar({ menu, events, sucursales }) {
                 <NavLink
                   to="/login"
                 >
-                  <Button variant="contained" sx={{ backgroundColor: "custom.yellow", color: "black" }}>Iniciar Sesión</Button>
+                  <Button variant="yellow">Iniciar Sesión</Button>
                 </NavLink>
               </Box>
             </Box>

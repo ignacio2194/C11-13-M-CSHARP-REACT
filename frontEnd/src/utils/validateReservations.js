@@ -9,7 +9,7 @@ const schema = yup.object().shape({
     .typeError("Invalid date format"),
   hour: yup
     .string().required("Can't be empty.")
-    .matches(/^([1][4-9]|2[0-2]):[0-5][0-9]$/, "Our opening hours are from 14:00hs to 23:00hs"),
+    .matches(/^([1][3-9]|2[0-2]):[0-5][0-9]$/, "Our opening hours are from 14:00hs to 23:00hs"),
   numPeople: yup.number().required("Can't be empty.")
 });
 
