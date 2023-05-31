@@ -1,7 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import axios from 'axios'
-import qs from 'qs';
+import axios from "axios";
+import qs from "qs";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
@@ -16,35 +16,54 @@ import "../Form/Form.css";
 import jwt_decode from "jwt-decode";
 import FooterSecondary from "../footerSecondary/FooterSecondary";
 import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
-
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 const theme = createTheme();
 
 const SignIn = () => {
-  const [UserData, setUserData] = useState({ Email: "", Password: "",ConfirmPassword:"" });
+  const [UserData, setUserData] = useState({
+    Email: "",
+    Password: "",
+    ConfirmPassword: "",
+  });
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [tokenGoogle, setTokenGoogle] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit =  async (event) => {
-    event.preventDefault()
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      const api ='https://sdlt2.azurewebsites.net/token'
+      const api = "https://sdlt2.azurewebsites.net/token";
       const formData = {
         UserName: `${UserData.Email}`,
         Password: `${UserData.Password}`,
-        grant_type: "password"
+        grant_type: "password",
       };
       const encodedData = qs.stringify(formData);
-      const data = await axios.post(api,encodedData,{
+      const data = await axios.post(api, encodedData, {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      })
-      console.log(data.data.access_token)
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      });
+      setToken(data.data.access_token);
+      localStorage.setItem("token", JSON.stringify(data.data.access_token));
+      navigate("/");
+      if (localStorage.getItem("token")) {
+        toast.success("¡Bienvenido! ", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
-  
-
 
   useEffect(() => {
     if (tokenGoogle) {
@@ -55,7 +74,6 @@ const SignIn = () => {
       }
     }
   }, [tokenGoogle]);
-console.log(UserData)
   return (
     <>
       <NavbarSecondary />
@@ -104,7 +122,6 @@ console.log(UserData)
               sx={{ mt: 1 }}
             >
               <TextField
-            
                 margin="normal"
                 required
                 fullWidth
@@ -113,7 +130,7 @@ console.log(UserData)
                 name="Email"
                 autoComplete="email"
                 autoFocus
-                sx={{backgroundColor:'#fff' ,border: 0}}
+                sx={{ backgroundColor: "#fff", border: 0 }}
                 onChange={(e) =>
                   setUserData((prevState) => ({
                     ...prevState,
@@ -130,7 +147,7 @@ console.log(UserData)
                 type="password"
                 id="Password"
                 autoComplete="current-password"
-                sx={{backgroundColor:'#fff'}}
+                sx={{ backgroundColor: "#fff" }}
                 onChange={(e) =>
                   setUserData((prevState) => ({
                     ...prevState,
@@ -184,18 +201,29 @@ console.log(UserData)
             {/* botonsito de google */}
             <Box sx={{ marginTop: 3 }}>
               <Box>
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  setTokenGoogle(credentialResponse.credential);
-                }}
-              />
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    setTokenGoogle(credentialResponse.credential);
+                  }}
+                />
               </Box>
-             
             </Box>
           </Box>
         </Container>
       </ThemeProvider>
       <FooterSecondary />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 };
