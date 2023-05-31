@@ -3,7 +3,7 @@ import "leaflet/dist/leaflet.css";
 import { icon } from "leaflet";
 import markerRestaurant from "../../assets/icons/restaurant_position.png";
 import markerClient from "../../assets/icons/client_position.png";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const Map = () => {
   const customMarkerRestaurant = new icon({
@@ -17,10 +17,10 @@ const Map = () => {
   });
 
   return (
-    <>
+    <Box sx={{ width: { lg: "600px", md: "500px", xs: "300px" }, height: { md: "250px" }, margin: "auto" }}>
       <MapContainer
-        style={{ width: "620px", height: "410px" }}
-        zoom={13}
+        style={{ width: "100%", height: "250px" }}
+        zoom={16}
         center={[19.413471, -99.175697]}
         scrollWheelZoom={false}
         fadeAnimation={true}
@@ -41,7 +41,7 @@ const Map = () => {
           </Popup>
         </Marker>
       </MapContainer>
-    </>
+    </Box>
   );
 }
 

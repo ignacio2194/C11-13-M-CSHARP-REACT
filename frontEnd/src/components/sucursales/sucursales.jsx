@@ -25,6 +25,7 @@ const Sucursales = () => {
         flexDirection: "column",
         alignItems: "center",
       }}
+      id='sucursales'
     >
       <h1
         style={{
@@ -65,25 +66,25 @@ const Sucursales = () => {
         </p>
       </div>
       <div
-  style={{
-    position: "relative",
-    width: "100%",
-    backgroundColor: "#050507", // Aplica un fondo negro a hoja2
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop:"3vw"
-  }}
->
-  <img
-    src={hoja2}
-    alt="hojas"
-    style={{
-      width: "140px",
-      height: "50px",
-    }}
-  />
-</div>
+        style={{
+          position: "relative",
+          width: "100%",
+          backgroundColor: "#050507", // Aplica un fondo negro a hoja2
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: "3vw"
+        }}
+      >
+        <img
+          src={hoja2}
+          alt="hojas"
+          style={{
+            width: "140px",
+            height: "50px",
+          }}
+        />
+      </div>
     </div>
   );
 };

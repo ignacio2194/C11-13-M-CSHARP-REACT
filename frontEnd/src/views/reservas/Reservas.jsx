@@ -7,10 +7,10 @@ import { useState, useEffect } from "react";
 import Ticket from "./Ticket";
 import Spinner from "./Spinner";
 import { useNavigate } from "react-router-dom";
-import logo from '../../img/logo-sabores@2x.png';
+import logo from '../../assets/images/logo.png';
 import BadgeAvatars from "../../components/avatar/Avatar";
 import myFecha from "../../utils/fecha";
-import axios from "axios";
+// import axios from "axios";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 
 const PERSONS_OPTIONS = [
@@ -62,43 +62,43 @@ const Reservas = () => {
     reset();
   };
 
-  const createReserva = async (reserva) => {
-    try {
-      const api = 'https://sdlt2.azurewebsites.net/api/Reservas/Create'
-      const data = await axios.post(api, reserva);
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const createReserva = async (reserva) => {
+  //   try {
+  //     const api = 'https://sdlt2.azurewebsites.net/api/Reservas/Create'
+  //     const data = await axios.post(api, reserva);
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  const getAllReservas = async () => {
-    try {
-      const api = 'https://sdlt2.azurewebsites.net/api/Reservas/GetAll'
-      const data = await axios.get(api);
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const getAllReservas = async () => {
+  //   try {
+  //     const api = 'https://sdlt2.azurewebsites.net/api/Reservas/GetAll'
+  //     const data = await axios.get(api);
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   useEffect(() => {
     // getAllReservas();
   }, []);
 
   return (
-    <Box component="section">
+    <Box component="section" sx={{ maxWidth: "1440px" }}>
       <Stack
         direction="row"
         justifyContent="space-between"
         alignItems="center"
-        sx={{ height: "68px", padding: "0 28px", backgroundColor: "primary.main", color: "custom.peachPuff" }}
+        sx={{ height: "68px", padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" }, backgroundColor: "primary.main", color: "#fff" }}
       >
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
-            gap: "4px"
+            gap: { lg: "8px", sm: "6px", xs: "4px" }
           }}
         >
           <LocalPhoneOutlinedIcon />
@@ -106,20 +106,27 @@ const Reservas = () => {
         </Box>
         <Stack
           direction="row"
-          divider={<Divider orientation="vertical" flexItem sx={{ color: "custom.peachPuff" }} />}
+          divider={<Divider orientation="vertical" flexItem style={{ color: "#fff" }} />}
           spacing={2}
-          sx={{ color: "custom.peachPuff" }}
         >
           <Typography sx={{ fontWeight: "bold" }}>ES</Typography>
           <Typography>EN</Typography>
         </Stack>
       </Stack>
-      <Box sx={{ backgroundColor: "custom.lightBrown", width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "40px 60px" }}>
-        <img src={logo} alt="Logo" style={{ width: "150px", height: "auto" }} onClick={() => navigate("/")} />
+      <Box sx={{ backgroundColor: "custom.sienna", display: "flex", justifyContent: "space-between", height: { lg: "133px", sm: "112px", xs: "96px" }, padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" } }}>
+        <Box sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: { lg: "200px", sm: "175px", xs: "110px" },
+          height: "auto"
+        }}>
+          <img src={logo} alt="Logo" style={{ width: "100%", height: "auto" }} onClick={() => navigate("/")} />
+        </Box>
         <BadgeAvatars />
       </Box>
-      <Container maxWidth="lg" sx={{ margin: "auto" }}>
-        <Typography variant="h3" sx={{ textAlign: "center", fontWight: "bold", fontSize: "50px", marginTop: "32px" }}>
+      <Box sx={{ margin: "0 auto", padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" } }}>
+        <Typography variant="h3" sx={{ textAlign: "center", fontWight: "bold", fontSize: "clamp(1.5rem, 6vw, 2.5rem)", margin: { lg: "48px 0", xs: "32px 0" } }}>
           Reservación
         </Typography>
         <Box>
@@ -129,12 +136,12 @@ const Reservas = () => {
               <>
                 <Stack
                   direction={{ xs: "column", sm: "row" }}
-                  justifyContent="center"
-                  alignItems="center"
+                  justifyContent={{ sm: "center" }}
+                  alignItems={{ sm: "start" }}
                   spacing={{ xs: 1, sm: 2, md: 4 }}
                 >
                   <Box>
-                    <Typography variant="h4" sx={{ textAlign: "left" }}>
+                    <Typography variant="h4" sx={{ textAlign: "left", fontSize: "clamp(1rem, 4vw, 2.5rem)" }}>
                       Condesa
                     </Typography>
                     <Typography
@@ -144,12 +151,12 @@ const Reservas = () => {
                       Av. Vicente Suárez 165, Col. Condesa, Cuauhtémoc C.P. 06140
                       Ciudad de México, CDMX
                     </Typography>
-                    <Box sx={{ width: "100%", height: "500px" }}>
+                    <Box>
                       <Map />
                     </Box>
                   </Box>
-                  <Box sx={{ width: "100%", p: 2 }}>
-                    <Typography variant="h4" sx={{ textAlign: "left" }}>
+                  <Box sx={{ width: { lg: "50%", xs: "100%" } }}>
+                    <Typography variant="h4" sx={{ textAlign: "left", fontSize: "clamp(1rem, 4vw, 2.5rem)", marginBottom: "16px", marginTop: { sm: "0", xs: "32px" } }}>
                       Realizá tu reservación
                     </Typography>
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -223,8 +230,8 @@ const Reservas = () => {
                     </form>
                   </Box>
                 </Stack>
-                <Box sx={{ marginBottom: "32px" }}>
-                  <Typography variant="body1" sx={{ textAlign: "left" }}>
+                <Box sx={{ margin: "64px 0 32px" }}>
+                  <Typography variant="body1" sx={{ textAlign: "left", fontSize: "clamp(1rem, 3vw, 2.5rem)", marginBottom: "8px" }}>
                     Elige otra sucursal
                   </Typography>
                   <Box>
@@ -253,7 +260,7 @@ const Reservas = () => {
                           Numquam commodi asperiores dolorem dignissimos
                         </Typography>
                       </Box>
-                      <Button variant="contained">
+                      <Button variant="contained" size="small" sx={{ width: { md: "unset", sm: "50%", xs: "100%" } }}>
                         Seleccionar
                       </Button>
                     </Stack>
@@ -263,7 +270,7 @@ const Reservas = () => {
             )
           }
         </Box>
-      </Container >
+      </Box >
     </Box >
   );
 };

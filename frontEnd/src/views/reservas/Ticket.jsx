@@ -14,11 +14,11 @@ const Ticket2 = ({ reserva }) => {
   };
 
   return (
-    <Box>
-      <Box onClose={handleClose} sx={{ backgroundColor: "custom.yellow", textAlign: "center" }}>
-        ¡Tu reservación fue exitosa!
+    <Box sx={{ width: { lg: "600px", md: "500px", xs: "300px" }, height: { md: "250px" }, margin: "auto" }}>
+      <Box onClose={handleClose} sx={{ textAlign: "center" }}>
+        <Typography sx={{ fontSize: "clamp(1rem, 3vw, 2.5rem)", margin: { lg: "16px" } }}>¡Tu reservación fue exitosa!</Typography>
       </Box>
-      <Paper sx={{ backgroundColor: "custom.yellow" }}>
+      <Paper sx={{ backgroundColor: "custom.yellow", padding: "16px" }}>
         <Typography variant="h6" sx={{ textAlign: "center" }}>Sabores de la Tierra</Typography>
         <Box>
           <Typography gutterBottom>Nombre: Michael Kelso</Typography>
@@ -27,7 +27,7 @@ const Ticket2 = ({ reserva }) => {
           <Typography gutterBottom>Hora: {fechaYHora[1]}hs</Typography>
         </Box>
         <Box>
-          <Typography gutterBottom>Sucursal A</Typography>
+          <Typography gutterBottom>Sucursal: Condesa</Typography>
           <Typography gutterBottom>
             Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
             magna, vel scelerisque nisl consectetur et.
@@ -49,7 +49,7 @@ const Ticket2 = ({ reserva }) => {
           </Button>
         </Stack>
       </Box>
-    </Box>
+    </Box >
   );
 }
 

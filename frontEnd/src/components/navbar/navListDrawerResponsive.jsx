@@ -5,33 +5,54 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { NavLink } from "react-router-dom";
-import scrollToSection from "../../utils/scrollToSection";
+import { useState } from "react";
+import { Link } from "./navlink";
 
-export default function NavListDrawerResponsive({ onClick, menu, events, sucursales }) {
+export default function NavListDrawerResponsive({ onClick }) {
+  const [show, setShow] = useState(false);
+
   return (
-    <Box sx={{ backgroundColor: "custom.lightBrown", width: "100%", m: "auto" }} onClick={onClick} >
+    <Box sx={{ backgroundColor: "custom.sienna", width: "100%", m: "auto" }} onClick={onClick} >
       <nav aria-label="main mailbox folders">
         <List>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: "16px", textAlign: "center", color: "white" }}>
-            <Box
-              onClick={() => scrollToSection(menu)}
+          <Box sx={{ display: "flex", flexDirection: "column", gap: "32px", alignItems: "center", color: "white", padding: "32px 0" }}>
+            <Link
+              spy={true}
+              duration={500}
+              smooth={true}
+              exact="true"
+              offset={-201}
+              onClick={() => setShow(false)}
+              to="menu"
             >
-              <Typography>Menú</Typography>
-            </Box>
-            <Box
-              onClick={() => scrollToSection(events)}
+              <Typography variant="h5">Menú</Typography>
+            </Link>
+            <Link
+              spy={true}
+              duration={500}
+              smooth={true}
+              exact="true"
+              offset={-201}
+              onClick={() => setShow(false)}
+              to="eventos"
             >
-              <Typography>Eventos</Typography>
-            </Box>
-            <Box
-              onClick={() => scrollToSection(sucursales)}
+              <Typography variant="h5">Eventos</Typography>
+            </Link>
+            <Link
+              spy={true}
+              duration={500}
+              smooth={true}
+              exact="true"
+              offset={-201}
+              onClick={() => setShow(false)}
+              to="sucursales"
             >
-              <Typography>Sucursales</Typography>
-            </Box>
+              <Typography variant="h5">Sucursales</Typography>
+            </Link>
             <NavLink
               to="/login"
             >
-              <Button variant="contained" sx={{ backgroundColor: "custom.yellow", color: "black" }}>Iniciar Sesión</Button>
+              <Button variant="yellow" size="small" >Iniciar Sesión</Button>
             </NavLink>
           </Box>
         </List>

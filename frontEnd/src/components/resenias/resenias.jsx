@@ -58,12 +58,12 @@ export default class Resenias extends Component {
     };
 
     return (
-      <Box sx={{ backgroundColor: "#050306", height: "1000px", display: "flex", alignItems: "center", jusitfyContent: "center", position: "relative" }}>
-        <Container width="lg" sx={{ margin: "auto" }}>
+      <Box sx={{ backgroundColor: "#050306", display: "flex", alignItems: "center", jusitfyContent: "center", position: "relative", padding: { lg: "96px 0", sm: "64px 0", xs: "32px 0" } }}>
+        <Container width="lg" sx={{ margin: "0 auto" }}>
           <Box sx={{ width: "130px", position: "absolute", top: "0", left: "50%", transform: "translateX(-50%)" }}>
             <img src={hoja} alt="hoja" />
           </Box>
-          <Typography variant="h4" sx={{ textAlign: 'center', color: '#fff', margin: '141px auto 79px', fontFamily: 'Parisienne, cursive', fontSize: '100px', fontWeight: 'normal' }}>Lo que opinan nuestros clientes</Typography>
+          <Typography variant="h4" sx={{ textAlign: 'center', color: '#fff', margin: '141px auto 79px', fontFamily: 'Parisienne, cursive', fontSize: "clamp(2rem, 5vw, 6.25rem)", fontWeight: 'normal' }}>Lo que opinan nuestros clientes</Typography>
           <Slider {...settings}>
             {
               dataResenias.map((resenia, index) => (

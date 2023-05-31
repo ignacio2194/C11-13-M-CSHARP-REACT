@@ -5,7 +5,7 @@ import './seccionEventos.module.css';
 
 const seccionEventos = () => {
   return (
-    <div style={{
+    <div id='eventos' style={{
       width: '100%',
       height: '120vh',
       display: 'flex',
@@ -18,8 +18,8 @@ const seccionEventos = () => {
       backgroundPosition: 'right',
       backgroundSize: '50%',
     }}>
-      <h2 style={{ textAlign: 'center', color: 'black' , marginTop: '-50px', fontFamily:'Parisienne, cursive', fontSize:'80px', fontWeight: 'normal' }}>Eventos</h2>
-      <CarouselEventos/>
+      <h2 style={{ textAlign: 'center', color: 'black', marginTop: '-50px', fontFamily: 'Parisienne, cursive', fontSize: '80px', fontWeight: 'normal' }}>Eventos</h2>
+      <CarouselEventos />
     </div>
   );
 };

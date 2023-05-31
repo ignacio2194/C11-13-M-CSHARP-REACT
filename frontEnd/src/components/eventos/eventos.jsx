@@ -33,7 +33,7 @@ export default function Eventox() {
     const currentItemIndex = index % evimg.length;
 
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', paddingLeft: '1%', paddingRight: '1%'}}>
+      <div style={{ display: 'flex', justifyContent: 'center', paddingLeft: '1%', paddingRight: '1%' }} >
         <div style={{ margin: '0 10px', width: '100%', height: 'auto' }}>
           <EventoCard img={evimg[currentItemIndex].img} txt={evimg[currentItemIndex].desc} />
         </div>

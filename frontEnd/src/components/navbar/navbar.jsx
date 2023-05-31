@@ -14,26 +14,27 @@ import { Box } from "@mui/system";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import NavListDrawerResponsive from "./navListDrawerResponsive.jsx";
-import scrollToSection from "../../utils/scrollToSection.js";
 import logo from "../../assets/images/logo.png";
+import { Link } from "./navlink.jsx";
 
 export default function Navbar({ menu, events, sucursales }) {
   const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
 
   return (
-    <nav style={{ position: "sticky", top: "0", right: "0", zIndex: "9", width: "100%" }}>
+    <Box component="nav" sx={{ position: "sticky", top: "0", right: "0", zIndex: "9", width: "100%" }}>
       <AppBar position="static" >
         <Stack
           direction="row"
           justifyContent="space-between"
           alignItems="center"
-          sx={{ height: "68px", padding: "0 28px" }}
+          sx={{ height: "68px", padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" } }}
         >
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
-              gap: "4px"
+              gap: { lg: "8px", sm: "6px", xs: "4px" }
             }}
           >
             <LocalPhoneOutlinedIcon />
@@ -48,53 +49,68 @@ export default function Navbar({ menu, events, sucursales }) {
             <Typography>EN</Typography>
           </Stack>
         </Stack>
-        <Box sx={{ backgroundColor: "custom.lightBrown", display: "flex", justifyContent: "space-between", height: "133px" }}>
+        <Box sx={{ backgroundColor: "custom.sienna", display: "flex", justifyContent: "space-between", height: { lg: "133px", sm: "112px", xs: "96px" }, padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" } }}>
           <Box
             sx={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              // width: "155px",
-              marginLeft: "28px",
-              width: { xs: "100px", sm: "175px" }
+              width: { lg: "200px", sm: "175px", xs: "110px" },
+              height: "auto"
             }}
           >
             <img src={logo} alt="Logo Sabores De La Tierra" style={{ width: "100%" }} />
           </Box>
-          <Toolbar >
+          <Toolbar style={{ padding: "0" }}>
             <IconButton
               color="inherit"
               size="large"
               aria-label="menu"
               onClick={() => setOpen(true)}
-              sx={{ display: { xs: "block", sm: "none" } }}
+              sx={{ display: { xs: "block", md: "none" } }}
             >
               <MenuIcon />
             </IconButton>
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Box sx={{ display: "flex", gap: "32px" }}>
-                <Box
-                  onClick={() => scrollToSection(menu)}
-                  sx={{ display: "flex", alignItems: "center" }}
+            <Box sx={{ display: { xs: "none", md: "block" } }}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: { lg: "64px", sm: "32px", xs: "16px" } }}>
+                <Link
+                  spy={true}
+                  duration={500}
+                  smooth={true}
+                  exact="true"
+                  offset={-201}
+                  onClick={() => setShow(false)}
+                  to="menu"
                 >
                   <Typography>Menú</Typography>
-                </Box>
-                <Box
-                  onClick={() => scrollToSection(events)}
-                  sx={{ display: "flex", alignItems: "center" }}
+                </Link>
+                <Link
+                  spy={true}
+                  duration={500}
+                  smooth={true}
+                  exact="true"
+                  offset={-201}
+                  onClick={() => setShow(false)}
+                  to="eventos"
                 >
                   <Typography>Eventos</Typography>
-                </Box>
-                <Box
-                  onClick={() => scrollToSection(sucursales)}
-                  sx={{ display: "flex", alignItems: "center" }}
+                </Link>
+                <Link
+                  spy={true}
+                  duration={500}
+                  smooth={true}
+                  exact="true"
+                  offset={-201}
+                  onClick={() => setShow(false)}
+                  to="sucursales"
                 >
                   <Typography>Sucursales</Typography>
-                </Box>
+                </Link>
                 <NavLink
                   to="/login"
+                  sx={{ marginLeft: "42px" }}
                 >
-                  <Button variant="yellow">Iniciar Sesión</Button>
+                  <Button variant="yellow" size="small">Iniciar Sesión</Button>
                 </NavLink>
               </Box>
             </Box>
@@ -105,15 +121,12 @@ export default function Navbar({ menu, events, sucursales }) {
         anchor="top"
         open={open}
         onClose={() => setOpen(false)}
-        sx={{ display: { xs: "block", sm: "none" } }}
+        sx={{ display: { xs: "block", md: "none" } }}
       >
         <NavListDrawerResponsive
           onClick={() => setOpen(false)}
-          menu={menu}
-          events={events}
-          sucursales={sucursales}
         />
       </Drawer>
-    </nav>
+    </Box>
   );
 }

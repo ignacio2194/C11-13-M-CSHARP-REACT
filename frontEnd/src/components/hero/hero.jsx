@@ -1,7 +1,7 @@
 import { styled } from '@mui/system';
-import {  Button, Container, Typography } from '@mui/material';
+import { Button, Container, Typography } from '@mui/material';
 import image from '../../img/hero-foto.png';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 // Estilos para el contenedor de la imagen
 const ImageContainer = styled('div')({
@@ -28,7 +28,7 @@ const ButtonContainer = styled('div')(({ theme }) => ({
   gap: theme.spacing(1),
   marginTop: theme.spacing(1),
 
-  
+
 }));
 
 // Estilos para el botón pequeño
@@ -37,20 +37,20 @@ const SmallButton = styled(Button)(({ theme }) => ({
   fontSize: '1.125rem',
   backgroundColor: '#FBE19D',
   color: '#000000',
-  fontFamily:"open sans",
+  fontFamily: "open sans",
   width: '224px',
   textTransform: "none",
-  height:"63px"
+  height: "63px"
 }));
 
 const TextContainer = styled('div')({
   position: 'absolute',
-  bottom: '3%',
-  left: '5%',
-  width: '50%',
+  top: '50%',
+  left: '0%',
+  // width: '50%',
   textAlign: 'left',
-  marginBottom:"5%"
-
+  // marginBottom: "5%"
+  transform: "translateY(-50%)"
 });
 
 // Estilos para el contenedor de texto y botón
@@ -58,24 +58,24 @@ const TextButtonContainer = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: theme.spacing(5),
-  marginBottom: '10%',
-  marginLeft:"8%",
-  width:"70%"
+  // marginBottom: '10%',
+  // marginLeft: "96px",
+  // width: "70%"
 }));
 
 // Componente Hero
 const Hero = () => (
   <Container maxWidth="xlg" disableGutters>
-    <ImageContainer>
+    <ImageContainer sx={{ height: { xs: "220px" } }}>
       <BackgroundImage src={image} alt="img" />
-      <TextContainer style={{marginLeft:"1vh", paddingBottom:"0vh" }}>
-        <TextButtonContainer>
-          <Typography variant="h5" component="span" sx={{ lineHeight: '1.2', maxWidth: '95%', whiteSpace: 'normal', wordWrap: 'break-word', fontSize: '2.6rem', color: '#FFFFFF', fontFamily:'Open Sans '  }}>
+      <TextContainer sx={{ paddingLeft: { lg: "96px" } }}>
+        <TextButtonContainer sx={{ alignItems: { md: "start", xs: "center" } }}>
+          <Typography variant="h5" component="span" sx={{ lineHeight: '1.2', maxWidth: '539px', whiteSpace: 'normal', wordWrap: 'break-word', color: '#FFFFFF', fontFamily: 'Open Sans', fontSize: "clamp(1rem, 5vw, 2.5rem)", textAlign: { md: "start", xs: "center" } }}>
             Sumérgete en una experiencia gastronómica sin igual que cautiva tus sentidos.
           </Typography>
           <ButtonContainer>
             <Link to='/reservas'>
-              <SmallButton>Reservar</SmallButton>
+              <Button variant="yellow">Reservar</Button>
             </Link>
           </ButtonContainer>
         </TextButtonContainer>
