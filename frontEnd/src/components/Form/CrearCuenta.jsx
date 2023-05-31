@@ -55,6 +55,7 @@ const CrearCuenta = () => {
         Password: `${UserData.Password}`,
         ConfirmPassword: `${UserData.ConfirmPassword}`,
       });
+     
 
       if (data.status === 200) {
         toast.success("¡Su cuenta se creó correctamente! ", {
@@ -69,12 +70,25 @@ const CrearCuenta = () => {
         });
        
       }
+      getUserToken(UserData)
     } catch (error) {
       const errorMessage = error.errors[0];
       setPasswordError(errorMessage);
     }
   };
-
+  const getUserToken = async (userData) => {
+    try {
+      const url = 'https://sdlt2.azurewebsites.net/token';
+      const res = await axios.get(url, {
+        UserName: userData.Email,
+        Password: userData.Password,
+        grant_type: "password"
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (token) {
@@ -92,6 +106,7 @@ const CrearCuenta = () => {
         console.error("Error al decodificar el token:", error);
       }
     }
+
   }, [token]);
   
   // ESTE ES LA FUNCION QUE SE EJECUTA CUANDO LE DAS CLICK AL BUTTON DE GOOGLE
@@ -111,7 +126,7 @@ const CrearCuenta = () => {
          progress: undefined,
          theme: "light",
        });
-       navigate("/");
+      //  navigate("/");
      }
     } catch (error) {
      console.log(error.response)
