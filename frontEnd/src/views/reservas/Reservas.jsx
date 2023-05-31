@@ -1,4 +1,4 @@
-import { Box, Stack, Container, Typography, Button, Select, TextField, MenuItem, Divider } from "@mui/material";
+import { Box, Stack, AppBar, Typography, Button, Select, TextField, MenuItem, Divider } from "@mui/material";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 import Map from "./Map";
@@ -12,6 +12,8 @@ import BadgeAvatars from "../../components/avatar/Avatar";
 import myFecha from "../../utils/fecha";
 // import axios from "axios";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
 const PERSONS_OPTIONS = [
   { text: "Una persona", value: 1 },
@@ -125,20 +127,21 @@ const Reservas = () => {
         </Box>
         <BadgeAvatars />
       </Box>
-      <Box sx={{ margin: "0 auto", padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" } }}>
-        <Typography variant="h3" sx={{ textAlign: "center", fontWight: "bold", fontSize: "clamp(1.5rem, 6vw, 2.5rem)", margin: { lg: "48px 0", xs: "32px 0" } }}>
+      <Box sx={{ margin: "0 auto" }}>
+        <Typography variant="h3" sx={{ textAlign: "center", fontWight: "bold", fontSize: "clamp(1.5rem, 6vw, 2.5rem)", margin: { lg: "121px 0 146px", xs: "32px 0" } }}>
           Reservación
         </Typography>
-        <Box>
+        <Box sx={{}}>
           {isSubmitting
             ? <Spinner />
             : showTicket ? <Ticket reserva={reserva} /> : (
               <>
                 <Stack
                   direction={{ xs: "column", sm: "row" }}
-                  justifyContent={{ sm: "center" }}
+                  justifyContent={{ lg: "space-between", sm: "center" }}
                   alignItems={{ sm: "start" }}
                   spacing={{ xs: 1, sm: 2, md: 4 }}
+                  sx={{ padding: { lg: "16px 96px", sm: "16px 32px", xs: "32px 16px" }, backgroundColor: "custom.murlywood" }}
                 >
                   <Box>
                     <Typography variant="h4" sx={{ textAlign: "left", fontSize: "clamp(1rem, 4vw, 2.5rem)" }}>
@@ -155,7 +158,7 @@ const Reservas = () => {
                       <Map />
                     </Box>
                   </Box>
-                  <Box sx={{ width: { lg: "50%", xs: "100%" } }}>
+                  <Box sx={{ width: { lg: "430px", xs: "100%" } }}>
                     <Typography variant="h4" sx={{ textAlign: "left", fontSize: "clamp(1rem, 4vw, 2.5rem)", marginBottom: "16px", marginTop: { sm: "0", xs: "32px" } }}>
                       Realizá tu reservación
                     </Typography>
@@ -204,7 +207,7 @@ const Reservas = () => {
                             // label="Selecciona el número de personas"
                             variant="outlined"
                             margin="dense"
-                            sx={{ width: "100%" }}
+                            sx={{ width: "100%", margin: { lg: "8px 0 4px" } }}
                           >
                             {PERSONS_OPTIONS.map((options, index) => (
                               <MenuItem key={index} value={options.value} >
@@ -230,8 +233,8 @@ const Reservas = () => {
                     </form>
                   </Box>
                 </Stack>
-                <Box sx={{ margin: "64px 0 32px" }}>
-                  <Typography variant="body1" sx={{ textAlign: "left", fontSize: "clamp(1rem, 3vw, 2.5rem)", marginBottom: "8px" }}>
+                <Box sx={{ margin: { lg: "79px 0 250px", sm: "32px 0", xs: "32px 0" }, padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" } }}>
+                  <Typography variant="body1" sx={{ textAlign: "left", fontSize: "clamp(1rem, 3vw, 2.5rem)", marginBottom: { lg: "16px", xs: "8px" } }}>
                     Elige otra sucursal
                   </Typography>
                   <Box>
@@ -240,10 +243,9 @@ const Reservas = () => {
                       justifyContent="space-between"
                       alignItems="center"
                       spacing={2}
-                      border={"2px dashed black"}
                       borderRadius={2}
                       p={2}
-                      sx={{ width: "100%" }}
+                      sx={{ width: "100%", border: "3px solid #472C1B" }}
                     >
                       <Box>
                         <Typography
@@ -271,6 +273,48 @@ const Reservas = () => {
           }
         </Box>
       </Box >
+      <Box component="footer">
+        <Box position="static" sx={{ backgroundColor: 'custom.sienna', color: "#fff", padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" } }}>
+          <Box display="flex" justifyContent="space-between" alignItems="center" style={{ marginBottom: '10px' }}>
+            <Stack display="flex" alignItems={{ xs: "start" }} direction={{ xs: "column", md: "row" }}>
+              <Typography variant="body2" style={{ marginRight: '10px' }}>
+                Av. Vicente Suárez 165, Col. Condesa, Cuauhtémoc
+              </Typography>
+              <Typography variant="body2" style={{ marginRight: '10px' }}>
+                C.P. 06140
+              </Typography>
+              <Typography variant="body2" style={{ marginRight: '15px' }}>
+                CDMX
+              </Typography>
+              <Typography variant="body2">
+                Tel +52 11 1010-2020
+              </Typography>
+            </Stack>
+            <Box display="flex" alignItems="center" >
+              <Typography variant="body2" style={{ marginRight: '8px' }}>
+                Síguenos:
+              </Typography>
+              <a href="https://www.facebook.com/" target="_blank" style={{ textDecoration: 'none', color: 'white' }} rel="noreferrer">
+                <FacebookIcon style={{ marginRight: '4px' }} /></a>
+              <a href="https://www.instagram.com/" target="_blank" style={{ textDecoration: 'none', color: 'white' }} rel="noreferrer">
+                <InstagramIcon /></a>
+            </Box>
+          </Box>
+          <hr style={{ margin: '0', border: 'none', borderTop: '1px solid white' }} />
+          <Box display="flex" justifyContent="space-between" alignItems="center" style={{ marginTop: '10px' }}>
+            <Box display="flex" alignItems="center">
+              <Typography variant="body2" style={{ marginTop: '8px' }}>
+                Sabores de la Tierra ® 2023
+              </Typography>
+            </Box>
+            <Box display="flex" alignItems="center">
+              <Typography variant="body2" style={{ marginTop: '8px' }}>
+                Aviso de Privacidad
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
     </Box >
   );
 };

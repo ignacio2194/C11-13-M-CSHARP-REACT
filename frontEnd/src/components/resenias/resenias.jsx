@@ -58,7 +58,7 @@ export default class Resenias extends Component {
     };
 
     return (
-      <Box sx={{ backgroundColor: "#050306", display: "flex", alignItems: "center", jusitfyContent: "center", position: "relative", padding: { lg: "96px 0", sm: "64px 0", xs: "32px 0" } }}>
+      <Box sx={{ backgroundColor: "#050306", display: "flex", alignItems: "center", jusitfyContent: "center", position: "relative", padding: { lg: "96px 0", sm: "64px 0", xs: "32px 0" }, maxWidth: "1440px" }}>
         <Container width="lg" sx={{ margin: "0 auto" }}>
           <Box sx={{ width: "130px", position: "absolute", top: "0", left: "50%", transform: "translateX(-50%)" }}>
             <img src={hoja} alt="hoja" />

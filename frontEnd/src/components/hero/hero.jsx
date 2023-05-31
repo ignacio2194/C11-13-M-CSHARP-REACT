@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { Button, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Typography } from '@mui/material';
 import image from '../../img/hero-foto.png';
 import { Link } from 'react-router-dom'
 
@@ -65,12 +65,12 @@ const TextButtonContainer = styled('div')(({ theme }) => ({
 
 // Componente Hero
 const Hero = () => (
-  <Container maxWidth="xlg" disableGutters>
-    <ImageContainer sx={{ height: { xs: "220px" } }}>
+  <Box disableGutters sx={{ maxWidth: "1440px" }}>
+    <ImageContainer sx={{ height: { xs: "calc(100vh - 164px)", sm: "calc(100vh - 180px)", md: "calc(100vh - 180px)", lg: "calc(100vh - 201px)" } }}>
       <BackgroundImage src={image} alt="img" />
-      <TextContainer sx={{ paddingLeft: { lg: "96px" } }}>
-        <TextButtonContainer sx={{ alignItems: { md: "start", xs: "center" } }}>
-          <Typography variant="h5" component="span" sx={{ lineHeight: '1.2', maxWidth: '539px', whiteSpace: 'normal', wordWrap: 'break-word', color: '#FFFFFF', fontFamily: 'Open Sans', fontSize: "clamp(1rem, 5vw, 2.5rem)", textAlign: { md: "start", xs: "center" } }}>
+      <TextContainer sx={{ paddingLeft: { sm: "32px", md: "32px", lg: "96px" }, padding: { xs: "0 16px" } }}>
+        <TextButtonContainer sx={{ alignItems: { xs: "center", sm: "start" }, margin: { sm: "auto" } }}>
+          <Typography variant="h5" component="span" sx={{ lineHeight: '1.2', maxWidth: '539px', whiteSpace: 'normal', wordWrap: 'break-word', color: '#FFFFFF', fontFamily: 'Open Sans', fontSize: "clamp(1rem, 4vw, 2.5rem)", textAlign: { md: "start", xs: "center", sm: "start" } }}>
             Sumérgete en una experiencia gastronómica sin igual que cautiva tus sentidos.
           </Typography>
           <ButtonContainer>
@@ -81,6 +81,6 @@ const Hero = () => (
         </TextButtonContainer>
       </TextContainer>
     </ImageContainer>
-  </Container>
+  </Box>
 );
 export default Hero;

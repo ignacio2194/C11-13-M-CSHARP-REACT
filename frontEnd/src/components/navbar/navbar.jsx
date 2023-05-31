@@ -17,12 +17,12 @@ import NavListDrawerResponsive from "./navListDrawerResponsive.jsx";
 import logo from "../../assets/images/logo.png";
 import { Link } from "./navlink.jsx";
 
-export default function Navbar({ menu, events, sucursales }) {
+export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
 
   return (
-    <Box component="nav" sx={{ position: "sticky", top: "0", right: "0", zIndex: "9", width: "100%" }}>
+    <Box component="nav" sx={{ position: "sticky", top: "0", right: "0", zIndex: "9", width: "100%", maxWidth: "1440px" }}>
       <AppBar position="static" >
         <Stack
           direction="row"
@@ -55,7 +55,7 @@ export default function Navbar({ menu, events, sucursales }) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              width: { lg: "200px", sm: "175px", xs: "110px" },
+              width: { lg: "200px", sm: "135px", xs: "110px" },
               height: "auto"
             }}
           >
@@ -67,12 +67,12 @@ export default function Navbar({ menu, events, sucursales }) {
               size="large"
               aria-label="menu"
               onClick={() => setOpen(true)}
-              sx={{ display: { xs: "block", md: "none" } }}
+              sx={{ display: { xs: "block", sm: "none" } }}
             >
               <MenuIcon />
             </IconButton>
-            <Box sx={{ display: { xs: "none", md: "block" } }}>
-              <Box sx={{ display: "flex", alignItems: "center", gap: { lg: "64px", sm: "32px", xs: "16px" } }}>
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: { lg: "64px", sm: "22px", xs: "16px" } }}>
                 <Link
                   spy={true}
                   duration={500}
@@ -121,7 +121,7 @@ export default function Navbar({ menu, events, sucursales }) {
         anchor="top"
         open={open}
         onClose={() => setOpen(false)}
-        sx={{ display: { xs: "block", md: "none" } }}
+        sx={{ display: { xs: "block", sm: "none" } }}
       >
         <NavListDrawerResponsive
           onClick={() => setOpen(false)}
