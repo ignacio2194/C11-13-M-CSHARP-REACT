@@ -80,7 +80,7 @@ namespace SDLTdb.Controllers
             Comida comida = await db.Comida.FindAsync(id);
             if (comida == null)
             {
-                return Content(HttpStatusCode.NotFound, "Bebida no encontrada");
+                return Content(HttpStatusCode.NotFound, "Comida no encontrada");
             }
             return Content(HttpStatusCode.OK, db.Comida.Remove(comida));
         }
