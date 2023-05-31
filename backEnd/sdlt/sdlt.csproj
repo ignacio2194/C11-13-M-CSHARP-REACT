@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" /> -->
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -212,34 +212,44 @@
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenusController.cs" />
-    <Compile Include="Controllers\ReservaEnEventoController.cs" />
+    <Compile Include="Controllers\ObjetoEncima.cs" />
+    <Compile Include="Controllers\OrdenesDeliveryController.cs" />
+    <Compile Include="Controllers\ParaArray.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ReservasController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DTOs\ProductOutDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ApplicationRoleManager.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActivacionEventoDto.cs" />
     <Compile Include="Models\AspNetUserClaims.cs" />
     <Compile Include="Models\AspNetUserLogins.cs" />
     <Compile Include="Models\AspNetUserRoles.cs" />
     <Compile Include="Models\Bebida.cs" />
     <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\CategoriaEnum.cs" />
     <Compile Include="Models\Comida.cs" />
     <Compile Include="Models\DetalleOrdenDelivery.cs" />
     <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MenuItem.cs" />
     <Compile Include="Models\OrdenDelivery.cs" />
+    <Compile Include="DTOs\PagoDto.cs" />
+    <Compile Include="Models\Producto.cs" />
+    <Compile Include="DTOs\ProductoDto.cs" />
     <Compile Include="Models\RegionPais.cs" />
     <Compile Include="Models\Reserva.cs" />
+    <Compile Include="DTOs\ReservacionDto.cs" />
     <Compile Include="Models\ReservacionEnEvento.cs" />
     <Compile Include="Models\Restaurante.cs" />
     <Compile Include="Models\SDLTDb.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserAssignRolDto.cs" />
-    <Compile Include="Models\UserDto.cs" />
+    <Compile Include="DTOs\UserAssignRolDto.cs" />
+    <Compile Include="DTOs\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -276,6 +286,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <None Include="Properties\PublishProfiles\sdlt - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\sdlt2 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -304,6 +315,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\OrdenesDelivery\" />
+    <Folder Include="Views\Productos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
