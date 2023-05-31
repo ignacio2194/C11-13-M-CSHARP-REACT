@@ -13,6 +13,7 @@ namespace sdlt.Models
         public Categoria()
         {
             Comida = new HashSet<Comida>();
+            Producto = new HashSet<Producto>();
         }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
@@ -24,5 +25,7 @@ namespace sdlt.Models
         public string ImagenUrl { get; set; }
         [JsonIgnore]
         public virtual ICollection<Comida> Comida { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Producto> Producto { get; set; }
     }
 }

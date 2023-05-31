@@ -33,7 +33,7 @@ export default function EventoCard({ img, txt }) {
             textAlign: 'center',
             fontFamily: 'Open Sans',
             fontWeight: 10,
-            fontSize: '1.5vw', // Tamaño de fuente ajustado en unidades responsivas (ejemplo: 3% del ancho de la pantalla)
+            fontSize: '2.5vw', // Tamaño de fuente ajustado en unidades responsivas (ejemplo: 3% del ancho de la pantalla)
             lineHeight: '4vw', // Altura de línea ajustada en unidades responsivas (ejemplo: 4% del ancho de la pantalla)
             color: '#ffffff',
             zIndex: 1,

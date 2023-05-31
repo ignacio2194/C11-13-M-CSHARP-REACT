@@ -12,7 +12,7 @@ namespace sdlt.Models
     {
         public Evento()
         {
-            ReservacionEnEvento = new HashSet<ReservacionEnEvento>();
+            Reserva = new HashSet<Reserva>();
         }
         public int EventoId { get; set; }
 
@@ -26,10 +26,12 @@ namespace sdlt.Models
         public string ImagenUrl { get; set; }
         [ForeignKey("Restaurante")]
         public virtual int? RestauranteId { get; set; }
+        public int? Stock { get; set; }
+        public virtual decimal? Precio { get; set; }
         [ForeignKey("RestauranteId")]
         [JsonIgnore]
         public virtual Restaurante Restaurante { get; set; }
         [JsonIgnore]
-        public virtual ICollection<ReservacionEnEvento> ReservacionEnEvento { get; set; }
+        public virtual ICollection<Reserva> Reserva { get; set; }
     }
 }

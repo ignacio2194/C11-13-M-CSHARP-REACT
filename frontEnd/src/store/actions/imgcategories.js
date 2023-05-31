@@ -5,7 +5,6 @@ import { takeImg, takeDish } from "../../reducers/imgcategories";
 const uri = "https://sdlt2.azurewebsites.net/"
 
 export function getImgCat() {
-    
     return async function (dispatch) {
       try {
         var json = await axios.get(`${uri}/api/Categorias/GetAll`);
@@ -15,16 +14,11 @@ export function getImgCat() {
     };
   }
 
-  export function getDish(dish) {
-    return async function (dispatch) {
+  export function getDish(id) {
+       return async function (dispatch) {
       try {
-        var json = await axios.get(`${uri}/api/Comidas/GetAll`);
-        console.log(json.data)
-        
-        return dispatch({
-            data:takeDish(json.data),
-            
-        });
+        var json = await axios.get(`${uri}api/Productos/GetByCategory?categoriaId=${id}`);
+        return dispatch(takeDish(json.data));
       } catch (error) {
         console.log(error);
       }

@@ -20,11 +20,11 @@ const evimg = [
   },
   {
     img: ev3,
-    desc: 'Concierto en Vivo',
+    desc: 'Tarde de Jazz',
   },
   {
     img: ev4,
-    desc: 'Noche de Madichis',
+    desc: 'Fiesta Mexicana',
   },
 ];
 
@@ -48,23 +48,22 @@ export default function Eventox() {
           display: 'flex',
           justifyContent: 'center',
           fontFamily: 'Parisienne',
-          fontSize: '96px',
+          fontSize: '6vw',
           fontWeight: 400,
-          lineHeight: '131px',
-          letterSpacing: '0px',
+          lineHeight: '1.2',
+          letterSpacing: '0',
           textAlign: 'center',
-          paddingBottom: "10%"
+          paddingBottom: '10vw'
         }}>Eventos</label>
         <Carousel
           showThumbs={false}
           showStatus={false}
           infiniteLoop={true}
           swipeable={true}
-          renderThumbs={() => null}
           renderCenterLeftControls={() => null}
           renderCenterRightControls={() => null}
           centerMode={true}
-          centerSlidePercentage={50.33}
+          centerSlidePercentage={30.33}
         >
           {evimg.map((item, index) => (
             <div key={index}>{renderCarouselItem(index)}</div>

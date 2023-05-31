@@ -1,119 +1,128 @@
-//FORMULARIO MODIFICACIÓN DE MENÚ
-//NOMBRE
-//DESCRIPCION
-//PRECIO
-//REGION/PAIS
-//CATEGORIA
-//STOCK
-//IMAGEN
-
-import React, { useState, useEffect } from "react";
-// import {useDispatch} from 'react-redux';
-// import {useNavigate, useParams} from 'react-router-dom';
-// import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import "./modifyMenuForm.css";
+import DashBoard from '../../dashboard/dashboard';
 
 const ModifyMenuForm = () => {
-    // const dispatch = useDispatch();
-    // const navigate = useNavigate();
-    // const {id} = useParams();
+  const { ProductoId } = useParams(); // Obtiene el ID del menú de los parámetros de la URL
 
-    const [ form, setForm]= useState ({})
+  const [formData, setFormData] = useState({
+    Nombre: '',
+    Descripcion: '',
+    Precio: '',
+    CategoriaId: '',
+    Stock: '',
+    EstaActivo: '',
+  });
 
+  useEffect(() => {
+    
+    const getAllProducts = async () => {
+      try {
+        const response = await axios.get(
+          `https://sdlt2.azurewebsites.net/api/Productos/Get/${ProductoId}`
+        );
+        const menuData = response.data;
+        setFormData(menuData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  
+    getAllProducts();
+  }, [ProductoId]);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setForm((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  
-  //   useEffect(() => {
-  //dispatch para obtener el detalle del producto a modificar
-
-  //     const changeProduct = async () => {
-  //       try {
-  //         const response = await axios.get('http://localhost:3001/menu/productId');
-  //         const productData = response.data;
-  //         setForm({
-  //           name: productData.name,
-  //           description: productData.description,
-  //           price: productData.price,
-  //           country: productData.country,
-  //           category: productData.category,
-  //           stock: productData.stock,
-  //          
-  //         });
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-
-  //     fetchProduct();
-  //   }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(
+        `https://sdlt2.azurewebsites.net/api/Productos/Modify/${ProductoId}`,
+        formData
+      );
+      console.log(response.data); 
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <form>
-      <div>
-        <label>Nombre: </label>
-        <input
-          type="text"
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-        />
+    <div>
+      <DashBoard />
+      <div className="container">
+        <h1 className="title">Modificar Producto</h1>
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+          <TextField
+            label="Nombre"
+            name="Nombre"
+            value={formData.Nombre}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            className="form-field"
+          />
+
+          <TextField
+            label="Descripción"
+            name="Descripcion"
+            value={formData.Descripcion}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            className="form-field"
+          />
+
+          <TextField
+            label="Precio"
+            name="Precio"
+            value={formData.Precio}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            className="form-field"
+          />
+
+          <TextField
+            label="Categoría ID"
+            name="CategoriaId"
+            value={formData.CategoriaId}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            className="form-field"
+          />
+
+          <TextField
+            label="Stock"
+            name="Stock"
+            value={formData.Stock}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            className="form-field"
+          />
+
+          <div className="button-container">
+            <Button type="submit" variant="contained" color="primary">
+              Guardar
+            </Button>
+          </div>
+        </form>
       </div>
-      <div>
-        <label>Descripción:</label>
-        <textarea
-          name="description"
-          value={form.description}
-          onChange={handleChange}
-        ></textarea>
-      </div>
-      <div>
-        <label>Precio:</label>
-        <input
-          type="number"
-          name="price"
-          value={form.price}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Región/País:</label>
-        <input
-          type="text"
-          name="country"
-          value={form.country}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Categoría:</label>
-        <input
-          type="text"
-          name="category"
-          value={form.category}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Stock:</label>
-        <input
-          type="number"
-          name="stock"
-          value={form.stock}
-          onChange={handleChange}
-        />
-      </div>
-      
-      <button type="submit">Enviar</button>
-    </form>
+    </div>
   );
-}
+};
 
 export default ModifyMenuForm;
+

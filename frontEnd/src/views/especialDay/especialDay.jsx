@@ -16,6 +16,7 @@ const Eventos = () => {
   //según el diseño deberían renderizar dos, en el caso de ser más
   //habría que hacer que se puedan mostrar el resto siguiendo el diseño.
   //este código será modificado
+
   return (
     <div>
         {/* <h1>EVENTOS</h1>
@@ -32,4 +33,3 @@ const Eventos = () => {
 }
 
 export default Eventos;
-

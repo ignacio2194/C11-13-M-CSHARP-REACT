@@ -27,8 +27,7 @@ const ButtonContainer = styled('div')(({ theme }) => ({
   justifyContent: 'flex-start',
   gap: theme.spacing(1),
   marginTop: theme.spacing(1),
-  
-  
+
   
 }));
 
@@ -39,8 +38,9 @@ const SmallButton = styled(Button)(({ theme }) => ({
   backgroundColor: '#FBE19D',
   color: '#000000',
   fontFamily:"open sans",
-  width: '200px',
+  width: '224px',
   textTransform: "none",
+  height:"63px"
 }));
 
 const TextContainer = styled('div')({
@@ -68,9 +68,9 @@ const Hero = () => (
   <Container maxWidth="xlg" disableGutters>
     <ImageContainer>
       <BackgroundImage src={image} alt="img" />
-      <TextContainer>
+      <TextContainer style={{marginLeft:"1vh", paddingBottom:"0vh" }}>
         <TextButtonContainer>
-          <Typography variant="h5" component="span" sx={{ lineHeight: '1.2', maxWidth: '100%', whiteSpace: 'normal', wordWrap: 'break-word', fontSize: '2.5rem', color: '#FFFFFF'  }}>
+          <Typography variant="h5" component="span" sx={{ lineHeight: '1.2', maxWidth: '95%', whiteSpace: 'normal', wordWrap: 'break-word', fontSize: '2.6rem', color: '#FFFFFF', fontFamily:'Open Sans '  }}>
             Sumérgete en una experiencia gastronómica sin igual que cautiva tus sentidos.
           </Typography>
           <ButtonContainer>
