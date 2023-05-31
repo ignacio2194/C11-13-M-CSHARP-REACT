@@ -9,7 +9,7 @@ const AllEvents = () => {
   const [allEvents, setAllEvents] = useState([]);
 
   useEffect(() => {
-    const fetchEvents = async () => {
+    const AllEvents = async () => {
       try {
         const response = await axios.get('https://sdlt2.azurewebsites.net/api/Eventos/GetAll');
         const events = response.data;
@@ -19,7 +19,7 @@ const AllEvents = () => {
       }
     };
 
-    fetchEvents();
+    AllEvents();
   }, []);
 
   const renderEvents = () => {
@@ -31,13 +31,12 @@ const AllEvents = () => {
             primary={event.Nombre}
             secondary={
               <React.Fragment>
-                <span>Descripción: {event.Descripcion}</span>
+                <span>Descripción:{event.Descripcion}</span>
                 <br />
                 <span>Stock: {event.Stock}</span>
                 <br />
-                <span>Precio: ${event.Precio}</span>
+                <span>${event.Precio}</span>
                 <br />
-                <span>Imagen: {event.Imagen}</span>
               </React.Fragment>
             }
           />
