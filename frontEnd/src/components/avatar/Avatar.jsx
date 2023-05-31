@@ -35,13 +35,13 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 export default function BadgeAvatars() {
   return (
-    <Stack direction="row" spacing={2}>
+    <Stack direction="row" alignItems="center">
       <StyledBadge
         overlap="circular"
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        variant="dot"
+      // anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      // variant="dot"
       >
-        <Avatar alt="Remy Sharp" src="https://www.vippng.com/png/detail/416-4161690_empty-profile-picture-blank-avatar-image-circle.png" />
+        <Avatar alt="Naruto Uzumaki" src="https://www.vippng.com/png/detail/416-4161690_empty-profile-picture-blank-avatar-image-circle.png" />
       </StyledBadge>
     </Stack>
   );

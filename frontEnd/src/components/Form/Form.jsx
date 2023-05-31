@@ -12,8 +12,8 @@ import React, { useState, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import "../Form/Form.css";
 import jwt_decode from "jwt-decode";
-import FooterSecondary from "../footerSecondary/FooterSecondary";
 import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
+import FooterMinimalista from "../footerMinimalista/footerMinimalista"
 const theme = createTheme();
 
 const SignIn = () => {
@@ -171,7 +171,7 @@ const SignIn = () => {
           </Box>
         </Container>
       </ThemeProvider>
-      <FooterSecondary />
+      <FooterMinimalista />
     </>
   );
 };

@@ -10,7 +10,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { GoogleLogin } from "@react-oauth/google";
 import "../Form/Form.css";
 import jwt_decode from "jwt-decode";
-import FooterSecondary from "../footerSecondary/FooterSecondary";
+import FooterMinimalista from "../footerMinimalista/footerMinimalista"
 import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
 
 const CrearCuenta = () => {
@@ -201,7 +201,7 @@ const CrearCuenta = () => {
           </Box>
         </Container>
       </ThemeProvider>
-      <FooterSecondary />
+      <FooterMinimalista />
     </>
   );
 };
