@@ -1,5 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import axios from "axios";
+import qs from "qs";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
@@ -13,27 +15,65 @@ import { GoogleLogin } from "@react-oauth/google";
 import "../Form/Form.css";
 import jwt_decode from "jwt-decode";
 import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import FooterMinimalista from "../footerMinimalista/footerMinimalista"
 const theme = createTheme();
 
 const SignIn = () => {
-  const [UserData, setUserData] = useState({ email: "", password: "" });
-  const [token, setToken] = useState("");
+  const [UserData, setUserData] = useState({
+    Email: "",
+    Password: "",
+    ConfirmPassword: "",
+  });
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [tokenGoogle, setTokenGoogle] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(UserData);
+    try {
+      const api = "https://sdlt2.azurewebsites.net/token";
+      const formData = {
+        UserName: `${UserData.Email}`,
+        Password: `${UserData.Password}`,
+        grant_type: "password",
+      };
+      const encodedData = qs.stringify(formData);
+      const data = await axios.post(api, encodedData, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      });
+      setToken(data.data.access_token);
+      localStorage.setItem("token", JSON.stringify(data.data.access_token));
+      navigate("/");
+      if (localStorage.getItem("token")) {
+        toast.success("¡Bienvenido! ", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   useEffect(() => {
-    if (token) {
+    if (tokenGoogle) {
       try {
-        const decoded = jwt_decode(token);
-        console.log(decoded);
+        const decoded = jwt_decode(tokenGoogle);
       } catch (error) {
         console.error("Error al decodificar el token:", error);
       }
     }
-  }, [token]);
+  }, [tokenGoogle]);
   return (
     <>
       <NavbarSecondary />
@@ -85,11 +125,12 @@ const SignIn = () => {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
+                id="Email"
                 label="Email Address"
-                name="email"
+                name="Email"
                 autoComplete="email"
                 autoFocus
+                sx={{ backgroundColor: "#fff", border: 0 }}
                 onChange={(e) =>
                   setUserData((prevState) => ({
                     ...prevState,
@@ -101,11 +142,12 @@ const SignIn = () => {
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                name="Password"
                 label="Password"
                 type="password"
-                id="password"
+                id="Password"
                 autoComplete="current-password"
+                sx={{ backgroundColor: "#fff" }}
                 onChange={(e) =>
                   setUserData((prevState) => ({
                     ...prevState,
@@ -113,10 +155,6 @@ const SignIn = () => {
                   }))
                 }
               />
-              {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
               <Button
                 type="submit"
                 fullWidth
@@ -161,16 +199,30 @@ const SignIn = () => {
               </Box>
             </Box>
             {/* botonsito de google */}
-            <Box sx={{ marginBottom: 15 }}>
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  setToken(credentialResponse.credential);
-                }}
-              />
+            <Box sx={{ marginTop: 3 }}>
+              <Box>
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    setTokenGoogle(credentialResponse.credential);
+                  }}
+                />
+              </Box>
             </Box>
           </Box>
         </Container>
       </ThemeProvider>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <FooterMinimalista />
     </>
   );
