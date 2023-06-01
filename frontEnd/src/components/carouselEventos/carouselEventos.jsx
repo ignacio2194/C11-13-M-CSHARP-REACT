@@ -1,54 +1,68 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import evento1 from "../../img/evento1.png";
-import evento2 from "../../img/evento2.png";
-import evento3 from "../../img/evento3.png";
-import evento4 from "../../img/evento4.png";
-import evento5 from "../../img/evento5.png";
-import styles from './carousel.module.css';
+import EventoCard from '../eventocard/eventocard';
+import ev1 from '../../img/4. Eventos/evento1.png';
+import ev2 from '../../img/4. Eventos/evento2.png';
+import ev3 from '../../img/4. Eventos/evento3.png';
+import ev4 from '../../img/4. Eventos/evento4.png';
+import ev5 from '../../img/4. Eventos/evento5.png';
+import { Box } from '@mui/material';
 
-const CarouselEventos = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const images = [evento1, evento2, evento3, evento4, evento5];
+const evimg = [
+  {
 
-  const handleOnSelect = (index) => {
-    setCurrentIndex(index);
+
+    img: ev2,
+    desc: 'Taller de Pizzas',
+  },
+  {
+    img: ev3,
+    desc: 'Tarde de Jazz',
+  },
+  {
+    img: ev4,
+    desc: 'Fiesta Mexicana', 
+  },
+  {
+    img: ev5,
+    desc: 'Noches de Baile',
+  },
+  {
+    img: ev1,
+    desc: 'Noche de Tango',
+  }
+];
+
+export default function CarouselEventos() {
+  const renderCarouselItem = (index) => {
+    const currentItemIndex = index % evimg.length;
+
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', paddingLeft: '1%', paddingRight: '1%', maxWidth: "1440px" }} >
+        <div style={{ margin: '0 10px', width: '100%', height: 'auto' }}>
+          <EventoCard img={evimg[currentItemIndex].img} txt={evimg[currentItemIndex].desc} />
+        </div>
+      </Box>
+    );
   };
 
   return (
-    <div className={styles.carouselContainer}>
-      <Carousel
-        className={styles.carousel}
-        showThumbs={false}
-        infiniteLoop={true}
-        autoPlay={true}
-        interval={3000}
-        transitionTime={300}
-        showStatus={false}
-        selectedItem={currentIndex}
-        onChange={handleOnSelect}
-        showIndicators={false}
-      >
-        {images.map((_, index) => (
-          <div key={index} className={styles.page}>
-            <div className={styles.column}>
-              <div className={styles.imageContainer}>
-                <img src={images[(currentIndex + index) % images.length]} alt={`Foto ${index + 1}`} />
-                <button className={styles.button}>Detalle del evento</button>
-              </div>
-            </div>
-            <div className={styles.column}>
-              <div className={styles.imageContainer}>
-                <img src={images[(currentIndex + index + 1) % images.length]} alt={`Foto ${index + 2}`} />
-                <button className={styles.button}>Detalle del evento</button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </Carousel>
-    </div>
+        <Carousel
+          showThumbs={false}
+          showStatus={false}
+          infiniteLoop={true}
+          swipeable={true}
+          renderCenterLeftControls={() => null}
+          renderCenterRightControls={() => null}
+          centerMode={true}
+          centerSlidePercentage={30.33}
+        >
+          {evimg.map((item, index) => (
+            <div key={index}>{renderCarouselItem(index)}</div>
+          ))}
+        </Carousel>
   );
-};
+}
 
-export default CarouselEventos;
+

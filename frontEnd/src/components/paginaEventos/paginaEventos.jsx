@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import "./paginaEventos.module.css";
-import imagen1 from "../../img/evento1.png"
+import imagen1 from "../../img/4. Eventos/evento1.png"
 import imagen2 from "../../img/evento2.png"
 import imagen3 from "../../img/evento3.png"
 import imagen4 from "../../img/evento4.png"

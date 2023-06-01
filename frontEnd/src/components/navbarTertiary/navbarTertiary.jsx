@@ -33,7 +33,7 @@ const NavbarTertiary = () => {
               <Typography>EN</Typography>
             </Stack>
           </Stack>
-          <Box sx={{ backgroundColor: "custom.lightBrown", display: "flex", justifyContent: "space-between", height: "133px" }}>
+          <Box sx={{ backgroundColor: "835C44", display: "flex", justifyContent: "space-between", height: "133px" }}>
             <Box
               sx={{
                 display: "flex",
