@@ -24,7 +24,7 @@ const CarouselEventos = () => {
         infiniteLoop={true}
         autoPlay={true}
         interval={3000}
-        transitionTime={100}
+        transitionTime={300}
         showStatus={false}
         selectedItem={currentIndex}
         onChange={handleOnSelect}
