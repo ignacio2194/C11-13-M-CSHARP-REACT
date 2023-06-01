@@ -10,24 +10,84 @@ const MuiThemeProvider = ({ children }) => {
         contrastText: '#fff',
       },
       custom: {
-        lightBrown: "#855D44",
+        // saddleBrown: "#472C1B",
+        sienna: "#835C44",
+        text: "#060407",
+        murlywood: "#E5B89B",
+        peachPuff: "rgba(255, 215, 189, 0.8)",
         yellow: "#FBE19D",
+        muted: "#797979",
       }
     },
     components: {
-      // Name of the component
       MuiButton: {
         styleOverrides: {
-          // Name of the slot
           root: {
-            // Some CSS
-            textTransform: "uppercase",
-            borderRadius: "4.68px",
-            padding: "11.71px 18.74px",
-            fontWeight: "bold",
-            fontSize: "14px"
+            textTransform: "initial",
+            padding: "18px 48px",
+            height: '63px',
+            borderRadius: "6px",
+            lineHeight: '27px',
+            fontWeight: '700',
+            fontSize: '18px',
+            backgroundColor: "#835C44",
+            color: "#fff",
+            "&:hover": {
+              backgroundColor: "primary.main",
+            }
           },
         },
+        variants: [
+          {
+            props: {
+              size: 'small',
+            },
+            style: {
+              padding: "18px 36px",
+              height: '63px',
+              borderRadius: "6px",
+              lineHeight: '27px',
+              fontWeight: '700',
+              fontSize: '18px',
+            },
+          },
+          {
+            props: {
+              size: 'large',
+            },
+            style: {
+              padding: "18px 54px",
+              height: '63px',
+              borderRadius: "6px",
+              lineHeight: '27px',
+              fontWeight: '700',
+              fontSize: '18px',
+            },
+          },
+          {
+            props: {
+              variant: 'outlined',
+            },
+            style: {
+              backgroundColor: "transparent",
+              border: "3px solid #835C44",
+              borderRadius: "6px",
+            },
+          },
+          {
+            props: {
+              variant: 'yellow',
+            },
+            style: {
+              backgroundColor: "#FBE19D",
+              color: "#060407",
+              "&:hover": {
+                backgroundColor: "#F0C553",
+              }
+            },
+          },
+
+        ],
       },
     },
   });

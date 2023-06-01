@@ -1,6 +1,7 @@
 ﻿using sdlt.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -53,6 +54,32 @@ namespace sdlt.Controllers
             }
             return Content(HttpStatusCode.BadRequest, "Compruebe los requerimientos");
         }
+        [HttpPut]
+        [Route("Activar")]
+        public async Task<IHttpActionResult> ActivarEvento(ActivacionEventoDto activacionEventoDto)
+        {
+            if (activacionEventoDto != null)
+            {
+                Evento elEvento = db.Evento.FirstOrDefault(e => e.EventoId == activacionEventoDto.EventoId);
+                if (elEvento != null)
+                {
+                    elEvento.Stock = activacionEventoDto.Stock;
+                    elEvento.RestauranteId = activacionEventoDto.RestauranteId;
+                    elEvento.Precio = activacionEventoDto.Precio;
+                    db.Entry(elEvento).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                    return Ok(elEvento);
+                }
+                else
+                {
+                    return Content(HttpStatusCode.BadRequest, "Id de evento no existente. Intente de nuevo");
+                }
+
+                
+            }
+            return Content(HttpStatusCode.BadRequest, "Compruebe los requerimientos");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

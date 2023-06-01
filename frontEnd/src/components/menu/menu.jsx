@@ -6,19 +6,20 @@ const Menu = () => {
   return (
     <section
       style={{
-        
-        padding:"0px",
-        margin:"0px",
+
+        padding: "0px",
+        margin: "0px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         color: "black",
         backgroundColor: "#FFD7BD",
-        flexDirection:"column"
+        flexDirection: "column"
       }}
+      id='menu'
     >
       <Menulegend />
-      <CardMenu/>
+      <CardMenu />
     </section>
   );
 };

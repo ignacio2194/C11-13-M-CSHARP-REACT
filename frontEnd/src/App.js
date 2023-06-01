@@ -21,7 +21,6 @@ import AllReservas from "./views/admin/reservas/reservas";
 import AccountCreated from "./components/accountCreated/AccountCreated";
 
 
-
 function App() {
   return (
     <MuiThemeProvider>
@@ -37,8 +36,8 @@ function App() {
         <Route path="/admin/allMenu" element={<AllMenu />} />
         <Route path="/admin/allUsers" element={<AllUsers />} />
         {/* <Route path="/admin/detailUser" element={<DetailUser />} /> */}
-        <Route path="/admin/modifyMenu" element={<ModifyMenuForm />} />
-        <Route path="/admin/menu/:id" element={<DetailMenu />} />
+        <Route path="/admin/modifyMenu/:ProductoId" element={<ModifyMenuForm />} />
+        <Route path="/admin/menu/:ProductoId" element={<DetailMenu />} />
         <Route path="/admin/allEvents" element={<ViewAllEvents />} />
         <Route path="/admin/eventForm" element={<EventForm />} />
         {/* <Route path="admin/createCategory" element={<CategoryForm />} /> */}

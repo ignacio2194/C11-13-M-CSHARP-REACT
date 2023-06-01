@@ -2,6 +2,7 @@ import React from "react";
 import hoja2 from "../../img/hoja2.png";
 import fondoSucursales from "../../img/fondo-sucursales.png";
 import "./sucursales.module.css";
+import { Box } from "@mui/material";
 
 const Sucursales = () => {
   const handleMouseEnter = (event) => {
@@ -24,7 +25,9 @@ const Sucursales = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        maxWidth: "1440px",
       }}
+      id='sucursales'
     >
       <h1
         style={{
@@ -32,13 +35,14 @@ const Sucursales = () => {
           color: "#ffffff",
           marginTop: "20px",
           fontFamily: "Parisienne, cursive",
-          fontSize: "70px",
+          fontSize: "clamp(2rem, 5vw, 4.375rem)",
+          // fontSize: "70px",
           fontWeight: "normal",
         }}
       >
         Nuestras sucursales
       </h1>
-      <div style={{ marginTop: "150px" }}>
+      <Box sx={{ marginTop: { lg: "150px" } }}>
         <h2 style={{ textAlign: "center", color: "#ffffff", fontSize: "50px" }}>
           Condesa
         </h2>
@@ -63,27 +67,27 @@ const Sucursales = () => {
         >
           Cómo llegar
         </p>
-      </div>
-      <div
-  style={{
-    position: "relative",
-    width: "100%",
-    backgroundColor: "#050507", // Aplica un fondo negro a hoja2
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop:"3vw"
-  }}
->
-  <img
-    src={hoja2}
-    alt="hojas"
-    style={{
-      width: "140px",
-      height: "50px",
-    }}
-  />
-</div>
+      </Box>
+      {/* <div
+        style={{
+          position: "relative",
+          width: "100%",
+          backgroundColor: "#050507", // Aplica un fondo negro a hoja2
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: "3vw"
+        }}
+      >
+        <img
+          src={hoja2}
+          alt="hojas"
+          style={{
+            width: "140px",
+            height: "50px",
+          }}
+        />
+      </div> */}
     </div>
   );
 };
