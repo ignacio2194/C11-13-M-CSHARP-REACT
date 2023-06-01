@@ -14,10 +14,10 @@ import React, { useState, useEffect } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import "../Form/Form.css";
 import jwt_decode from "jwt-decode";
-import FooterSecondary from "../footerSecondary/FooterSecondary";
 import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+import FooterMinimalista from "../footerMinimalista/footerMinimalista"
 const theme = createTheme();
 
 const SignIn = () => {
@@ -211,7 +211,6 @@ const SignIn = () => {
           </Box>
         </Container>
       </ThemeProvider>
-      <FooterSecondary />
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -224,6 +223,7 @@ const SignIn = () => {
         pauseOnHover
         theme="light"
       />
+      <FooterMinimalista />
     </>
   );
 };

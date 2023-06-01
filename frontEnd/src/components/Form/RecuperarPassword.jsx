@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import FooterSecondary from "../footerSecondary/FooterSecondary";
+import FooterMinimalista from "../footerMinimalista/footerMinimalista";
 import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
 import { ToastContainer, toast } from "react-toastify";
 
@@ -35,9 +35,8 @@ const RecuperarPassword = () => {
     e.preventDefault();
 
     if (dataUser.Email !== "") {
-    
-      showMeMessage()
-    }else{
+      showMeMessage();
+    } else {
       toast.error(
         "Por favor ingresa un email para poder enviarte las instrucciones de reseteo de contraseña",
         {
@@ -63,82 +62,86 @@ const RecuperarPassword = () => {
 
   return (
     <>
-    <NavbarSecondary />
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: "#FFD7BD",
-          }}
-        >
-          <Typography
-            variant="h3"
+      <NavbarSecondary />
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
             sx={{
-              textAlign: "center",
-              fontFamily: "Balsamiq Sans, cursive",
-              fontWeight: "700",
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#FFD7BD",
             }}
           >
-            Recupera tu contraseña
-          </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="Email"
-              label="Ingresa tu email"
-              name="Email"
-              autoComplete="Nombre"
-              autoFocus
-              sx={{ backgroundColor: "#fff" }}
-              onChange={handleChange}
-            />
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, backgroundColor: "#855D44" }}
-              onClick={handleSubmit}
+            <Typography
+              variant="h3"
+              sx={{
+                textAlign: "center",
+                fontFamily: "Balsamiq Sans, cursive",
+                fontWeight: "700",
+              }}
             >
-              RESETEAR CONTRASEÑA
-            </Button>
-            <Grid container justifyContent="center">
-              <Grid item xs={12} textAlign="center"></Grid>
-              <Grid
-                item
-                xs={12}
-                textAlign="center"
-                sx={{ marginBottom: "10px" }}
-              ></Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
-    <FooterSecondary />
-    <ToastContainer
-      position="top-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="light"
-    />
-  </>
-);
+              Recupera tu contraseña
+            </Typography>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="Email"
+                label="Ingresa tu email"
+                name="Email"
+                autoComplete="Nombre"
+                autoFocus
+                sx={{ backgroundColor: "#fff" }}
+                onChange={handleChange}
+              />
 
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, backgroundColor: "#855D44" }}
+                onClick={handleSubmit}
+              >
+                RESETEAR CONTRASEÑA
+              </Button>
+              <Grid container justifyContent="center">
+                <Grid item xs={12} textAlign="center"></Grid>
+                <Grid
+                  item
+                  xs={12}
+                  textAlign="center"
+                  sx={{ marginBottom: "10px" }}
+                ></Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Container>
+      </ThemeProvider>
+      <FooterMinimalista />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </>
+  );
 };
 
 export default RecuperarPassword;

@@ -8,6 +8,7 @@ import ev1 from '../../img/4. Eventos/evento1.png';
 import ev2 from '../../img/4. Eventos/evento2.png';
 import ev3 from '../../img/4. Eventos/evento3.png';
 import ev4 from '../../img/4. Eventos/evento4.png';
+import { Box } from '@mui/material';
 
 const evimg = [
   {
@@ -33,11 +34,11 @@ export default function Eventox() {
     const currentItemIndex = index % evimg.length;
 
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', paddingLeft: '1%', paddingRight: '1%'}}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', paddingLeft: '1%', paddingRight: '1%', maxWidth: "1440px" }} >
         <div style={{ margin: '0 10px', width: '100%', height: 'auto' }}>
           <EventoCard img={evimg[currentItemIndex].img} txt={evimg[currentItemIndex].desc} />
         </div>
-      </div>
+      </Box>
     );
   };
 

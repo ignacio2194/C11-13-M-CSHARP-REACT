@@ -14,42 +14,45 @@ import { Box } from "@mui/system";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import NavListDrawerResponsive from "./navListDrawerResponsive.jsx";
-import scrollToSection from "../../utils/scrollToSection.js";
 import logo from "../../assets/images/logo.png";
 import avatar from "../../assets/images/avatar.png";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-export default function Navbar({ menu, events, sucursales }) {
+import { Link } from "./navlink.jsx";
 
+export default function Navbar() {
+  const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
-  const [token, setToken]= useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const navigate = useNavigate();
   const closeSession = () => {
     localStorage.removeItem("token");
     setToken(null);
   };
-useEffect(()=>{
-  if(!token){
-    toast.success("¡Su cuenta se cerro correctamente 😎!", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  }
-},[token])
+  useEffect(() => {
+    if (!token) {
+      toast.success("¡Su cuenta se cerro correctamente 😎!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  }, [token]);
   return (
-    <nav
-      style={{
+    <Box
+      component="nav"
+      sx={{
         position: "sticky",
         top: "0",
         right: "0",
         zIndex: "9",
         width: "100%",
+        maxWidth: "1440px",
       }}
     >
       <AppBar position="static">
@@ -57,13 +60,16 @@ useEffect(()=>{
           direction="row"
           justifyContent="space-between"
           alignItems="center"
-          sx={{ height: "68px", padding: "0 28px" }}
+          sx={{
+            height: "68px",
+            padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" },
+          }}
         >
           <Box
             sx={{
               display: "flex",
               alignItems: "center",
-              gap: "4px",
+              gap: { lg: "8px", sm: "6px", xs: "4px" },
             }}
           >
             <LocalPhoneOutlinedIcon />
@@ -82,10 +88,11 @@ useEffect(()=>{
         </Stack>
         <Box
           sx={{
-            backgroundColor: "custom.lightBrown",
+            backgroundColor: "custom.sienna",
             display: "flex",
             justifyContent: "space-between",
-            height: "133px",
+            height: { lg: "133px", sm: "112px", xs: "96px" },
+            padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" },
           }}
         >
           <Box
@@ -93,9 +100,8 @@ useEffect(()=>{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              // width: "155px",
-              marginLeft: "28px",
-              width: { xs: "100px", sm: "175px" },
+              width: { lg: "200px", sm: "135px", xs: "110px" },
+              height: "auto",
             }}
           >
             <img
@@ -104,7 +110,7 @@ useEffect(()=>{
               style={{ width: "100%" }}
             />
           </Box>
-          <Toolbar>
+          <Toolbar style={{ padding: "0" }}>
             <IconButton
               color="inherit"
               size="large"
@@ -115,77 +121,97 @@ useEffect(()=>{
               <MenuIcon />
             </IconButton>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              <Box sx={{ display: "flex", gap: "32px" }}>
-                <Box
-                  onClick={() => scrollToSection(menu)}
-                  sx={{ display: "flex", alignItems: "center" }}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: { lg: "64px", sm: "22px", xs: "16px" },
+                }}
+              >
+                <Link
+                  spy={true}
+                  duration={500}
+                  smooth={true}
+                  exact="true"
+                  offset={-201}
+                  onClick={() => setShow(false)}
+                  to="menu"
                 >
                   <Typography>Menú</Typography>
-                </Box>
-                <Box
-                  onClick={() => scrollToSection(events)}
-                  sx={{ display: "flex", alignItems: "center" }}
+                </Link>
+                <Link
+                  spy={true}
+                  duration={500}
+                  smooth={true}
+                  exact="true"
+                  offset={-201}
+                  onClick={() => setShow(false)}
+                  to="eventos"
                 >
                   <Typography>Eventos</Typography>
-                </Box>
-                <Box
-                  onClick={() => scrollToSection(sucursales)}
-                  sx={{ display: "flex", alignItems: "center" }}
-                >
-                  <Typography>Sucursales</Typography>
-                </Box>
-                {token? (
-                  <Box>
-                    <Box>
-                      {token ? (
-                        <Box>
-                          <Box
-                            sx={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              width: "auto",
-                              height: "71.86px",
-                            }}
-                          >
-                            <img
-                              src={avatar}
-                              alt="avatar"
-                              style={{ width: "35%" }}
-                            />
-                          </Box>
-                          <Box>
-                            {" "}
-                            <Button
-                              variant="contained"
-                              sx={{
-                                backgroundColor: "custom.yellow",
-                                color: "black",
-                              }}
-                              onClick={closeSession}
-                            >
-                              {" "}
-                              cerrar session
-                            </Button>{" "}
-                          </Box>
-                        </Box>
-                      ) : (
-                        <p>iniciar sesion </p>
-                      )}
-                    </Box>
-                  </Box>
-                ) : (
-                  <NavLink to="/login">
-                    <Button
-                      variant="contained"
-                      sx={{ backgroundColor: "custom.yellow", color: "black" }}
-                    >
-                      {" "}
-                      iniciar sesion
-                    </Button>
-                  </NavLink>
-                )}
+                </Link>
+                <Link
+                  spy={true}
+                  duration={500}
+                  smooth={true}
+                  exact="true"
+                  offset={-201}
+                  onClick={() => setShow(false)}
+                  to="sucursales"
+                />
+                <Typography>Sucursales</Typography>
               </Box>
+              {token ? (
+                <Box>
+                  <Box>
+                    {token ? (
+                      <Box>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            width: "auto",
+                            height: "71.86px",
+                          }}
+                        >
+                          <img
+                            src={avatar}
+                            alt="avatar"
+                            style={{ width: "35%" }}
+                          />
+                        </Box>
+                        <Box>
+                          {" "}
+                          <Button
+                            variant="contained"
+                            sx={{
+                              backgroundColor: "custom.yellow",
+                              color: "black",
+                            }}
+                            onClick={closeSession}
+                          >
+                            {" "}
+                            cerrar session
+                          </Button>{" "}
+                        </Box>
+                      </Box>
+                    ) : (
+                      <p>iniciar sesion </p>
+                    )}
+                  </Box>
+                </Box>
+              ) : (
+                <NavLink to="/login">
+                  <Button
+                    variant="contained"
+                    sx={{ backgroundColor: "custom.yellow", color: "black" }}
+                  >
+                    {" "}
+                    iniciar sesion
+                  </Button>
+                </NavLink>
+              )}
             </Box>
           </Toolbar>
         </Box>
@@ -196,25 +222,8 @@ useEffect(()=>{
         onClose={() => setOpen(false)}
         sx={{ display: { xs: "block", sm: "none" } }}
       >
-        <NavListDrawerResponsive
-          onClick={() => setOpen(false)}
-          menu={menu}
-          events={events}
-          sucursales={sucursales}
-        />
+        <NavListDrawerResponsive onClick={() => setOpen(false)} />
       </Drawer>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-    </nav>
+    </Box>
   );
 }

@@ -13,13 +13,13 @@ const NavbarSecondary = () => {
         justifyContent="space-between"
         alignItems="center"
         p={4}
-        sx={{ backgroundColor: "primary.main", color: "white", height: "68px" }}
+        sx={{ height: "68px", padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" }, backgroundColor: "primary.main", color: "white" }}
       >
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
-            gap: "4px"
+            gap: { lg: "8px", sm: "6px", xs: "4px" }
           }}
         >
           <LocalPhoneOutlinedIcon />
@@ -34,8 +34,18 @@ const NavbarSecondary = () => {
           <Typography>EN</Typography>
         </Stack>
       </Stack>
-      <Box sx={{ backgroundColor: "custom.lightBrown", width: "100%", height: "187px", display: "flex", alignItems: "center", justifyContent: "center", padding: "31px 0" }}>
-        <img src={logo} alt="Logo Sabores De La Tierra" style={{ width: "246px", height: "auto", cursor: "pointer" }} onClick={() => navigate("/")} />
+      <Box sx={{ backgroundColor: "custom.sienna", display: "flex", justifyContent: "center", height: { lg: "133px", sm: "112px", xs: "96px" }, padding: { lg: "16px 0", sm: "16px 0", xs: "16px 0" } }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: { lg: "200px", sm: "175px", xs: "110px" },
+            height: "auto"
+          }}
+        >
+          <img src={logo} alt="Logo Sabores De La Tierra" style={{ width: "100%", cursor: "pointer" }} onClick={() => navigate("/")} />
+        </Box>
       </Box>
     </Box>
   )
