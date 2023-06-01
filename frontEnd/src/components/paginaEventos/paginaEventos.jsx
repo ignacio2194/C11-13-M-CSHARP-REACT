@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
+import "./paginaEventos.module.css";
 import imagen1 from "../../img/evento1.png"
 import imagen2 from "../../img/evento2.png"
 import imagen3 from "../../img/evento3.png"
@@ -9,9 +10,14 @@ import imagen5 from "../../img/evento5.png"
 const PaginaEventos = () => {
 
   return (
-    <Grid container spacing={2} padding="300px 100px 150px 100px">
+    <>       
+    <h1 style={{ textAlign: "center", color: "black", marginTop: "20px", fontFamily: "Parisienne, cursive", fontSize: "100px", fontWeight: "normal"}}>
+    Eventos
+  </h1>
+  <p style={{textAlign: "center", color: "black", fontSize: "30px"}}>Estos son nuestros eventos del mes</p>
+    <Grid container spacing={2} padding="0px 100px 150px 100px">
       {/* Fila 1 */}
-      <Grid item xs={12} container justifyContent="center" style={{borderTop: '1px solid black', marginTop: '50px'}}>
+      <Grid item xs={12} container justifyContent="center" style={{borderTop: '1px solid black', marginTop: '15px'}}>
         <Grid item xs={6} container justifyContent="center" style={{marginTop: '25px'}}>
           <img src={imagen1} alt="Imagen 1" />
         </Grid>
@@ -115,6 +121,7 @@ const PaginaEventos = () => {
         </Grid>
       </Grid>
     </Grid>
+    </>
   );
 };
 
