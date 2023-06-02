@@ -60,7 +60,7 @@ export default function NavListDrawerResponsive({ onClick, closeSession }) {
                 <NavLink
                   to="/login"
                 >
-                  <Button variant="yellow" size="small" >Inisiar Sesión</Button>
+                  <Button variant="yellow" size="small" >Iniciar Sesión</Button>
                 </NavLink>
               )
             }
