@@ -85,11 +85,6 @@ export default function AccountMenu({ closeSession }) {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        {/* <MenuItem onClick={handleClose}>
-          <Avatar />
-          <Typography>Profile</Typography>
-        </MenuItem>
-        <Divider /> */}
         <MenuItem onClick={handleClose}>
           <ListItemIcon onClick={closeSession}>
             <Logout fontSize="small" />
