@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import logo from '../../assets/images/logo.png';
 import BadgeAvatars from "../../components/avatar/Avatar";
 import myFecha from "../../utils/fecha";
-// import axios from "axios";
+import axios from "axios";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -57,16 +57,38 @@ const Reservas = () => {
       Cantidad
     }
     setReserva(reserva);
+
     setShowTicket(true);
-    console.log("Reserva submitted: ", reserva);
-    // createReserva(reserva);
-    await sleep(5000);
+
+    createReserva();
+
+    await sleep(2000);
     reset();
   };
+
+  const createReserva = async () => {
+    try {
+      const response = await axios.post('https://sdlt2.azurewebsites.net/api/Reservas/Create', reserva, {
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        }
+      })
+      console.log(response)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   // const createReserva = async (reserva) => {
   //   try {
   //     const api = 'https://sdlt2.azurewebsites.net/api/Reservas/Create'
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "application/x-www-form-urlencoded",
+  //         Authorizations: "Bearer " + localStorage.getItem("token")
+  //       },
+  //     }
   //     const data = await axios.post(api, reserva);
   //     console.log(data);
   //   } catch (error) {
@@ -74,22 +96,22 @@ const Reservas = () => {
   //   }
   // };
 
-  // const getAllReservas = async () => {
-  //   try {
-  //     const api = 'https://sdlt2.azurewebsites.net/api/Reservas/GetAll'
-  //     const data = await axios.get(api);
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const getAllReservas = async () => {
+    try {
+      const api = 'https://sdlt2.azurewebsites.net/api/Reservas/GetAll'
+      const data = await axios.get(api);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     // getAllReservas();
   }, []);
 
   return (
-    <Box component="section" sx={{ maxWidth: "1440px" }}>
+    <Box component="section" sx={{ maxWidth: "1440px", margin: "auto" }}>
       <Stack
         direction="row"
         justifyContent="space-between"
@@ -108,7 +130,7 @@ const Reservas = () => {
         </Box>
         <Stack
           direction="row"
-          divider={<Divider orientation="vertical" flexItem style={{ color: "#fff" }} />}
+          divider={<Divider orientation="vertical" flexItem sx={{ color: "#fff" }} />}
           spacing={2}
         >
           <Typography sx={{ fontWeight: "bold" }}>ES</Typography>
@@ -121,14 +143,15 @@ const Reservas = () => {
           justifyContent: "center",
           alignItems: "center",
           width: { lg: "200px", sm: "175px", xs: "110px" },
-          height: "auto"
+          height: "auto",
+          cursor: "pointer"
         }}>
           <img src={logo} alt="Logo" style={{ width: "100%", height: "auto" }} onClick={() => navigate("/")} />
         </Box>
         <BadgeAvatars />
       </Box>
       <Box sx={{ margin: "0 auto" }}>
-        <Typography variant="h3" sx={{ textAlign: "center", fontWight: "bold", fontSize: "clamp(1.5rem, 6vw, 2.5rem)", margin: { lg: "121px 0 146px", xs: "32px 0" } }}>
+        <Typography variant="h3" sx={{ textAlign: "center", fontWight: "bold", fontSize: "clamp(1.5rem, 6vw, 2.5rem)", margin: { lg: "121px 0 146px", md: "48px 0", xs: "32px 0" } }}>
           Reservación
         </Typography>
         <Box sx={{}}>
@@ -137,11 +160,11 @@ const Reservas = () => {
             : showTicket ? <Ticket reserva={reserva} /> : (
               <>
                 <Stack
-                  direction={{ xs: "column", sm: "row" }}
-                  justifyContent={{ lg: "space-between", sm: "center" }}
-                  alignItems={{ sm: "start" }}
-                  spacing={{ xs: 1, sm: 2, md: 4 }}
-                  sx={{ padding: { lg: "16px 96px", sm: "16px 32px", xs: "32px 16px" }, backgroundColor: "custom.murlywood" }}
+                  direction={{ xs: "column", md: "row" }}
+                  justifyContent={{ lg: "space-between", md: "center" }}
+                  alignItems={{ sm: "center", lg: "center" }}
+                  spacing={{ xs: 1, sm: 4, md: 4 }}
+                  sx={{ padding: { lg: "96px", sm: "48px 32px", xs: "32px 16px" }, backgroundColor: "custom.murlywood", marginBottom: { lg: "128px", md: "96px", sm: "64px", xs: "48px" } }}
                 >
                   <Box>
                     <Typography variant="h4" sx={{ textAlign: "left", fontSize: "clamp(1rem, 4vw, 2.5rem)" }}>
@@ -158,8 +181,8 @@ const Reservas = () => {
                       <Map />
                     </Box>
                   </Box>
-                  <Box sx={{ width: { lg: "430px", xs: "100%" } }}>
-                    <Typography variant="h4" sx={{ textAlign: "left", fontSize: "clamp(1rem, 4vw, 2.5rem)", marginBottom: "16px", marginTop: { sm: "0", xs: "32px" } }}>
+                  <Box sx={{ width: { lg: "430px", md: "450px", sm: "70%", xs: "100%" } }}>
+                    <Typography variant="h4" sx={{ textAlign: { xs: "left", sm: "center", md: "start" }, fontSize: "clamp(1rem, 4vw, 2.5rem)", marginBottom: "16px", marginTop: { sm: "0", xs: "32px" } }}>
                       Realizá tu reservación
                     </Typography>
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -207,7 +230,7 @@ const Reservas = () => {
                             // label="Selecciona el número de personas"
                             variant="outlined"
                             margin="dense"
-                            sx={{ width: "100%", margin: { lg: "8px 0 4px" } }}
+                            sx={{ width: "100%", margin: "8px 0 4px" }}
                           >
                             {PERSONS_OPTIONS.map((options, index) => (
                               <MenuItem key={index} value={options.value} >
@@ -233,7 +256,7 @@ const Reservas = () => {
                     </form>
                   </Box>
                 </Stack>
-                <Box sx={{ margin: { lg: "79px 0 250px", sm: "32px 0", xs: "32px 0" }, padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" } }}>
+                {/* <Box sx={{ margin: { lg: "79px 0 250px", sm: "32px 0", xs: "32px 0" }, padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" } }}>
                   <Typography variant="body1" sx={{ textAlign: "left", fontSize: "clamp(1rem, 3vw, 2.5rem)", marginBottom: { lg: "16px", xs: "8px" } }}>
                     Elige otra sucursal
                   </Typography>
@@ -267,7 +290,7 @@ const Reservas = () => {
                       </Button>
                     </Stack>
                   </Box>
-                </Box>
+                </Box> */}
               </>
             )
           }

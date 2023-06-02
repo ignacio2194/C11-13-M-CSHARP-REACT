@@ -17,7 +17,7 @@ const Map = () => {
   });
 
   return (
-    <Box sx={{ width: { lg: "600px", md: "500px", xs: "300px" }, height: { lg: "450px", md: "250px" }, margin: "auto" }}>
+    <Box sx={{ width: { lg: "600px", md: "90%", xs: "100%" }, height: { md: "250px" }, margin: "auto" }}>
       <MapContainer
         style={{ width: "100%", height: "250px" }}
         zoom={16}
