@@ -45,7 +45,7 @@ const categories = [
     CategoriaId: 7,
     image: cat6,
     dish: "Postres",
-  },
+  }
 ];
 
 const CardMenu = () => {
@@ -148,6 +148,7 @@ const CardMenu = () => {
               />
             </Grid>
           ))}
+          
         </Grid>
       )}
       <div style={{width:"165vh"}}>

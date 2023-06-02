@@ -1,12 +1,12 @@
 import Hero from "../../components/hero/hero"
 import Menu from "../../components/menu/menu";
-import SeccionEventos from "../../components/seccionEventos/seccionEventos";
 import Sucursales from "../../components/sucursales/sucursales";
 import Resenias from "../../components/resenias/resenias";
 import Navbar from "../../components/navbar/navbar"
 import Footer from "../../components/footer/footer"
 import { useRef } from "react"
 import { Box } from "@mui/material";
+import Eventox from "../../components/eventos/eventos";
 
 const Home = () => {
   const menu = useRef(null);
@@ -21,7 +21,7 @@ const Home = () => {
         <Menu />
       </Box>
       <Box ref={events}>
-        <SeccionEventos/>
+        <Eventox/>
       </Box>
       <Box ref={sucursales}>
         <Sucursales />
