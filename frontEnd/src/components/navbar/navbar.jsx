@@ -15,16 +15,14 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import NavListDrawerResponsive from "./navListDrawerResponsive.jsx";
 import logo from "../../assets/images/logo.png";
-import avatar from "../../assets/images/avatar.png";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "./navlink.jsx";
+import AccountMenu from "./menu.jsx";
 
 export default function Navbar() {
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const navigate = useNavigate();
   const closeSession = () => {
     localStorage.removeItem("token");
     setToken(null);
@@ -43,15 +41,17 @@ export default function Navbar() {
       });
     }
   }, [token]);
+
   return (
     <Box
       component="nav"
       sx={{
         position: "sticky",
         top: "0",
+        left: "0",
         right: "0",
         zIndex: "9",
-        width: "100%",
+        width: "100vw",
         maxWidth: "1440px",
       }}
     >
@@ -120,12 +120,13 @@ export default function Navbar() {
             >
               <MenuIcon />
             </IconButton>
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            <Box sx={{ display: { xs: "none", sm: "flex" } }}>
               <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
                   gap: { lg: "64px", sm: "22px", xs: "16px" },
+                  marginRight: "42px"
                 }}
               >
                 <Link
@@ -158,58 +159,29 @@ export default function Navbar() {
                   offset={-201}
                   onClick={() => setShow(false)}
                   to="sucursales"
-                />
-                <Typography>Sucursales</Typography>
+                >
+                  <Typography>Sucursales</Typography>
+                </Link>
               </Box>
               {token ? (
                 <Box>
                   <Box>
                     {token ? (
-                      <Box>
-                        <Box
-                          sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            width: "auto",
-                            height: "71.86px",
-                          }}
-                        >
-                          <img
-                            src={avatar}
-                            alt="avatar"
-                            style={{ width: "35%" }}
-                          />
-                        </Box>
-                        <Box>
-                          {" "}
-                          <Button
-                            variant="contained"
-                            sx={{
-                              backgroundColor: "custom.yellow",
-                              color: "black",
-                            }}
-                            onClick={closeSession}
-                          >
-                            {" "}
-                            cerrar session
-                          </Button>{" "}
-                        </Box>
-                      </Box>
+                      <AccountMenu closeSession={closeSession} />
                     ) : (
-                      <p>iniciar sesion </p>
+                      <NavLink
+                        to="/login"
+                      >
+                        <Button variant="yellow" size="small">Iniciar Sesión</Button>
+                      </NavLink>
                     )}
                   </Box>
                 </Box>
               ) : (
-                <NavLink to="/login">
-                  <Button
-                    variant="contained"
-                    sx={{ backgroundColor: "custom.yellow", color: "black" }}
-                  >
-                    {" "}
-                    iniciar sesion
-                  </Button>
+                <NavLink
+                  to="/login"
+                >
+                  <Button variant="yellow" size="small">Iniciar Sesión</Button>
                 </NavLink>
               )}
             </Box>
@@ -221,8 +193,9 @@ export default function Navbar() {
         open={open}
         onClose={() => setOpen(false)}
         sx={{ display: { xs: "block", sm: "none" } }}
+        closeSession={closeSession}
       >
-        <NavListDrawerResponsive onClick={() => setOpen(false)} />
+        <NavListDrawerResponsive onClick={() => setOpen(false)} closeSession={closeSession} />
       </Drawer>
     </Box>
   );

@@ -8,11 +8,11 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { Link } from "./navlink";
 
-export default function NavListDrawerResponsive({ onClick }) {
+export default function NavListDrawerResponsive({ onClick, closeSession }) {
   const [show, setShow] = useState(false);
 
   return (
-    <Box sx={{ backgroundColor: "custom.sienna", width: "100%", m: "auto" }} onClick={onClick} >
+    <Box sx={{ backgroundColor: "custom.sienna", width: "100%", m: "auto", height: "80vh", display: "flex", alignItems: "center", justifyContent: "center" }} onClick={onClick} >
       <nav aria-label="main mailbox folders">
         <List>
           <Box sx={{ display: "flex", flexDirection: "column", gap: "32px", alignItems: "center", color: "white", padding: "32px 0" }}>
@@ -21,7 +21,7 @@ export default function NavListDrawerResponsive({ onClick }) {
               duration={500}
               smooth={true}
               exact="true"
-              offset={-201}
+              offset={-164}
               onClick={() => setShow(false)}
               to="menu"
             >
@@ -32,7 +32,7 @@ export default function NavListDrawerResponsive({ onClick }) {
               duration={500}
               smooth={true}
               exact="true"
-              offset={-201}
+              offset={-164}
               onClick={() => setShow(false)}
               to="eventos"
             >
@@ -43,17 +43,27 @@ export default function NavListDrawerResponsive({ onClick }) {
               duration={500}
               smooth={true}
               exact="true"
-              offset={-201}
+              offset={-164}
               onClick={() => setShow(false)}
               to="sucursales"
             >
               <Typography variant="h5">Sucursales</Typography>
             </Link>
-            <NavLink
-              to="/login"
-            >
-              <Button variant="yellow" size="small" >Iniciar Sesión</Button>
-            </NavLink>
+            {
+              localStorage.getItem("token") ? (
+                <NavLink
+                  to="/login"
+                >
+                  <Button variant="yellow" size="small">Cerrar Sesión</Button>
+                </NavLink>) : (
+                <NavLink
+                  to="/"
+                  onClick={closeSession}
+                >
+                  <Button variant="yellow" size="small" >Inisiar Sesión</Button>
+                </NavLink>
+              )
+            }
           </Box>
         </List>
       </nav>
