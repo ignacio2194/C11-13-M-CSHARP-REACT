@@ -71,7 +71,7 @@ const Reservas = () => {
       const response = await axios.post('https://sdlt2.azurewebsites.net/api/Reservas/Create', reserva, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
       console.log(response)
@@ -107,7 +107,7 @@ const Reservas = () => {
   };
 
   useEffect(() => {
-    // getAllReservas();
+    getAllReservas();
   }, []);
 
   return (

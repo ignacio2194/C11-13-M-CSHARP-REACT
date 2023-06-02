@@ -52,15 +52,16 @@ export default function NavListDrawerResponsive({ onClick, closeSession }) {
             {
               localStorage.getItem("token") ? (
                 <NavLink
-                  to="/login"
+                  to="/"
+                  onClick={closeSession}
                 >
                   <Button variant="yellow" size="small">Cerrar Sesión</Button>
                 </NavLink>) : (
                 <NavLink
-                  to="/"
-                  onClick={closeSession}
+                  to="/login"
                 >
-                  <Button variant="yellow" size="small" >Inisiar Sesión</Button>
+                  <Button variant="yellow" size="small" >Iniciar Sesión</Button>
+                >
                 </NavLink>
               )
             }
