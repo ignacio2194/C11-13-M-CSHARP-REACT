@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import avatar from "../../assets/images/avatar.png";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -41,7 +42,7 @@ export default function BadgeAvatars() {
       // anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       // variant="dot"
       >
-        <Avatar alt="Naruto Uzumaki" src="https://www.vippng.com/png/detail/416-4161690_empty-profile-picture-blank-avatar-image-circle.png" />
+        <Avatar alt="Naruto Uzumaki" src={avatar} />
       </StyledBadge>
     </Stack>
   );
