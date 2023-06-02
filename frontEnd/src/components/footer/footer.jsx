@@ -9,7 +9,7 @@ const Footer = ({ menu, events, sucursales }) => {
   const [show, setShow] = useState(false);
 
   return (
-    <Box position="static" sx={{ backgroundColor: '#835c44', color: "#fff", padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" }, maxWidth: "1440px" }}>
+    <Box position="static" sx={{ backgroundColor: '#835c44', color: "#fff", padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" } }}>
       <Toolbar>
         <Stack
           direction="row"

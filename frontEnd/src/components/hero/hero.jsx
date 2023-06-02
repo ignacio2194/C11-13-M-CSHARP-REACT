@@ -65,7 +65,7 @@ const TextButtonContainer = styled('div')(({ theme }) => ({
 
 // Componente Hero
 const Hero = () => (
-  <Box disableGutters sx={{ maxWidth: "1440px" }}>
+  <Box disableGutters >
     <ImageContainer sx={{ height: { xs: "calc(100vh - 164px)", sm: "calc(100vh - 180px)", md: "calc(100vh - 180px)", lg: "calc(100vh - 201px)" } }}>
       <BackgroundImage src={image} alt="img" />
       <TextContainer sx={{ paddingLeft: { sm: "32px", md: "32px", lg: "96px" }, padding: { xs: "0 16px" } }}>
