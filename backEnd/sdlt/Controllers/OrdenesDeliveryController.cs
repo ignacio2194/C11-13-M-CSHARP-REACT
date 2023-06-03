@@ -18,12 +18,13 @@ namespace sdlt.Controllers
         [Route("CrearPrefMP")]
         public async Task<IHttpActionResult> CrearPrefMP()
         {
+            
             var request = new PreferenceRequest
-            {
+            {                
                 BackUrls = new PreferenceBackUrlsRequest {
                     Success = "http://localhost:44335/success",
-                  Failure = "https://www.youtube.com/watch?v=Fw3RB7xnb80", 
-                   Pending = "" },
+                    Failure = "https://www.youtube.com/watch?v=Fw3RB7xnb80", 
+                    Pending = "" },
                 AutoReturn = "approved",
                 NotificationUrl = "https://misitio/server",//mercado pago manda un post a esta url luego de que finalice el pago
                 Items = new List<PreferenceItemRequest>
@@ -44,7 +45,7 @@ namespace sdlt.Controllers
                     }
                 },
             };
-        
+            string PROD_ACCESS_TOKEN = "TEST-8745031599738171-050420-9199ef6aa7d3367a72271aec715b20df-57697661";
             // Crea la preferencia usando el client
             var client = new PreferenceClient();
             Preference preference = await client.CreateAsync(request);

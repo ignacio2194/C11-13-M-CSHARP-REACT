@@ -13,8 +13,7 @@ namespace sdlt
     {
         public void Configuration(IAppBuilder app)
         {
-            MercadoPagoConfig.AccessToken = "APP_USR-8745031599738171-050420-a875df2284d8db5126ed35ac2e7f38d7-57697661";
-
+            MercadoPagoConfig.AccessToken = "TEST-8745031599738171-050420-9199ef6aa7d3367a72271aec715b20df-57697661";
             ConfigureAuth(app);
         }
     }
