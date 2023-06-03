@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MercadoPago.Client.Preference;
+using MercadoPago.Config;
+using MercadoPago.Resource.Preference;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,14 +15,41 @@ namespace sdlt.Controllers
     public class OrdenesDeliveryController : ApiController
     {
         [HttpPost]
-        [Route("Pagar")]
-        public async Task<IHttpActionResult> Pagar(ObjetoEncima objetoEncima)
+        [Route("CrearPrefMP")]
+        public async Task<IHttpActionResult> CrearPrefMP()
         {
-            // primero necesito saber que usuario paga (correo)
-            // llamar a un procedimiento almacenado, este tiene que insertar
-            // tratar que el array de detalles se serialice en icollection de detalles
-            // ------------2 parámetros o parámetros anidados
-            return Content(HttpStatusCode.OK, objetoEncima.paraArray);
+            var request = new PreferenceRequest
+            {
+                BackUrls = new PreferenceBackUrlsRequest {
+                    Success = "http://localhost:44335/success",
+                  Failure = "https://www.youtube.com/watch?v=Fw3RB7xnb80", 
+                   Pending = "" },
+                AutoReturn = "approved",
+                NotificationUrl = "https://misitio/server",//mercado pago manda un post a esta url luego de que finalice el pago
+                Items = new List<PreferenceItemRequest>
+                {
+                    new PreferenceItemRequest
+                    {
+                        Title = "Mi producto",
+                        Quantity = 1,
+                        CurrencyId = "USD",
+                        UnitPrice = 20.0m,
+                    },
+                    new PreferenceItemRequest
+                    {
+                        Title = "Mi producto fachero",
+                        Quantity = 1,
+                        CurrencyId = "USD",
+                        UnitPrice = 20.0m,
+                    }
+                },
+            };
+        
+            // Crea la preferencia usando el client
+            var client = new PreferenceClient();
+            Preference preference = await client.CreateAsync(request);
+
+            return Content(HttpStatusCode.OK, preference);
         }
     }
 }

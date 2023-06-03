@@ -32,6 +32,8 @@ namespace sdlt.Models
         public bool HasRegistered { get; set; }
 
         public string LoginProvider { get; set; }
+
+        public string RoleId { get; set; }
     }
 
     public class UserLoginInfoViewModel

@@ -141,6 +141,9 @@ namespace sdlt.Controllers
                     case "Postres":
                         categoriaIdConvertido = (int)CategoriaEnum.Postre;
                         break;
+                    case "Postres y Bebidas":
+                        categoriaIdConvertido = (int)CategoriaEnum.Postre;
+                        break;
                     default:
                         return null;
                 }

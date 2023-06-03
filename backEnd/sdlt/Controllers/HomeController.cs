@@ -14,5 +14,11 @@ namespace sdlt.Controllers
 
             return View();
         }
+
+        public ActionResult Generar()
+        {
+            ViewBag.Title = "Generar";
+            return View();
+        }
     }
 }
