@@ -1,8 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { getDish } from "../../store/actions/imgcategories";
 import BackgroundImg from "../../img/romero.png";
 import Dishcard from "../dishcard/dishcard";
+import { useNavigate } from "react-router-dom";
+import { pushCart } from "../../store/actions/cartActions";
 
 export default function Dishmenu({
   dish,
@@ -12,12 +15,52 @@ export default function Dishmenu({
   categoriaId,
   handleCategoriaId,
 }) {
+  const [selectProducts, setSelectProducts] = useState([]);
   const dispatch = useDispatch();
   const data = useSelector((state) => state.imgcategories.dish);
+  const data2 = useSelector((state) => state.shopingCart.data);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getDish(dish));
+    if (data2.length !== 0) {
+      console.log(data2);
+      console.log(selectProducts);
+      setSelectProducts(data2);
+    }
   }, [dispatch, categoriaId]);
+
+  useEffect(() => {
+    console.log(data);
+  }, [selectProducts]);
+
+  const loadCart = (e) => {
+    e.preventDefault();
+
+    const uniqueNames = {};
+    const filteredProducts = selectProducts.filter((item) => {
+      if (!item.hasOwnProperty("cantidad") && !uniqueNames[item.Nombre]) {
+        uniqueNames[item.Nombre] = true;
+        return true;
+      }
+      return false;
+    });
+
+    const updatedProducts = filteredProducts.map((item) => ({
+      ...item,
+      cantidad: 1,
+    }));
+
+    console.log([...selectProducts, ...updatedProducts]);
+
+    setSelectProducts([...selectProducts, ...updatedProducts].filter((item) => item.hasOwnProperty("cantidad")));
+
+    console.log([...selectProducts, ...updatedProducts].filter((item) => item.hasOwnProperty("cantidad")));
+
+    dispatch(pushCart([...selectProducts, ...updatedProducts].filter((item) => item.hasOwnProperty("cantidad"))));
+    console.log(data2);
+    navigate("/detalles-pedido");
+  };
 
   return (
     <div
@@ -31,6 +74,43 @@ export default function Dishmenu({
         <hr />
         <label style={{ fontWeight: "bold" }}>{dish}</label>
         <hr />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          position: "relative",
+        }}
+      >
+        <div
+          onClick={(e) => loadCart(e)}
+          style={{
+            position: "relative",
+            fontSize: "2.5rem",
+            opacity: selectProducts.length === 0 ? 0.5 : 1,
+            pointerEvents: selectProducts.length === 0 ? "none" : "auto",
+          }}
+        >
+          <AddShoppingCartIcon sx={{ fontSize: "2.5rem" }} />
+          <div
+            style={{
+              position: "absolute",
+              top: "-0.5rem",
+              right: "-0.5rem",
+              backgroundColor: "red",
+              fontSize: "0.7rem",
+              color: "white",
+              width: "1.3rem",
+              height: "1.3rem",
+              borderRadius: "50%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {selectProducts.length}
+          </div>
+        </div>
       </div>
 
       <div
@@ -56,6 +136,7 @@ export default function Dishmenu({
               desc={e.Descripcion}
               price={e.Precio}
               status={status}
+              setSelectProducts={setSelectProducts}
             />
           </div>
         ))}
