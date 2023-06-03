@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Avatar, Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { AppBar, Toolbar, Avatar, Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import avatar from "../../../assets/images/avatar.png";
 import logo from "../../../assets/images/logo-color.png";
 import { Home, Restaurant, Event, People, MenuBook, ListAlt } from '@mui/icons-material';
@@ -28,8 +28,6 @@ const Navbar = () => {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-
 
   return (
     <>
