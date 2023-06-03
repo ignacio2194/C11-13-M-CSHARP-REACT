@@ -1,71 +1,48 @@
-import React from 'react';
-import { styled } from '@mui/system';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Avatar } from '@mui/material';
-import { Home, Restaurant, Event, People, MenuBook, ListAlt } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import SideBar from "./sideBar"
+import Navbar from "./navBar"
+import Cards from "./cards";
+import { Box, Divider, Stack, Typography } from "@mui/material";
+import { useState } from "react";
 
+const data = [
+  { id: 1, title: "Sucursales Activas", info: "1/2" },
+  { id: 2, title: "Total Reservaciones", info: "8/20" },
+  { id: 3, title: "Deliveries Activos", info: "0" },
+  { id: 4, title: "Menús Activos", info: "0" }
+];
 
-const DrawerContainer = styled(Drawer)(({ theme }) => ({
-  width: 240,
-  flexShrink: 0,
-  '& .MuiDrawer-paper': {
-    width: 240,
-    backgroundColor: '#E5B89B',
-  },
-}));
-
-const Toolbar = styled('div')(({ theme }) => theme.mixins.toolbar);
-//Este dashboard es solo la sideBar, faltan los dibujos del diseño
-const DashBoard = () => {
+const Dashboard = () => {
   return (
-    <DrawerContainer variant="permanent">
-      <Toolbar />
-      <List>
-        <ListItem button component={Link} to="/">
-          <ListItemIcon>
-            {/* ACÁ VA EL LOGO */}
-          </ListItemIcon>
-          <ListItemText primary="Inicio" />
-        </ListItem>
-        <ListItem button component={Link} to="/admin/createMenu">
-          <ListItemIcon>
-            <Restaurant />
-          </ListItemIcon>
-          <ListItemText primary="Crear Menú" />
-        </ListItem>
-        <ListItem button component={Link} to="/admin/allMenu">
-          <ListItemIcon>
-            <MenuBook />
-          </ListItemIcon>
-          <ListItemText primary="Ver Menú" />
-        </ListItem>
-        <ListItem button component={Link} to="/admin/eventForm">
-          <ListItemIcon>
-            <Event />
-          </ListItemIcon>
-          <ListItemText primary="Crear Evento" />
-        </ListItem>
-        <ListItem button component={Link} to="/admin/allEvents">
-          <ListItemIcon>
-            <ListAlt />
-          </ListItemIcon>
-          <ListItemText primary="Ver Eventos" />
-        </ListItem>
-        <ListItem button component={Link} to="/admin/allreservas">
-          <ListItemIcon>
-            <Event />
-          </ListItemIcon>
-          <ListItemText primary="Ver Reservas" />
-        </ListItem>
-        <ListItem button component={Link} to="/admin/allUsers">
-          <ListItemIcon>
-            <People />
-          </ListItemIcon>
-          <ListItemText primary="Ver Usuarios" />
-        </ListItem>
-      </List>
-    </DrawerContainer>
-  );
-};
+    <>
+      <SideBar />
+      <Navbar />
+      <Box sx={{ width: { xs: "100%", md: 'calc(100vw - 240px)' }, marginLeft: { xs: "0", md: "240px" }, padding: { xs: "16px", md: "64px" } }}>
+        <Typography sx={{ fontFamily: "open sans", fontWeight: "700", fontSize: "clamp(1rem, 5vw, 2.5rem)", marginLeft: { xs: "0", md: "32px" }, textAlign: { xs: "center", md: "unset" } }}>Dashboard</Typography>
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          divider={<Divider orientation="vertical" variant="middle" flexItem />}
+          spacing={{ xs: 1, sm: 2, md: 2 }}
+          sx={{ margin: "36px auto 52px", padding: "32px", border: "4px solid #472C1B", borderRadius: "26px", backgroundColor: "#FFEBDE", justifyContent: { md: "center" } }}
+        >
+          {
+            data.map(item => (
+              <Box sx={{ textAlign: "center" }} key={item.id}>
+                <Typography sx={{ fontFamily: "open sans", fontWeight: "700", fontSize: "clamp(1rem, 2vw, 2rem)" }}>
+                  {item.title}
+                </Typography>
+                <Typography sx={{ fontFamily: "open sans", fontWeight: "700", fontSize: "clamp(1.5rem, 5vw, 2.5rem)" }}>
+                  {item.info}
+                </Typography>
+              </Box>
+            ))
+          }
+        </Stack>
+        <Divider sx={{ height: "5px" }} />
+        <Cards />
+      </Box >
+    </>
+  )
 
-export default DashBoard;
+}
+
+export default Dashboard;

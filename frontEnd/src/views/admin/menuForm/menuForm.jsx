@@ -3,7 +3,7 @@ import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import "./menuForm.css"
-import Dashboard from '../dashboard/dashboard';
+import SideBar from '../dashboard/sideBar';
 import Navbar from '../../admin/dashboard/navBar';
 
 const MenuForm = () => {
@@ -43,77 +43,77 @@ const MenuForm = () => {
   };
 
   return (
-   <div>
-     <Dashboard/>
-     <Navbar/>
-    <div className="container">
-      
-      <h1 className="title">Crear Producto</h1>
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
-      <TextField
-       label="Nombre"
-       name="Nombre"
-       value={formData.Nombre}
-       onChange={handleChange}
-       variant="outlined"
-       fullWidth
-       margin="normal"
-       className="form-field"
-      />
+    <div>
+      <SideBar />
+      <Navbar />
+      <div className="container">
 
-      <TextField
-         label="Descripción"
-         name="Descripcion"
-         value={formData.Descripcion}
-         onChange={handleChange}
-         variant="outlined"
-         fullWidth
-         margin="normal"
-         className="form-field"
-      />
+        <h1 className="title">Crear Producto</h1>
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+          <TextField
+            label="Nombre"
+            name="Nombre"
+            value={formData.Nombre}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            className="form-field"
+          />
 
-      <TextField
-        label="Precio"
-        name="Precio"
-        value={formData.Precio}
-        onChange={handleChange}
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        className="form-field"
-      />
+          <TextField
+            label="Descripción"
+            name="Descripcion"
+            value={formData.Descripcion}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            className="form-field"
+          />
 
-      <TextField
-        label="Categoría ID"
-        name="CategoriaId"
-        value={formData.CategoriaId}
-        onChange={handleChange}
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        className="form-field"
-      />
+          <TextField
+            label="Precio"
+            name="Precio"
+            value={formData.Precio}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            className="form-field"
+          />
 
-      <TextField
-        label="Stock"
-        name="Stock"
-        value={formData.Stock}
-        onChange={handleChange}
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        className="form-field"
-      />
+          <TextField
+            label="Categoría ID"
+            name="CategoriaId"
+            value={formData.CategoriaId}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            className="form-field"
+          />
 
-<div className="button-container">
-        <Button type="submit" variant="contained" color="primary">
-          Guardar
-        </Button>
+          <TextField
+            label="Stock"
+            name="Stock"
+            value={formData.Stock}
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            className="form-field"
+          />
+
+          <div className="button-container">
+            <Button type="submit" variant="contained" color="primary">
+              Guardar
+            </Button>
+          </div>
+        </form>
       </div>
-    </form>
-  </div>
-  </div>
-);
+    </div>
+  );
 };
 
 export default MenuForm;
