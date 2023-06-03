@@ -1,0 +1,14 @@
+ 
+  .lista {
+    background-color: #FFEBDE;
+    padding: 20px;
+    width: 1000px; 
+    margin: 0 auto;
+    
+  }
+  
+  .product-lista {
+    display: flex;
+    align-items: center;
+  }
+  

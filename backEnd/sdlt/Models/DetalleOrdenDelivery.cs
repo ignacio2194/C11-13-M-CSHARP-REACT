@@ -1,5 +1,6 @@
 namespace sdlt.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -12,19 +13,21 @@ namespace sdlt.Models
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [ForeignKey("OrdenDelivery")]
         public int OrdenId { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int MenuItemId { get; set; }
+        [ForeignKey("Producto")]
+        public int ProductoId { get; set; }
 
         public int? Cantidad { get; set; }
 
         public decimal? PrecioUnitario { get; set; }
-
-        public virtual MenuItem MenuItem { get; set; }
-
+        [ForeignKey("ProductoId")]
+        public virtual Producto Producto { get; set; }
+        [JsonIgnore]
         public virtual OrdenDelivery OrdenDelivery { get; set; }
     }
 }

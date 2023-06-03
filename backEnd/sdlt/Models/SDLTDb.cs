@@ -27,6 +27,7 @@ namespace sdlt.Models
         public virtual DbSet<Reserva> Reserva { get; set; }
         public virtual DbSet<Restaurante> Restaurante { get; set; }
         public virtual DbSet<ReservacionEnEvento> ReservacionEnEvento { get; set; }
+        public virtual DbSet<Producto> Producto { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -63,10 +64,10 @@ namespace sdlt.Models
                 .WithOptional(e => e.AspNetUsers)
                 .HasForeignKey(e => e.UserId);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.OrdenDelivery)
-                .WithOptional(e => e.AspNetUsers)
-                .HasForeignKey(e => e.ClienteId);
+            //modelBuilder.Entity<User>()
+            //    .HasMany(e => e.OrdenDelivery)
+            //    .WithOptional(e => e.AspNetUsers)
+            //    .HasForeignKey(e => e.ClienteId);
 
             modelBuilder.Entity<Bebida>()
                 .Property(e => e.Nombre)
@@ -108,10 +109,10 @@ namespace sdlt.Models
                 .HasOptional(e => e.Comida)
                 .WithRequired(e => e.MenuItem);
 
-            modelBuilder.Entity<MenuItem>()
-                .HasMany(e => e.DetalleOrdenDelivery)
-                .WithRequired(e => e.MenuItem)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<MenuItem>()
+            //    .HasMany(e => e.DetalleOrdenDelivery)
+            //    .WithRequired(e => e.MenuItem)
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<OrdenDelivery>()
                 .HasMany(e => e.DetalleOrdenDelivery)

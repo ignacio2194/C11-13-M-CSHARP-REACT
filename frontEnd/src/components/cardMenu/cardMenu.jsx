@@ -44,7 +44,7 @@ const categories = [
   {
     CategoriaId: 7,
     image: cat6,
-    dish: "Postres",
+    dish: "Postres y Bebidas",
   }
 ];
 
