@@ -29,7 +29,6 @@ const Sucursales = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        maxWidth: "1440px",
       }}
       id='sucursales'
     >

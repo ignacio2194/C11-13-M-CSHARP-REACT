@@ -43,6 +43,7 @@ export default function Navbar() {
   }, [token]);
 
   return (
+
     <Box
       component="nav"
       sx={{
@@ -52,7 +53,6 @@ export default function Navbar() {
         right: "0",
         zIndex: "9",
         width: "100vw",
-        maxWidth: "1440px",
       }}
     >
       <AppBar position="static">
@@ -197,6 +197,6 @@ export default function Navbar() {
       >
         <NavListDrawerResponsive onClick={() => setOpen(false)} closeSession={closeSession} />
       </Drawer>
-    </Box>
+    </Box >
   );
 }
