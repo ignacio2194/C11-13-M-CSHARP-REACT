@@ -5,29 +5,17 @@ import Sucursales from "../../components/sucursales/sucursales";
 import Resenias from "../../components/resenias/resenias";
 import Navbar from "../../components/navbar/navbar"
 import Footer from "../../components/footer/footer"
-import { useRef } from "react"
-import { Box } from "@mui/material";
 
 const Home = () => {
-  const menu = useRef(null);
-  const events = useRef(null);
-  const sucursales = useRef(null);
-
   return (
     <>
-      <Navbar menu={menu} events={events} sucursales={sucursales} />
+      <Navbar />
       <Hero />
-      <Box ref={menu} >
-        <Menu />
-      </Box>
-      <Box ref={events}>
-        <SeccionEventos/>
-      </Box>
-      <Box ref={sucursales}>
-        <Sucursales />
-      </Box>
+      <Menu />
+      <SeccionEventos />
+      <Sucursales />
       <Resenias />
-      <Footer menu={menu} events={events} sucursales={sucursales} />
+      <Footer />
     </>
   )
 }
