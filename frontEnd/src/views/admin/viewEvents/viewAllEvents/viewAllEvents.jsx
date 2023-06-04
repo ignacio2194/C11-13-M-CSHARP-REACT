@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { List, ListItem, ListItemText, Paper, Typography } from '@mui/material';
-import Dashboard from '../../dashboard/dashboard';
+import SideBar from '../../dashboard/sideBar';
 import './viewAllEvents.css';
 import Navbar from '../../dashboard/navBar';
 
@@ -47,7 +47,7 @@ const AllEvents = () => {
 
   return (
     <div>
-      <Dashboard />
+      <SideBar />
       <Navbar />
       <div className="dashboard-container">
         <Paper className="container" style={{ backgroundColor: '#FFEBDE', padding: '20px' }}>
