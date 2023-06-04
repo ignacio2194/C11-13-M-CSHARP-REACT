@@ -1,14 +1,21 @@
  
   .lista {
     background-color: #FFEBDE;
-    padding: 20px;
-    width: 1000px; 
-    margin: 0 auto;
-    
+    padding: 58px 27px;
+    border: 4px solid #472C1B;
+    border-radius: 20px;
+    margin: 0 54px 144px;
   }
   
   .product-lista {
     display: flex;
     align-items: center;
   }
+
+    @media only screen and (max-width: 900px) {
+      .lista {
+        padding: 16px;
+        margin: 0 16px 144px;
+      }
+    }
   
