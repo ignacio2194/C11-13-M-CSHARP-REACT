@@ -36,7 +36,8 @@ export default function Dishcard({ dish, desc, price, status, setSelectProducts 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
       <div style={{ display: "flex", alignItems: "center" }}>
-        <Checkbox
+      <Checkbox
+          disabled={status}
           checked={isChecked}
           onChange={handleCheckboxChange}
           style={{ marginRight: "5px" }}
