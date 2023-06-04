@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import Dashboard from "../../dashboard/dashboard";
+import SideBar from "../../dashboard/sideBar";
 import Navbar from "../../dashboard/navBar";
 import "./allMenu.css";
 
@@ -108,7 +108,7 @@ const AllMenu = () => {
 
   return (
     <div>
-      <Dashboard />
+      <SideBar />
       <Navbar />
       <div className="lista">{renderProductsByCategory()}</div>
     </div>

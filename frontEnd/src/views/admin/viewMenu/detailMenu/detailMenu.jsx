@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import NavBar from "../../dashboard/navBar";
-import SideBar from "../../dashboard/dashboard";
+import SideBar from "../../dashboard/sideBar";
 
 const DetailMenu = () => {
   const { ProductoId } = useParams();
@@ -48,7 +48,7 @@ const DetailMenu = () => {
         </Typography>
         <Button
           component={Link}
-          to={`/admin/modifyMenu/${ProductoId }`}
+          to={`/admin/modifyMenu/${ProductoId}`}
           variant="contained"
           color="primary"
           style={{ marginTop: "1rem" }}

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import "./modifyMenuForm.css";
-import DashBoard from '../../dashboard/dashboard';
+import SideBar from '../../dashboard/sideBar';
 import { useNavigate } from 'react-router-dom';
 
 const ModifyMenuForm = () => {
-  const { ProductoId } = useParams(); 
+  const { ProductoId } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ const ModifyMenuForm = () => {
   });
 
   useEffect(() => {
-    
+
     const getAllProducts = async () => {
       try {
         const response = await axios.get(
@@ -48,7 +48,7 @@ const ModifyMenuForm = () => {
         `https://sdlt2.azurewebsites.net/api/Productos/Modify?id=${ProductoId}`,
         formData
       );
-      console.log(response.data); 
+      console.log(response.data);
       navigate('/admin/AllMenu');
     } catch (error) {
       console.error(error);
@@ -57,7 +57,7 @@ const ModifyMenuForm = () => {
 
   return (
     <div>
-      <DashBoard />
+      <SideBar />
       <div className="container">
         <h1 className="title">Modificar Producto</h1>
         <form onSubmit={handleSubmit} className="max-w-md mx-auto">

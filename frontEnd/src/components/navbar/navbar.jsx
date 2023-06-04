@@ -22,14 +22,19 @@ import AccountMenu from "./menu.jsx";
 export default function Navbar() {
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(sessionStorage.getItem("token"));
+  const [rol, setRol] = useState(sessionStorage.getItem("rol"));
+  
   const closeSession = () => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("rol");
     setToken(null);
+    setRol(null);
   };
+  
   useEffect(() => {
-    if (!token) {
-      toast.success("¡Su cuenta se cerro correctamente 😎!", {
+    if (!token && !rol) {
+      toast.success("¡Su cuenta se cerró correctamente 😎!", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -40,8 +45,8 @@ export default function Navbar() {
         theme: "light",
       });
     }
-  }, [token]);
-
+  }, [token, rol]);
+  
   return (
 
     <Box
