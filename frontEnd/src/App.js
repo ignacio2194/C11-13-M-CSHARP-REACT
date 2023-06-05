@@ -45,7 +45,6 @@ function App() {
         <Route path="cuenta-creada" element={<AccountCreated />} />
         <Route path="*" element={<Navigate to="/" replace={true} />} />
         <Route path="admin/allreservas" element={<AllReservas />} />
-        
       </Routes>
     </MuiThemeProvider>
   );
