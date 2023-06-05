@@ -20,6 +20,9 @@ const DrawerContainer = styled(Drawer)(({ theme }) => ({
 //el avatar lo tiene que traer desde el logueo.
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+  const nombreApellido = userData && userData.NombreApellido;
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -34,7 +37,12 @@ const Navbar = () => {
       <AppBar position="static" sx={{ backgroundColor: '#835C44', height: "94px" }}>
         <Toolbar sx={{ height: "100%", display: 'flex', justifyContent: 'space-between', alignItems: "center" }}>
           <Box><MenuIcon onClick={handleDrawerOpen} /></Box>
-          <Avatar src={avatar} alt="Admin Photo" sx={{ width: 40, height: 40 }} />
+          {userData && userData.Email && (
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <span>{nombreApellido}</span>
+
+            </Box>
+          )}
         </Toolbar>
       </AppBar>
       <DrawerContainer open={open} sx={{ display: { xs: "block", md: "none" } }}>
@@ -103,4 +111,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
