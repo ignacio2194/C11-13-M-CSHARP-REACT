@@ -24,14 +24,14 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [token, setToken] = useState(sessionStorage.getItem("token"));
   const [rol, setRol] = useState(sessionStorage.getItem("rol"));
-  
+
   const closeSession = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("rol");
     setToken(null);
     setRol(null);
   };
-  
+
   useEffect(() => {
     if (!token && !rol) {
       toast.success("¡Su cuenta se cerró correctamente 😎!", {
@@ -46,7 +46,7 @@ export default function Navbar() {
       });
     }
   }, [token, rol]);
-  
+
   return (
 
     <Box
@@ -78,7 +78,7 @@ export default function Navbar() {
             }}
           >
             <LocalPhoneOutlinedIcon />
-            <Typography>+54 11 1010-2020</Typography>
+            <Typography>+52 11 1010-2020</Typography>
           </Box>
           <Stack
             direction="row"

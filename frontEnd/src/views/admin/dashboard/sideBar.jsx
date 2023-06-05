@@ -2,7 +2,7 @@ import React from 'react';
 import { styled } from '@mui/system';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Box, Divider } from '@mui/material';
 import { Home, Restaurant, Event, People, MenuBook, ListAlt } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from "../../../assets/images/logo-color.png"
 
 const DrawerContainer = styled(Drawer)(({ theme }) => ({
@@ -33,11 +33,16 @@ const SideBar = () => {
       </Box>
       <Divider variant="middle" />
       <List sx={{ marginTop: "51px" }}>
-        <ListItem button component={Link} to="/">
+        <ListItem button>
           <ListItemIcon>
             <Home />
           </ListItemIcon>
-          <ListItemText primary="Inicio" />
+          <NavLink
+            style={{ textDecoration: "none" }}
+            to="/"
+          >
+            <ListItemText primary="Inicio" primaryTypographyProps={{ color: "#000000DE" }} />
+          </NavLink>
         </ListItem>
         <ListItem button component={Link} to="/admin/createMenu">
           <ListItemIcon>

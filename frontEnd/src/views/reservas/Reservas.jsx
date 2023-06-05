@@ -6,7 +6,7 @@ import schema from "../../utils/validateReservations";
 import { useState, useEffect } from "react";
 import Ticket from "./Ticket";
 import Spinner from "./Spinner";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from '../../assets/images/logo.png';
 import BadgeAvatars from "../../components/avatar/Avatar";
 import myFecha from "../../utils/fecha";
@@ -15,6 +15,7 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import qs from "qs";
+import AccountMenu from "../../components/navbar/menu";
 
 const PERSONS_OPTIONS = [
   { text: "Una persona", value: 1 },
@@ -27,6 +28,16 @@ const PERSONS_OPTIONS = [
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const Reservas = () => {
+  const [token, setToken] = useState(sessionStorage.getItem("token"));
+  const [rol, setRol] = useState(sessionStorage.getItem("rol"));
+
+  const closeSession = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("rol");
+    setToken(null);
+    setRol(null);
+  };
+
   const {
     control,
     handleSubmit,
@@ -131,8 +142,33 @@ const Reservas = () => {
         }}>
           <img src={logo} alt="Logo" style={{ width: "100%", height: "auto" }} onClick={() => navigate("/")} />
         </Box>
-        <BadgeAvatars />
+        {/* <Box> */}
+        {token ? (
+          <Box>
+            <Box>
+              {token ? (
+                <AccountMenu closeSession={closeSession} />
+              ) : (
+                <NavLink
+                  to="/login"
+                >
+                  <Button variant="yellow" size="small">Iniciar Sesión</Button>
+                </NavLink>
+              )}
+            </Box>
+          </Box>
+        ) : (
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <NavLink
+              to="/login"
+            >
+              <Button variant="yellow" size="small">Iniciar Sesión</Button>
+            </NavLink>
+          </Box>
+        )}
+        {/* </Box> */}
       </Box>
+
       <Box sx={{ margin: "0 auto" }}>
         <Typography variant="h3" sx={{ textAlign: "center", fontWight: "bold", fontSize: "clamp(1.5rem, 6vw, 2.5rem)", margin: { lg: "121px 0 146px", md: "48px 0", xs: "32px 0" } }}>
           Reservación

@@ -35,7 +35,7 @@ export default function AccountMenu({ closeSession }) {
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "flex-end",
+                justifyContent: "center",
                 alignItems: "center",
                 width: "auto",
                 height: "71.86px",
