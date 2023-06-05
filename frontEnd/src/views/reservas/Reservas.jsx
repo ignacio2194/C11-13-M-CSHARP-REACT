@@ -14,6 +14,7 @@ import axios from "axios";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import qs from "qs";
 
 const PERSONS_OPTIONS = [
   { text: "Una persona", value: 1 },
@@ -47,54 +48,36 @@ const Reservas = () => {
   let [reserva, setReserva] = useState({});
 
   const onSubmit = async (data) => {
-    const FechaHora = `${myFecha(data.date)} ${data.hour}`
-    const Cantidad = data.numPeople;
-
-    reserva = {
-      FechaHora,
-      Precio: 99.99,
-      EventoId: 99,
-      Cantidad
-    }
-    setReserva(reserva);
-
-    setShowTicket(true);
-
-    createReserva();
-
-    await sleep(2000);
-    reset();
-  };
-
-  const createReserva = async () => {
     try {
-      const response = await axios.post('https://sdlt2.azurewebsites.net/api/Reservas/Create', reserva, {
+      const api = 'https://sdlt2.azurewebsites.net/api/Reservas/Create';
+      const FechaHora = `${myFecha(data.date)} ${data.hour}`
+      const Cantidad = data.numPeople;
+
+      reserva = {
+        FechaHora,
+        Precio: 19.99,
+        EventoId: 99,
+        Cantidad
+      }
+      const encodedData = qs.stringify(reserva);
+
+      const response = await axios.post(api, encodedData, {
         headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'application/x-www-form-urlencoded'
+          "Authorization": "Bearer " + JSON.parse(sessionStorage.getItem("token")),
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Accept": "application/json",
+          "X-Requested-With": "XMLHttpRequest"
         }
       })
-      console.log(response)
+      setReserva(reserva);
+      setShowTicket(true);
+      await sleep(5000);
+      reset();
+      // getAllReservas();
     } catch (error) {
       console.error(error)
     }
-  }
-
-  // const createReserva = async (reserva) => {
-  //   try {
-  //     const api = 'https://sdlt2.azurewebsites.net/api/Reservas/Create'
-  //     const config = {
-  //       headers: {
-  //         "Content-Type": "application/x-www-form-urlencoded",
-  //         Authorizations: "Bearer " + localStorage.getItem("token")
-  //       },
-  //     }
-  //     const data = await axios.post(api, reserva);
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  };
 
   const getAllReservas = async () => {
     try {
@@ -107,7 +90,7 @@ const Reservas = () => {
   };
 
   useEffect(() => {
-    getAllReservas();
+    // getAllReservas();
   }, []);
 
   return (
@@ -126,7 +109,7 @@ const Reservas = () => {
           }}
         >
           <LocalPhoneOutlinedIcon />
-          <Typography>+54 11 1010-2020</Typography>
+          <Typography>+52 11 1010-2020</Typography>
         </Box>
         <Stack
           direction="row"
