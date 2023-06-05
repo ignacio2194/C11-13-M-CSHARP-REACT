@@ -1,4 +1,4 @@
-import { Box, Stack, AppBar, Typography, Button, Select, TextField, MenuItem, Divider } from "@mui/material";
+import { Box, Stack, Typography, Button, Select, TextField, MenuItem, Divider } from "@mui/material";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 import Map from "./Map";
@@ -8,7 +8,6 @@ import Ticket from "./Ticket";
 import Spinner from "./Spinner";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from '../../assets/images/logo.png';
-import BadgeAvatars from "../../components/avatar/Avatar";
 import myFecha from "../../utils/fecha";
 import axios from "axios";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
@@ -142,7 +141,6 @@ const Reservas = () => {
         }}>
           <img src={logo} alt="Logo" style={{ width: "100%", height: "auto" }} onClick={() => navigate("/")} />
         </Box>
-        {/* <Box> */}
         {token ? (
           <Box>
             <Box>
@@ -166,7 +164,6 @@ const Reservas = () => {
             </NavLink>
           </Box>
         )}
-        {/* </Box> */}
       </Box>
 
       <Box sx={{ margin: "0 auto" }}>
