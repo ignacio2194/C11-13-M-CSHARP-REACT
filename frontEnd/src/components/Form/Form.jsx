@@ -215,12 +215,6 @@ const SignIn = () => {
                 <Box flex={1}>
                   <hr />
                 </Box>
-                <Typography variant="body1" align="center" sx={{ px: 1 }}>
-                  Ingresa con
-                </Typography>
-                <Box flex={1}>
-                  <hr />
-                </Box>
               </Box>
             </Box>
           </Box>
