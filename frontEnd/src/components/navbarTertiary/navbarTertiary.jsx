@@ -3,6 +3,7 @@ import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 import { Box } from "@mui/system";
 import logo from "../../assets/images/logo.png";
 import BadgeAvatars from "../avatar/Avatar";
+import { Link } from "react-router-dom";
   
 const NavbarTertiary = () => {
     return (
@@ -34,7 +35,7 @@ const NavbarTertiary = () => {
             </Stack>
           </Stack>
           <Box sx={{ backgroundColor: "835C44", display: "flex", justifyContent: "space-between", height: "133px" }}>
-            <Box
+         <Box
               sx={{
                 display: "flex",
                 justifyContent: "center",
@@ -44,7 +45,7 @@ const NavbarTertiary = () => {
                 width: { xs: "100px", sm: "175px" }
               }}
             >
-              <img src={logo} alt="Logo Sabores De La Tierra" style={{ width: "100%" }} />
+            <Link to='/'><img src={logo} alt="Logo Sabores De La Tierra" style={{ width: "100%" }} /></Link>
             </Box>
             <Toolbar>
              <BadgeAvatars/>

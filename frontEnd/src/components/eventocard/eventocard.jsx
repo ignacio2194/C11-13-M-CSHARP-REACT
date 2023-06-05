@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function EventoCard({ img, txt }) {
   return (
@@ -7,20 +8,28 @@ export default function EventoCard({ img, txt }) {
       component="div"
       sx={{
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '40vh',
+        height: '100%',
       }}
     >
       <Box
         sx={{
           position: 'relative',
           textAlign: 'center',
+          width: '100%',
+          height: '100%',
         }}
       >
         <img
           src={img}
           alt="Imagen evento"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
         />
         <Typography
           variant="h5"
@@ -33,14 +42,26 @@ export default function EventoCard({ img, txt }) {
             textAlign: 'center',
             fontFamily: 'Open Sans',
             fontWeight: 10,
-            fontSize: '2.5vw', // Tamaño de fuente ajustado en unidades responsivas (ejemplo: 3% del ancho de la pantalla)
-            lineHeight: '4vw', // Altura de línea ajustada en unidades responsivas (ejemplo: 4% del ancho de la pantalla)
+            fontSize: '2.5vw',
+            lineHeight: '4vw',
             color: '#ffffff',
             zIndex: 1,
           }}
         >
           {txt}
         </Typography>
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: '10px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+          }}
+        >
+          <Link to='/eventos'>
+            <Button variant="yellow" sx={{ fontSize: '1vw', maxWidth: '200px', whiteSpace: 'nowrap'}}>Detalle del evento</Button>
+          </Link>
+        </Box>
       </Box>
     </Box>
   );
