@@ -24,7 +24,7 @@
     const [open, setOpen] = useState(false);
     const [token, setToken] = useState(sessionStorage.getItem("token"));
     const [rol, setRol] = useState(sessionStorage.getItem("rol"));
-    
+    const [componentMounted, setComponentMounted] = useState(false);
     const closeSession = () => {
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("rol");
@@ -32,6 +32,10 @@
       setRol(null);
     };
     useEffect(() => {
+      if (!componentMounted) {
+        setComponentMounted(true);
+        return;
+      }
       if (!token && !rol) {
         toast.success("¡Su cuenta se cerró correctamente!", {
           position: "top-center",

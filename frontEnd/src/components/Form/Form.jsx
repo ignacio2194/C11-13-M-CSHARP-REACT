@@ -28,6 +28,7 @@ const SignIn = () => {
     ConfirmPassword: "",
   });
   const [token, setToken] = useState(sessionStorage.getItem("token"));
+  const [Email, setEmail] = useState(sessionStorage.getItem("Email"));
   const [rol, setRol] = useState(sessionStorage.getItem("rol"));
   const [allUsers, setAllUsers] = useState();
   const navigate = useNavigate();
@@ -46,7 +47,9 @@ const SignIn = () => {
       const userFinded = allUsers.find((user) => user.Email === emailUser);
       if (userFinded) {
         setRol(userFinded.RoleId);
+        setEmail(userFinded.Email)
         sessionStorage.setItem("rol", JSON.stringify(userFinded.RoleId));
+        sessionStorage.setItem("Email", JSON.stringify(userFinded.Email));
       }
     }
   };
