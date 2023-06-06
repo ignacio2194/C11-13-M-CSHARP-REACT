@@ -1,9 +1,24 @@
 {
   "dependencies": {
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2023-06-04T08:29:01.2771999Z"
+    },
     "mssql1": {
       "restored": true,
       "restoreTime": "2023-05-24T05:59:15.5306437Z"
     }
   },
-  "parameters": {}
+  "parameters": {
+    "secrets1.resourceGroupName": {
+      "Name": "secrets1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "sdlt2_group"
+    },
+    "secrets1.subscriptionId": {
+      "Name": "secrets1.subscriptionId",
+      "Type": "subscription",
+      "Value": "7d4bd24a-e820-4161-8c37-648bad46d702"
+    }
+  }
 }

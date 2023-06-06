@@ -14,17 +14,18 @@ namespace sdlt.Models
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [ForeignKey("OrdenDelivery")]
-        public int OrdenId { get; set; }
+        public int? OrdenId { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [ForeignKey("Producto")]
-        public int ProductoId { get; set; }
+        public int? ProductoId { get; set; }
 
         public int? Cantidad { get; set; }
 
         public decimal? PrecioUnitario { get; set; }
+        [JsonIgnore]
         [ForeignKey("ProductoId")]
         public virtual Producto Producto { get; set; }
         [JsonIgnore]
