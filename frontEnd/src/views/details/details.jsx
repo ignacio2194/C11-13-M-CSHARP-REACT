@@ -1,13 +1,6 @@
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import BasicTable from "./Table";
-<<<<<<< HEAD
-//import MediaCard from "./Card";
-import logo from '../../img/logo-sabores@2x.png';
-import { useNavigate } from "react-router-dom";
-import BadgeAvatars from "../../components/avatar/Avatar";
-import AddressSelector from "./addressSelector";
-=======
 import logo from "../../img/logo-sabores@2x.png";
 import { useNavigate } from "react-router-dom";
 import BadgeAvatars from "../../components/avatar/Avatar";
@@ -17,8 +10,9 @@ import { clearCart } from "../../store/actions/cartActions";
 import { useDispatch, useSelector } from "react-redux";
 import { payment } from "../../store/actions/payment";
 import { deliverySaveAction } from "../../store/actions/delivery";
+import AddressSelector from './addressSelector'
+import { Add } from "@mui/icons-material";
 
->>>>>>> 41933e1c3e7feeaff180c8851c5d84b68958b314
 
 const Details = () => {
   const navigate = useNavigate();
@@ -98,17 +92,12 @@ const Details = () => {
         <BadgeAvatars />
       </Box>
       <Box>
-<<<<<<< HEAD
-        <Typography variant="h4" sx={{ textAlign: "center", my: 8 }}>Detalles de pedidos</Typography>
-        <Box sx={{ display: "flex", justifyContent: "center"}}>
-       <AddressSelector/>
-      </Box>
-        <BasicTable />
-        <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", margin: "auto", p: "24px" }}>
-=======
         <Typography variant="h4" sx={{ textAlign: "center", my: 8 }}>
           Detalles de pedidos
         </Typography>
+        <Box sx={{ display: "flex", justifyContent: "center"}}>
+          <AddressSelector/>
+        </Box>
         <BasicTable isempty={isempty} total={total} />
         <Box
           sx={{
@@ -119,7 +108,6 @@ const Details = () => {
             p: "24px",
           }}
         >
->>>>>>> 41933e1c3e7feeaff180c8851c5d84b68958b314
           <Stack
             direction={{ xs: "column", sm: "row" }}
             justifyContent="space-between"
@@ -138,17 +126,6 @@ const Details = () => {
             {botonMP}
           </Stack>
         </Box>
-<<<<<<< HEAD
-        {/*<Box>
-          <Typography variant="h4" sx={{ textAlign: "center", marginTop: "16px" }}>¿Quieres agregar otro platillo?</Typography>
-          <Box sx={{ display: "flex", justifyContent: "center", flexFlow: "wrap", gap: "16px", marginTop: "24px" }}>
-            <MediaCard urlImage="https://minichef.net/wp-content/uploads/2020/05/empanadas.jpg" namePlato="Empanadas" />
-            <MediaCard urlImage="https://fegasacruz.org/wp-content/uploads/2020/10/El-consumo-de-carne.jpg" namePlato="Carnes" />
-            <MediaCard urlImage="https://www.chismestoday.com/wp-content/uploads/2019/07/Beneficios-del-Vino-Tinto.jpg" namePlato="Vinos" />
-            <MediaCard urlImage="https://img.theculturetrip.com/1440x/smart/wp-content/uploads/2020/02/p3wdfm-1.jpg" namePlato="Sushi" />
-          </Box>
-        </Box>*/}
-=======
         <Box>
           <Box
             sx={{
@@ -160,7 +137,6 @@ const Details = () => {
             }}
           ></Box>
         </Box>
->>>>>>> 41933e1c3e7feeaff180c8851c5d84b68958b314
       </Box>
     </Box>
   );
