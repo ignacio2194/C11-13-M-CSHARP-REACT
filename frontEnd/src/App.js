@@ -55,7 +55,7 @@ function App() {
         ) : isAdmin === "user" ? (
           <>
             <Route path="/" element={<Home />} />
-
+            <Route path="/reservas" element={<Reservas />} />
             <Route path="/detalles-pedido" element={<Details />} />
             <Route path="/eventos" element={<Eventos />} />
           </>
