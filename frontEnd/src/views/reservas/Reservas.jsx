@@ -27,6 +27,8 @@ const PERSONS_OPTIONS = [
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const Reservas = () => {
+  const [userName, setUserName] = useState("");
+
   const [token, setToken] = useState(sessionStorage.getItem("token"));
   const [rol, setRol] = useState(sessionStorage.getItem("rol"));
 
@@ -66,7 +68,7 @@ const Reservas = () => {
       reserva = {
         FechaHora,
         Precio: 19.99,
-        EventoId: 99,
+        EventoId: 1,
         Cantidad
       }
       const encodedData = qs.stringify(reserva);
@@ -81,11 +83,27 @@ const Reservas = () => {
       })
       setReserva(reserva);
       setShowTicket(true);
-      await sleep(5000);
+      console.log(response);
+      await sleep(2000);
       reset();
-      // getAllReservas();
     } catch (error) {
-      console.error(error)
+      const errorUtils = {
+        getError: (error) => {
+          let e = error;
+          if (error.response) {
+            e = error.response.data;                   // data, status, headers
+            if (error.response.data && error.response.data.error) {
+              e = error.response.data.error;           // my app specific keys override
+            }
+          } else if (error.message) {
+            e = error.message;
+          } else {
+            e = "Unknown error occured";
+          }
+          return e;
+        },
+      };
+      errorUtils.getError(error);
     }
   };
 
@@ -99,8 +117,25 @@ const Reservas = () => {
     }
   };
 
+  const getUserInfo = async () => {
+    try {
+      const api = "https://sdlt2.azurewebsites.net/api/Account/UserInfo";
+      const data = await axios.get(api, {
+        headers: {
+          "Authorization": "Bearer " + JSON.parse(sessionStorage.getItem("token")),
+          "Content-Type": "application/x-www-form-urlencoded",
+        }
+      });
+      setUserName(data.Email);
+      return data;
+    } catch (error) {
+      console.error(error.response.data);
+    }
+  }
+
   useEffect(() => {
     // getAllReservas();
+    getUserInfo();
   }, []);
 
   return (
@@ -173,7 +208,7 @@ const Reservas = () => {
         <Box sx={{}}>
           {isSubmitting
             ? <Spinner />
-            : showTicket ? <Ticket reserva={reserva} /> : (
+            : showTicket ? <Ticket reserva={reserva} userName={userName} /> : (
               <>
                 <Stack
                   direction={{ xs: "column", md: "row" }}
