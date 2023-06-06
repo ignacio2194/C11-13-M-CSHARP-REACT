@@ -21,7 +21,7 @@ const AddressSelector = () => {
   return (
     <div>
       <Typography style={{ textAlign: 'center' }} variant="h5">
-        Ingresa tu dirección
+        Dirección donde se enviará el pedido
       </Typography>
       <Box
         style={{
