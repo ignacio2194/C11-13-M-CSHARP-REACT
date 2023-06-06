@@ -53,7 +53,20 @@ namespace sdlt.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
-
+        
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [HttpGet]
+        [Route("GetDireccion")]
+        //[Authorize(Roles = "User")]
+        public string GetDireccion()
+        {
+            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var httpContext = HttpContext.Current;
+            SDLTDb db = new SDLTDb();
+            string userId = httpContext.User.Identity.GetUserId();
+            User user = db.AspNetUsers.FirstOrDefault(u => u.Id == userId);
+            return user.Direccion;
+        }
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
