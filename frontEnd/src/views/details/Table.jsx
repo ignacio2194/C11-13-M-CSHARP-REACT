@@ -105,7 +105,7 @@ const BasicTable = ({ isempty, sendData }) => {
   }, [dispatch, items]);
   
   return (
-    <TableContainer component={Paper} sx={{ maxWidth: "1200px", margin: "auto" }}>
+    <TableContainer component={Paper} sx={{ maxWidth: "1200px", margin: "auto", background: "#fcd4bc", boxShadow: "none", p: 0 }}>
       <Table sx={{ minWidth: "800px" }} aria-label="simple table">
         <TableHead>
           <TableRow>
