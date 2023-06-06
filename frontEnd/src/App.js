@@ -60,6 +60,7 @@ function App() {
             <Route path="/eventos" element={<Eventos />} />
           </>
         ) : (
+          // estas serian las rutas publicas
           <>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
