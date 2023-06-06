@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Avatar, Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import avatar from "../../../assets/images/avatar.png";
+import { AppBar, Button, Toolbar, Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import logo from "../../../assets/images/logo-color.png";
-import { Home, Restaurant, Event, People, MenuBook, ListAlt } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Home, Restaurant, Event, People, MenuBook, ListAlt, Logout } from '@mui/icons-material';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
+import { NavLink } from "react-router-dom";
 
 const DrawerContainer = styled(Drawer)(({ theme }) => ({
   width: 240,
@@ -17,9 +17,12 @@ const DrawerContainer = styled(Drawer)(({ theme }) => ({
   },
 }));
 
-//el avatar lo tiene que traer desde el logueo.
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+  const nombreApellido = userData && userData.NombreApellido;
+  const userEmail = sessionStorage.getItem("Email");
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -29,12 +32,23 @@ const Navbar = () => {
     setOpen(false);
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("userData");
+    sessionStorage.removeItem("Email");
+    sessionStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <>
       <AppBar position="static" sx={{ backgroundColor: '#835C44', height: "94px" }}>
         <Toolbar sx={{ height: "100%", display: 'flex', justifyContent: 'space-between', alignItems: "center" }}>
           <Box><MenuIcon onClick={handleDrawerOpen} /></Box>
-          <Avatar src={avatar} alt="Admin Photo" sx={{ width: 40, height: 40 }} />
+          {userEmail && (
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <span>{userEmail}</span>
+            </Box>
+          )}
         </Toolbar>
       </AppBar>
       <DrawerContainer open={open} sx={{ display: { xs: "block", md: "none" } }}>
@@ -54,11 +68,16 @@ const Navbar = () => {
         <Divider variant="middle" />
         <Box sx={{ width: "100%", padding: "8px 16px", display: "flex", justifyContent: "flex-end" }} ><CloseIcon onClick={handleDrawerClose} sx={{ color: "#472C1B" }} /></Box>
         <List sx={{ marginTop: "16px" }}>
-          <ListItem button component={Link} to="/">
+          <ListItem button>
             <ListItemIcon>
               <Home />
             </ListItemIcon>
-            <ListItemText primary="Inicio" />
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to="/"
+            >
+              <ListItemText primary="Inicio" primaryTypographyProps={{ color: "#000000DE" }} />
+            </NavLink>
           </ListItem>
           <ListItem button component={Link} to="/admin/createMenu">
             <ListItemIcon>
@@ -96,6 +115,12 @@ const Navbar = () => {
             </ListItemIcon>
             <ListItemText primary="Ver Usuarios" />
           </ListItem>
+          <ListItem button onClick={handleLogout}>
+            <ListItemIcon>
+              <Logout />
+            </ListItemIcon>
+            <ListItemText primary="Cerrar sesión" />
+          </ListItem>
         </List>
       </DrawerContainer>
     </>
@@ -103,4 +128,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
 

@@ -1,7 +1,7 @@
 import { Box, Divider, Stack, Typography } from "@mui/material";
-import logo from "../../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
+import logo from "../../assets/images/logo.png";
 
 const NavbarSecondary = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const NavbarSecondary = () => {
           }}
         >
           <LocalPhoneOutlinedIcon />
-          <Typography>+54 11 1010-2020</Typography>
+          <Typography>+52 11 1010-2020</Typography>
         </Box>
         <Stack
           direction="row"
