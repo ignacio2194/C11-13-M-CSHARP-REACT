@@ -1,8 +1,8 @@
 import React from 'react';
 import { styled } from '@mui/system';
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, Box, Divider } from '@mui/material';
-import { Home, Restaurant, Event, People, MenuBook, ListAlt } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Drawer, List, ListItem, ListItemIcon, ListItemText, Box, Divider, Button } from '@mui/material';
+import { Home, Restaurant, Event, People, MenuBook, ListAlt, ExitToApp } from '@mui/icons-material';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from "../../../assets/images/logo-color.png"
 
 const DrawerContainer = styled(Drawer)(({ theme }) => ({
@@ -14,8 +14,16 @@ const DrawerContainer = styled(Drawer)(({ theme }) => ({
   },
 }));
 
-//Este dashboard es solo la sideBar, faltan los dibujos del diseño
 const SideBar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("userData");
+    sessionStorage.removeItem("Email");
+    sessionStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <DrawerContainer variant="permanent" sx={{ display: { xs: "none", md: "block" } }}>
       <Box
@@ -75,9 +83,20 @@ const SideBar = () => {
           </ListItemIcon>
           <ListItemText primary="Ver Usuarios" />
         </ListItem>
+        <Divider variant="middle" />
+        <ListItem>
+          <Button
+            startIcon={<ExitToApp />}
+            onClick={handleLogout}
+            sx={{ color: '#472C1B', fontWeight: 'bold' }}
+          >
+            Salir de sesión
+          </Button>
+        </ListItem>
       </List>
     </DrawerContainer>
   );
 };
 
 export default SideBar;
+
