@@ -1,5 +1,5 @@
 import {  useState } from "react";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Typography } from "@mui/material";
 import Card from "../card/card";
 
 import BackgroundImg from "../../img/romero.png";
@@ -12,6 +12,8 @@ import cat4 from "../../img/categorias/menu4.jpg";
 import cat5 from "../../img/categorias/menu5.jpg";
 import cat6 from "../../img/categorias/menu6.jpg";
 import { Link } from "react-router-dom";
+
+
 
 const promocion = image;
 
@@ -53,8 +55,7 @@ const CardMenu = () => {
   const [categorytype, setCategorytype] = useState("menu");
   const [categoriaId, setCategoraId] = useState('')
 
-  console.log(categoriaId)
-
+  
   const handleCategoriaId = (id) =>{
     console.log(id)
     setCategoraId(id)
@@ -107,7 +108,7 @@ const CardMenu = () => {
             MENÚ
           </div>
         </Grid>
-        <Grid item>
+        {sessionStorage.token !== undefined && <Grid item>
           <div
             onClick={handleClick}
             style={{
@@ -119,7 +120,7 @@ const CardMenu = () => {
           >
             DELIVERY
           </div>
-        </Grid>
+        </Grid>}
       </Grid>
       <Grid container spacing={1} justifyContent="center" alignItems="center">
         {selectedOption && (

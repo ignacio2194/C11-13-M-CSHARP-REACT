@@ -24,16 +24,11 @@ export default function Dishmenu({
   useEffect(() => {
     dispatch(getDish(dish));
     if (data2.length !== 0) {
-      console.log(data2);
-      console.log(selectProducts);
       setSelectProducts(data2);
     }
   }, [dispatch, categoriaId]);
 
-  useEffect(() => {
-    console.log(data);
-  }, [selectProducts]);
-
+  
   const loadCart = (e) => {
     e.preventDefault();
 
@@ -51,14 +46,20 @@ export default function Dishmenu({
       cantidad: 1,
     }));
 
-    console.log([...selectProducts, ...updatedProducts]);
+    setSelectProducts(
+      [...selectProducts, ...updatedProducts].filter((item) =>
+        item.hasOwnProperty("cantidad")
+      )
+    );
 
-    setSelectProducts([...selectProducts, ...updatedProducts].filter((item) => item.hasOwnProperty("cantidad")));
+    dispatch(
+      pushCart(
+        [...selectProducts, ...updatedProducts].filter((item) =>
+          item.hasOwnProperty("cantidad")
+        )
+      )
+    );
 
-    console.log([...selectProducts, ...updatedProducts].filter((item) => item.hasOwnProperty("cantidad")));
-
-    dispatch(pushCart([...selectProducts, ...updatedProducts].filter((item) => item.hasOwnProperty("cantidad"))));
-    console.log(data2);
     navigate("/detalles-pedido");
   };
 
@@ -82,16 +83,17 @@ export default function Dishmenu({
           position: "relative",
         }}
       >
-        <div
+        { sessionStorage.token !== undefined && <div
           onClick={(e) => loadCart(e)}
           style={{
             position: "relative",
             fontSize: "2.5rem",
-            opacity: selectProducts.length === 0 ? 0.5 : 1,
-            pointerEvents: selectProducts.length === 0 ? "none" : "auto",
+            opacity: selectProducts.length === 0 || status ? 0.5 : 1,
+            pointerEvents:
+              selectProducts.length === 0 || status ? "none" : "auto",
           }}
         >
-          <AddShoppingCartIcon sx={{ fontSize: "2.5rem" }} />
+          {sessionStorage.token !== undefined && <AddShoppingCartIcon sx={{ fontSize: "2.5rem" }} />}
           <div
             style={{
               position: "absolute",
@@ -110,7 +112,7 @@ export default function Dishmenu({
           >
             {selectProducts.length}
           </div>
-        </div>
+        </div>}
       </div>
 
       <div
@@ -145,7 +147,9 @@ export default function Dishmenu({
       <hr />
 
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <label onClick={() => click("menu")}>Categorias </label>
+        <label style={{ color: "red" }} onClick={() => click("menu")}>
+          <strong> Cancelar </strong>
+        </label>
         {list.map((e, index) => (
           <label
             key={index}

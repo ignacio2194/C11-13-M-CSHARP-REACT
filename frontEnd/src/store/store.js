@@ -21,7 +21,21 @@ const persistor = persistStore(store);
 
 const resetStore = () => {
   persistor.purge();
+  return new Promise((resolve, reject) => {
+    persistor.flush()
+      .then(() => {
+        console.log('Persistor purged successfully');
+        resolve();
+      })
+      .catch(error => {
+        console.error('Failed to purge persistor:', error);
+        reject(error);
+      });
+  });
 };
+
+
+
 
 export { store, persistor, resetStore };
 
