@@ -22,14 +22,22 @@ import AccountMenu from "./menu.jsx";
 export default function Navbar() {
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(sessionStorage.getItem("token"));
+  const [rol, setRol] = useState(sessionStorage.getItem("rol"));
+  const [componentMounted, setComponentMounted] = useState(false);
   const closeSession = () => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("rol");
     setToken(null);
+    setRol(null);
   };
   useEffect(() => {
-    if (!token) {
-      toast.success("¡Su cuenta se cerro correctamente 😎!", {
+    if (!componentMounted) {
+      setComponentMounted(true);
+      return;
+    }
+    if (!token && !rol) {
+      toast.success("¡Su cuenta se cerró correctamente!", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -40,7 +48,7 @@ export default function Navbar() {
         theme: "light",
       });
     }
-  }, [token]);
+  }, [token, rol]);
 
   return (
 
@@ -73,7 +81,7 @@ export default function Navbar() {
             }}
           >
             <LocalPhoneOutlinedIcon />
-            <Typography>+54 11 1010-2020</Typography>
+            <Typography>+52 11 1010-2020</Typography>
           </Box>
           <Stack
             direction="row"
@@ -197,6 +205,19 @@ export default function Navbar() {
       >
         <NavListDrawerResponsive onClick={() => setOpen(false)} closeSession={closeSession} />
       </Drawer>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <ToastContainer />
     </Box >
   );
 }

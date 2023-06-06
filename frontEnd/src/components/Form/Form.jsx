@@ -17,7 +17,8 @@ import jwt_decode from "jwt-decode";
 import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import FooterMinimalista from "../footerMinimalista/footerMinimalista"
+import FooterMinimalista from "../footerMinimalista/footerMinimalista";
+
 const theme = createTheme();
 
 const SignIn = () => {
@@ -26,10 +27,33 @@ const SignIn = () => {
     Password: "",
     ConfirmPassword: "",
   });
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  const [tokenGoogle, setTokenGoogle] = useState("");
+  const [token, setToken] = useState(sessionStorage.getItem("token"));
+  const [Email, setEmail] = useState(sessionStorage.getItem("Email"));
+  const [rol, setRol] = useState(sessionStorage.getItem("rol"));
+  const [allUsers, setAllUsers] = useState();
   const navigate = useNavigate();
 
+  const getAllUsers = async () => {
+    try {
+      const url = "https://sdlt2.azurewebsites.net/api/Account/GetAllUsers";
+      const response = await axios.get(url);
+      setAllUsers(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const FindUser = (allUsers, emailUser) => {
+    if (allUsers) {
+      const userFinded = allUsers.find((user) => user.Email === emailUser);
+      if (userFinded) {
+        setRol(userFinded.RoleId);
+        setEmail(userFinded.Email)
+        sessionStorage.setItem("rol", JSON.stringify(userFinded.RoleId));
+        sessionStorage.setItem("Email", JSON.stringify(userFinded.Email));
+      }
+    }
+  };
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -46,9 +70,10 @@ const SignIn = () => {
         },
       });
       setToken(data.data.access_token);
-      localStorage.setItem("token", JSON.stringify(data.data.access_token));
+      sessionStorage.setItem("token", JSON.stringify(data.data.access_token));
+      FindUser(allUsers, UserData.Email);
       navigate("/");
-      if (localStorage.getItem("token")) {
+      if (sessionStorage.getItem("token")) {
         toast.success("¡Bienvenido! ", {
           position: "top-center",
           autoClose: 5000,
@@ -64,16 +89,18 @@ const SignIn = () => {
       console.log(error);
     }
   };
+  
 
   useEffect(() => {
-    if (tokenGoogle) {
-      try {
-        const decoded = jwt_decode(tokenGoogle);
-      } catch (error) {
-        console.error("Error al decodificar el token:", error);
+    const fetchData = async () => {
+      await getAllUsers();
+      if (allUsers) {
+        FindUser(allUsers, UserData.Email);
       }
-    }
-  }, [tokenGoogle]);
+    };
+    fetchData()
+  }, []);
+
   return (
     <>
       <NavbarSecondary />
@@ -138,6 +165,7 @@ const SignIn = () => {
                   }))
                 }
               />
+
               <TextField
                 margin="normal"
                 required
@@ -190,22 +218,6 @@ const SignIn = () => {
                 <Box flex={1}>
                   <hr />
                 </Box>
-                <Typography variant="body1" align="center" sx={{ px: 1 }}>
-                  Ingresa con
-                </Typography>
-                <Box flex={1}>
-                  <hr />
-                </Box>
-              </Box>
-            </Box>
-            {/* botonsito de google */}
-            <Box sx={{ marginTop: 3 }}>
-              <Box>
-                <GoogleLogin
-                  onSuccess={(credentialResponse) => {
-                    setTokenGoogle(credentialResponse.credential);
-                  }}
-                />
               </Box>
             </Box>
           </Box>
@@ -223,6 +235,7 @@ const SignIn = () => {
         pauseOnHover
         theme="light"
       />
+
       <FooterMinimalista />
     </>
   );

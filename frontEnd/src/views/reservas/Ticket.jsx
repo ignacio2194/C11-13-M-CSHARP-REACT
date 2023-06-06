@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import { Box, Paper, Stack } from '@mui/material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
-const Ticket2 = ({ reserva }) => {
+const Ticket2 = ({ reserva, userName }) => {
   const fechaYHora = reserva["FechaHora"].split(" ");
   const people = reserva.Cantidad;
 
@@ -24,7 +24,7 @@ const Ticket2 = ({ reserva }) => {
       <Paper sx={{ backgroundColor: "#FAEECF", padding: "16px" }}>
         <Typography variant="h6" sx={{ textAlign: "center", margin: "0 auto 16px" }}>Sabores de la Tierra</Typography>
         <Box>
-          <Typography gutterBottom>Nombre: Michael Kelso</Typography>
+          <Typography gutterBottom>Nombre de usuario: {userName}</Typography>
           <Typography gutterBottom>Fecha: {fechaYHora[0]} </Typography>
           <Typography gutterBottom>Reservación: {people} {people === 1 ? "persona" : "personas"}</Typography>
           <Typography gutterBottom>Hora: {fechaYHora[1]}hs</Typography>
@@ -32,8 +32,7 @@ const Ticket2 = ({ reserva }) => {
         <Box>
           <Typography gutterBottom>Sucursal: Condesa</Typography>
           <Typography gutterBottom>
-            Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
-            magna, vel scelerisque nisl consectetur et.
+            Av. Vicente Suárez 165, Col. Condesa, Cuauhtémoc C.P. 06140 Ciudad de México, CDMX.
           </Typography>
         </Box>
       </Paper>

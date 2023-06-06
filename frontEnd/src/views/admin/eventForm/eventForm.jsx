@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button, Grid } from '@mui/material';
-import Dashboard from '../../admin/dashboard/dashboard';
+import SideBar from '../dashboard/sideBar';
 import './eventForm.css';
 import Navbar from '../../admin/dashboard/navBar';
 
@@ -53,9 +53,9 @@ const EventForm = () => {
 
   return (
     <div>
-      
-      <Dashboard />
-      <Navbar/>
+
+      <SideBar />
+      <Navbar />
       <form onSubmit={handleSubmit} className="container">
         <h1 className="title">Crear Evento</h1>
         <Grid container spacing={2}>

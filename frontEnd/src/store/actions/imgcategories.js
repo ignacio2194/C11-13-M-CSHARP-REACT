@@ -1,7 +1,6 @@
 import axios from "axios";
 import { takeImg, takeDish } from "../../reducers/imgcategories";
 
-
 const uri = "https://sdlt2.azurewebsites.net/"
 
 export function getImgCat() {
@@ -14,6 +13,18 @@ export function getImgCat() {
     };
   }
 
+  //Para ver todos los productos
+  export function getAllProducts() {
+    return async function (dispatch) {
+      try {
+        var json = await axios.get(`${uri}/api/Productos/GetAll`);
+        return dispatch(takeImg(json.data));
+      } catch (error) {
+      }
+    };
+  }
+
+  //Para Obtener Productos por Id
   export function getDish(id) {
        return async function (dispatch) {
       try {
@@ -25,6 +36,14 @@ export function getImgCat() {
     };
   }
 
-
-  
-  
+  //para modificar el producto por Id
+  export function modfiDish(ProductoId, formData) {
+    return async function (dispatch) {
+   try {
+     var json = await axios.put(`${uri}api/Productos/Modify?id=${ProductoId }, ${formData}`);
+     return json
+   } catch (error) {
+     console.log(error);
+   }
+ };
+}
