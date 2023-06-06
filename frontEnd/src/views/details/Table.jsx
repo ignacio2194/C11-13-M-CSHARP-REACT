@@ -13,6 +13,7 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { Box, TableFooter } from "@mui/material";
 import { resetStore } from "../../store/store";
 import { pushCart } from "../../store/actions/cartActions";
+import { useNavigate } from "react-router-dom";
 
 const Cantidad = ({ cantidad = 1, onIncrement, onDecrement }) => {
   return (
@@ -46,13 +47,20 @@ const Cantidad = ({ cantidad = 1, onIncrement, onDecrement }) => {
   );
 };
 
-const BasicTable = ({ isempty }) => {
+const BasicTable = ({ isempty, sendData }) => {
   const select = useSelector((state) => state.shopingCart.data);
   const [items, setItems] = useState(select);
   const [totalPrice, setTotalPrice] = useState(0);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+
 
   useEffect(() => {
+    console.log(select)
+    if(items.length === 0){
+      navigate("/")
+    }
     const calculateTotalPrice = () => {
       let total = 0;
       items.forEach((item) => {
@@ -95,7 +103,7 @@ const BasicTable = ({ isempty }) => {
   useEffect(() => {
     dispatch(pushCart(items));
   }, [dispatch, items]);
-
+  
   return (
     <TableContainer component={Paper} sx={{ maxWidth: "1200px", margin: "auto" }}>
       <Table sx={{ minWidth: "800px" }} aria-label="simple table">
@@ -138,11 +146,8 @@ const BasicTable = ({ isempty }) => {
         <TableFooter>
           <TableRow>
             <TableCell colSpan={2}></TableCell>
-            <TableCell align="right" sx={{ fontWeight: "bold" }}>
-              Total:
-            </TableCell>
-            <TableCell align="right" sx={{ fontWeight: "bold" }}>
-              $ {totalPrice.toFixed(2)}
+            <TableCell align="right" sx={{ fontWeight: "bold", fontSize:"1.2rem"}}>
+              Total: $ {totalPrice.toFixed(2)}
             </TableCell>
           </TableRow>
         </TableFooter>

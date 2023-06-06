@@ -83,7 +83,7 @@ export default function Dishmenu({
           position: "relative",
         }}
       >
-        <div
+        { sessionStorage.token !== undefined && <div
           onClick={(e) => loadCart(e)}
           style={{
             position: "relative",
@@ -93,7 +93,7 @@ export default function Dishmenu({
               selectProducts.length === 0 || status ? "none" : "auto",
           }}
         >
-          <AddShoppingCartIcon sx={{ fontSize: "2.5rem" }} />
+          {sessionStorage.token !== undefined && <AddShoppingCartIcon sx={{ fontSize: "2.5rem" }} />}
           <div
             style={{
               position: "absolute",
@@ -112,7 +112,7 @@ export default function Dishmenu({
           >
             {selectProducts.length}
           </div>
-        </div>
+        </div>}
       </div>
 
       <div

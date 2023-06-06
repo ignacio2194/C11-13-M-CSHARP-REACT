@@ -1,4 +1,4 @@
-import  {loadCart}  from "../../reducers/cart";
+import  {loadCart, clearCarts}  from "../../reducers/cart";
 
 export function pushCart(date){
 
@@ -7,4 +7,15 @@ export function pushCart(date){
         return dispatch(loadCart(date))
         }catch(error){}
     }
+}
+
+export function clearCart(){
+    console.log("clear de actions")
+    const vacio = []
+    return function(dispatch){
+        try{
+        return dispatch(clearCarts(vacio))
+        }catch(error){}
+    }
+
 }
