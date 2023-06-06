@@ -24,17 +24,20 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [token, setToken] = useState(sessionStorage.getItem("token"));
   const [rol, setRol] = useState(sessionStorage.getItem("rol"));
-
+  const [componentMounted, setComponentMounted] = useState(false);
   const closeSession = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("rol");
     setToken(null);
     setRol(null);
   };
-
   useEffect(() => {
+    if (!componentMounted) {
+      setComponentMounted(true);
+      return;
+    }
     if (!token && !rol) {
-      toast.success("¡Su cuenta se cerró correctamente 😎!", {
+      toast.success("¡Su cuenta se cerró correctamente!", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -202,6 +205,19 @@ export default function Navbar() {
       >
         <NavListDrawerResponsive onClick={() => setOpen(false)} closeSession={closeSession} />
       </Drawer>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <ToastContainer />
     </Box >
   );
 }

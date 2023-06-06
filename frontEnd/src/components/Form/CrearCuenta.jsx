@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { GoogleLogin } from "@react-oauth/google";
-import "../Form/Form.css";
-import jwt_decode from "jwt-decode";
-import FooterMinimalista from "../footerMinimalista/footerMinimalista"
-import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import validationSchema from "../../utils/validationSchema ";
+import NavbarSecondary from "../navbarSecondary/NavbarSecondary";
+import FooterMinimalista from "../footerMinimalista/footerMinimalista";
+
 const CrearCuenta = () => {
   const theme = createTheme();
   const [UserData, setUserData] = useState({
@@ -26,17 +25,40 @@ const CrearCuenta = () => {
     ConfirmEmail: "",
   });
 
-  const [userDataGoogle, setUserDataGoogle] = useState({});
-  const [token, setToken] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
- // ESTE ES LA FUNCION QUE SE EJECUTA CUANDO LLENA EL FORMULARIO DE REGISTRO
+
+const AccountSucces=(data)=>{
+  if (data.status === 200) {
+    toast.success("¡Tu cuenta se ha creado correctamente. Serás redirigido para iniciar sesión con tu nueva cuenta.! ", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+    setUserData({
+      Email: "",
+      Password: "",
+      ConfirmPassword: "",
+      ConfirmEmail: "",
+    });
+    setTimeout(()=>{
+      navigate("/login")
+    },7000)
+
+   
+  }
+}
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
       await validationSchema.validate(UserData, { abortEarly: false });
-
       let confirmEmailErrors = [];
       try {
         await validationSchema.validateAt("ConfirmEmail", UserData);
@@ -51,87 +73,41 @@ const CrearCuenta = () => {
 
       const api = "https://sdlt2.azurewebsites.net/api/Account/Register";
       const data = await axios.post(api, {
-        Email: `${UserData.Email}`,
-        Password: `${UserData.Password}`,
-        ConfirmPassword: `${UserData.ConfirmPassword}`,
+        Email: UserData.Email,
+        Password: UserData.Password,
+        ConfirmPassword: UserData.ConfirmPassword,
       });
-     
 
-      if (data.status === 200) {
-        toast.success("¡Su cuenta se creó correctamente! ", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-       
-      }
-      getUserToken(UserData)
+      AccountSucces(data)
     } catch (error) {
       const errorMessage = error.errors[0];
       setPasswordError(errorMessage);
     }
   };
-  const getUserToken = async (userData) => {
-    try {
-      const url = 'https://sdlt2.azurewebsites.net/token';
-      const res = await axios.get(url, {
-        UserName: userData.Email,
-        Password: userData.Password,
-        grant_type: "password"
-      });
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
-  useEffect(() => {
-    if (token) {
-      try {
-        const decoded = jwt_decode(token);
-        const {  email } = decoded;
-        console.log(decoded)
-        setUserDataGoogle({
-          Email: `${email}`,
-          Password:'MeLoguieConGoogle123456!',
-          ConfirmPassword:'MeLoguieConGoogle123456!'
-        });
-        sendDataUser()
-      } catch (error) {
-        console.error("Error al decodificar el token:", error);
-      }
-    }
+  // const handleGoogleLoginSuccess = (credentialResponse) => {
+  //   const { email } = credentialResponse.profileObj;
 
-  }, [token]);
-  
-  // ESTE ES LA FUNCION QUE SE EJECUTA CUANDO LE DAS CLICK AL BUTTON DE GOOGLE
-  const sendDataUser = async () => {
-    try {
-     const api = "https://sdlt2.azurewebsites.net/api/Account/Register";
-     const data = await axios.post(api, userDataGoogle);
+  //   setUserData({
+  //     Email: email,
+  //     Password: 'MeLoguieConGoogle123456!',
+  //     ConfirmPassword: 'MeLoguieConGoogle123456!',
+  //     ConfirmEmail: email,
+  //   });
 
-     if (data.status === 200) {
-       toast.success("¡Su cuenta se creó correctamente!", {
-         position: "top-center",
-         autoClose: 5000,
-         hideProgressBar: false,
-         closeOnClick: true,
-         pauseOnHover: true,
-         draggable: true,
-         progress: undefined,
-         theme: "light",
-       });
-      //  navigate("/");
-     }
-    } catch (error) {
-     console.log(error.response)
-    }
-   };
+  //   toast.success("¡Su cuenta se creó correctamente!", {
+  //     position: "top-center",
+  //     autoClose: 5000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "light",
+  //   });
+
+  //   navigate("/");
+  // };
   return (
     <>
       <NavbarSecondary />
@@ -184,6 +160,7 @@ const CrearCuenta = () => {
                 id="Nombre"
                 label="Nombre"
                 name="Nombre"
+                value={UserData.Nombre}
                 autoComplete="Nombre"
                 autoFocus
                 sx={{ backgroundColor: "#fff" }}
@@ -199,6 +176,7 @@ const CrearCuenta = () => {
                 required
                 fullWidth
                 name="Password"
+                value={UserData.Password}
                 label="Contraseña"
                 type="password"
                 id="password"
@@ -218,6 +196,7 @@ const CrearCuenta = () => {
                 required
                 fullWidth
                 name="ConfirmPassword"
+                value={UserData.ConfirmPassword}
                 label=" Confirma la contraseña"
                 type="password"
                 id="ConfirmPassword"
@@ -237,6 +216,7 @@ const CrearCuenta = () => {
                 required
                 fullWidth
                 name="Email"
+                value={UserData.Email}
                 label="Escribe tu correo electronico"
                 type="email"
                 id="email"
@@ -254,6 +234,7 @@ const CrearCuenta = () => {
                 required
                 fullWidth
                 name="ConfirmEmail"
+                value={UserData.ConfirmEmail}
                 label="Confirma tu correo electronico"
                 type="email"
                 id="ConfirmEmail"
@@ -303,13 +284,13 @@ const CrearCuenta = () => {
               </Box>
             </Box>
             {/* botonsito de google */}
-            <Box sx={{ marginTop: 3 }}>
+            {/* <Box sx={{ marginTop: 3 }}>
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   setToken(credentialResponse.credential);
                 }}
               />
-            </Box>
+            </Box> */}
           </Box>
         </Container>
       </ThemeProvider>

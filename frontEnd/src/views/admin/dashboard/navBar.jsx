@@ -30,6 +30,9 @@ const Navbar = () => {
     setToken(null);
     setRol(null);
   };
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+  const nombreApellido = userData && userData.NombreApellido;
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -44,29 +47,38 @@ const Navbar = () => {
       <AppBar position="static" sx={{ backgroundColor: '#835C44', height: "94px" }}>
         <Toolbar sx={{ height: "100%", display: 'flex', justifyContent: 'space-between', alignItems: "center" }}>
           <Box><MenuIcon onClick={handleDrawerOpen} /></Box>
-          {token ? (
-            <Box>
-              <Box>
-                {token ? (
-                  <AccountMenu closeSession={closeSession} />
-                ) : (
-                  <NavLink
-                    to="/login"
-                  >
-                    <Button variant="yellow" size="small">Iniciar Sesión</Button>
-                  </NavLink>
-                )}
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: "center", gap: "8px" }}>
+            {userData && userData.Email && (
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <span>{nombreApellido}</span>
               </Box>
-            </Box>
-          ) : (
-            <Box sx={{ display: "flex", alignItems: "center" }}>
-              <NavLink
-                to="/login"
-              >
-                <Button variant="yellow" size="small">Iniciar Sesión</Button>
-              </NavLink>
-            </Box>
-          )}
+            )}
+            {token ? (
+              <Box>
+                <Box>
+                  <Box>
+                    {token ? (
+                      <AccountMenu closeSession={closeSession} />
+                    ) : (
+                      <NavLink
+                        to="/login"
+                      >
+                        <Button variant="yellow" size="small">Iniciar Sesión</Button>
+                      </NavLink>
+                    )}
+                  </Box>
+                </Box>
+              </Box>
+            ) : (
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <NavLink
+                  to="/login"
+                >
+                  <Button variant="yellow" size="small">Iniciar Sesión</Button>
+                </NavLink>
+              </Box>
+            )}
+          </Box>
         </Toolbar>
       </AppBar>
       <DrawerContainer open={open} sx={{ display: { xs: "block", md: "none" } }}>
@@ -140,4 +152,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
