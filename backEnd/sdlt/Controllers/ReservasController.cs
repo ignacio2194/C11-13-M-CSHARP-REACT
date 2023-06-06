@@ -1,7 +1,11 @@
-﻿using sdlt.Models;
+﻿using Microsoft.AspNet.Identity;
+using sdlt.DTOs;
+using sdlt.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -13,14 +17,43 @@ namespace sdlt.Controllers
     [RoutePrefix("api/Reservas")]
     public class ReservasController : ApiController { 
 
-        private SDLTDb db = new SDLTDb();
+        private readonly SDLTDb db = new SDLTDb();
 
         // GET: Reservas/GetAll
         [HttpGet]
         [Route("GetAll")]
-        public IQueryable<Reserva> GetAll()
+        public IQueryable<ReservaOutDto> GetAll()
         {
-            return db.Reserva;
+            string nombreDelProcedimiento = "ObtenerReservas";
+            var result = new List<ReservaOutDto>();
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["SDLTDb"].ToString()))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(nombreDelProcedimiento, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        ReservaOutDto reservaOutDto;
+                        while (reader.Read())
+                        {
+                            reservaOutDto = new ReservaOutDto
+                            {
+                                ReservaId = int.Parse(reader[0].ToString()),
+                                FechaHora = DateTime.Parse(reader[1].ToString()),
+                                Precio = decimal.Parse(reader[2].ToString()),
+                                User = reader[4].ToString(),
+                                EventoId = int.Parse(reader[5].ToString()),
+                                Evento = reader[6].ToString(),
+                                Cantidad = int.Parse(reader[7].ToString())
+                            };
+                            result.Add(reservaOutDto);
+                        }
+                    }
+                    connection.Close();
+                    return result.AsQueryable();
+                }
+            }
         }
 
         // GET: Comidas/GetComida

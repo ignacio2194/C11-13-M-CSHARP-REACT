@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
@@ -59,12 +61,30 @@ namespace sdlt.Controllers
         public UserInfoViewModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
-
-            return new UserInfoViewModel
+            string nombreDelProcedimiento = "ObtenerRol";
+            string elRol = "";
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["SDLTDb"].ToString()))
             {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(nombreDelProcedimiento, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add(new SqlParameter("@Email", User.Identity.GetUserName()));
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            elRol = reader[0].ToString();
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            return new UserInfoViewModel {
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
-                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
+                LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null,
+                RoleId = elRol
             };
         }
 
@@ -385,11 +405,50 @@ namespace sdlt.Controllers
         [HttpGet]
         [Route("GetAllUsers")]
         //[Authorize(Roles = "Administrator")]
-        public IQueryable<User> GetAllUsers()
+        public IQueryable<UserDto> GetAllUsers()
         {
-            SDLTDb context = new SDLTDb();
-
-            return context.AspNetUsers.AsQueryable();
+            string nombreDelProcedimiento = "GetAllUsers";
+            var result = new List<UserDto>();
+            using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["SDLTDb"].ToString()))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(nombreDelProcedimiento, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        UserDto userdtoOut;
+                        while (reader.Read())
+                        {
+                            DateTime.TryParse(reader[8].ToString(), out DateTime lockoutenabled);
+                            userdtoOut = new UserDto
+                            {
+                                Id = reader[0].ToString(),
+                                Email = reader[1].ToString(),
+                                EmailConfirmed = bool.Parse(reader[2].ToString()),
+                                PasswordHash=null,
+                                SecurityStamp = reader[4].ToString(),
+                                PhoneNumber = reader[5].ToString(),
+                                PhoneNumberConfirmed = bool.Parse(reader[6].ToString()),
+                                TwoFactorEnabled = bool.Parse(reader[7].ToString()),
+                                LockoutEndDateUtc = lockoutenabled,
+                                LockoutEnabled = bool.Parse(reader[9].ToString()),
+                                AccessFailedCount = int.Parse(reader[10].ToString()),
+                                UserName = reader[11].ToString(),
+                                Direccion = reader[12].ToString(),
+                                CodigoPostal = reader[13].ToString(),
+                                Reseña = reader[14].ToString(),
+                                ImagenUrl = reader[15].ToString(),
+                                NombreApellido = reader[16].ToString(), 
+                                RoleId = reader[17].ToString()
+                            };
+                            result.Add(userdtoOut);
+                        }
+                    }
+                    connection.Close();
+                    return result.AsQueryable();
+                }
+            }
         }
 
         [HttpGet]
