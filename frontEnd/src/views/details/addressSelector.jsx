@@ -1,23 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Box from '@mui/material/Box';
+import axios from 'axios';
 
 const AddressSelector = () => {
-  const [selectedOption, setSelectedOption] = useState('');
+  const [addressText, setAddressText] = useState('');
 
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
+  useEffect(() => {
+    // Realizar la solicitud a la API para obtener la información
+    axios
+      .get('URL_DE_LA_API')
+      .then(response => {
+        setAddressText(response.data.texto);
+      })
+      .catch(error => {
+        console.error('Error al obtener la información de la API:', error);
+      });
+  }, []);
 
   return (
     <div>
-      <Typography style={{ textAlign: 'center' }} variant="h5">Elige la dirección de envío</Typography>
-      <RadioGroup style={{ display: 'flex', flexDirection: 'row' }} value={selectedOption} onChange={handleOptionChange}>
-        <FormControlLabel value="option1" control={<Radio />} label="Dirección registrada" />
-        <FormControlLabel value="option2" control={<Radio />} label="Otra dirección" />
-      </RadioGroup>
+      <Typography style={{ textAlign: 'center' }} variant="h5">
+        Ingresa tu dirección
+      </Typography>
+      <Box
+        style={{
+          backgroundColor: '#fcecdc',
+          borderRadius: '8px',
+          border: '2px solid black',
+          padding: '16px',
+          margin: '16px',
+        }}
+      >
+        <Typography variant="body1">{addressText}</Typography>
+      </Box>
     </div>
   );
 };
