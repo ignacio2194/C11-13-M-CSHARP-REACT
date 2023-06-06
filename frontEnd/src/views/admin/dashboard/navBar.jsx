@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Avatar, Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import avatar from "../../../assets/images/avatar.png";
+import { AppBar, Button, Toolbar, Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import logo from "../../../assets/images/logo-color.png";
 import { Home, Restaurant, Event, People, MenuBook, ListAlt, Logout } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
+import { NavLink } from "react-router-dom";
 
 const DrawerContainer = styled(Drawer)(({ theme }) => ({
   width: 240,
@@ -68,11 +68,16 @@ const Navbar = () => {
         <Divider variant="middle" />
         <Box sx={{ width: "100%", padding: "8px 16px", display: "flex", justifyContent: "flex-end" }} ><CloseIcon onClick={handleDrawerClose} sx={{ color: "#472C1B" }} /></Box>
         <List sx={{ marginTop: "16px" }}>
-          <ListItem button component={Link} to="/">
+          <ListItem button>
             <ListItemIcon>
               <Home />
             </ListItemIcon>
-            <ListItemText primary="Inicio" />
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to="/"
+            >
+              <ListItemText primary="Inicio" primaryTypographyProps={{ color: "#000000DE" }} />
+            </NavLink>
           </ListItem>
           <ListItem button component={Link} to="/admin/createMenu">
             <ListItemIcon>
