@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { AppBar, Button, Toolbar, Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import logo from "../../../assets/images/logo-color.png";
-import { Home, Restaurant, Event, People, MenuBook, ListAlt } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Home, Restaurant, Event, People, MenuBook, ListAlt, Logout } from '@mui/icons-material';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import { NavLink } from "react-router-dom";
-import AccountMenu from '../../../components/navbar/menu';
 
 const DrawerContainer = styled(Drawer)(({ theme }) => ({
   width: 240,
@@ -18,21 +17,12 @@ const DrawerContainer = styled(Drawer)(({ theme }) => ({
   },
 }));
 
-//el avatar lo tiene que traer desde el logueo.
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [token, setToken] = useState(sessionStorage.getItem("token"));
-  const [rol, setRol] = useState(sessionStorage.getItem("rol"));
-
-  const closeSession = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("rol");
-    setToken(null);
-    setRol(null);
-  };
+  const navigate = useNavigate();
   const userData = JSON.parse(sessionStorage.getItem("userData"));
   const nombreApellido = userData && userData.NombreApellido;
-
+  const userEmail = sessionStorage.getItem("Email");
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -42,43 +32,23 @@ const Navbar = () => {
     setOpen(false);
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("userData");
+    sessionStorage.removeItem("Email");
+    sessionStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <>
       <AppBar position="static" sx={{ backgroundColor: '#835C44', height: "94px" }}>
         <Toolbar sx={{ height: "100%", display: 'flex', justifyContent: 'space-between', alignItems: "center" }}>
           <Box><MenuIcon onClick={handleDrawerOpen} /></Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: "center", gap: "8px" }}>
-            {userData && userData.Email && (
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <span>{nombreApellido}</span>
-              </Box>
-            )}
-            {token ? (
-              <Box>
-                <Box>
-                  <Box>
-                    {token ? (
-                      <AccountMenu closeSession={closeSession} />
-                    ) : (
-                      <NavLink
-                        to="/login"
-                      >
-                        <Button variant="yellow" size="small">Iniciar Sesión</Button>
-                      </NavLink>
-                    )}
-                  </Box>
-                </Box>
-              </Box>
-            ) : (
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <NavLink
-                  to="/login"
-                >
-                  <Button variant="yellow" size="small">Iniciar Sesión</Button>
-                </NavLink>
-              </Box>
-            )}
-          </Box>
+          {userEmail && (
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <span>{userEmail}</span>
+            </Box>
+          )}
         </Toolbar>
       </AppBar>
       <DrawerContainer open={open} sx={{ display: { xs: "block", md: "none" } }}>
@@ -145,6 +115,12 @@ const Navbar = () => {
             </ListItemIcon>
             <ListItemText primary="Ver Usuarios" />
           </ListItem>
+          <ListItem button onClick={handleLogout}>
+            <ListItemIcon>
+              <Logout />
+            </ListItemIcon>
+            <ListItemText primary="Cerrar sesión" />
+          </ListItem>
         </List>
       </DrawerContainer>
     </>
@@ -152,5 +128,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
