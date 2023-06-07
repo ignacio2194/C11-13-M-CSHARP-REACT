@@ -19,7 +19,6 @@ const AddressSelector = () => {
           }
         );
         setAddressText(response.data);
-        console.log('addressText:', addressText); // Mostrar addressText en la consola
       } catch (error) {
         console.error('Error al obtener la información de la API:', error);
         // Manejar el error, mostrar un mensaje de error o establecer un valor predeterminado
