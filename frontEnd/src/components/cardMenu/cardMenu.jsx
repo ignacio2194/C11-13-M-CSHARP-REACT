@@ -57,7 +57,6 @@ const CardMenu = () => {
 
   
   const handleCategoriaId = (id) =>{
-    console.log(id)
     setCategoraId(id)
   }
 
