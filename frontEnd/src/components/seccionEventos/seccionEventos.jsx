@@ -2,12 +2,13 @@ import React from 'react';
 import CarouselEventos from '../carouselEventos/carouselEventos';
 import hojas from '../../img/hojas.svg';
 import './seccionEventos.module.css';
+import { Box, Typography } from '@mui/material';
 
 const seccionEventos = () => {
   return (
-    <div id='eventos' style={{
+    <Box id='eventos' sx={{
       width: '100%',
-      height: '120vh',
+      // height: '120vh',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -17,10 +18,22 @@ const seccionEventos = () => {
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'right',
       backgroundSize: '50%',
+      overflow: 'hidden',
+      padding: { xs: "64px 0", lg: "129px 0 210px" }
     }}>
-      <h2 style={{ textAlign: 'center', color: 'black', marginTop: '-50px', fontFamily: 'Parisienne, cursive', fontSize: '80px', fontWeight: 'normal' }}>Eventos</h2>
+      <Typography
+        sx={{
+          textAlign: 'center',
+          color: 'custom.text',
+          marginBottom: { xs: "32px", lg: "127px" },
+          fontFamily: 'Parisienne, cursive',
+          fontSize: "clamp(2rem, 5vw, 4.375rem)"
+        }}
+      >
+        Eventos
+      </Typography>
       <CarouselEventos />
-    </div>
+    </Box>
   );
 };
 
