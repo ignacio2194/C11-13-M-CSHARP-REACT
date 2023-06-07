@@ -1,21 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { initMercadoPago} from "@mercadopago/sdk-react";
 const initialState = {
   Id: 0,
 };
 
-const Idpago = createSlice({
-  name: "DATS",
+const paymentSlice = createSlice({
+  name: "payment",
+  
   initialState,
   reducers: {
-    Id(state, action) {
-        console.log("Hiapepepepepe")
+    
+    setId(state, action) {
+      
+      console.log("Hiapepepepepe");
       state.Id = action.payload;
+      initMercadoPago("TEST-fc30be2e-cc40-46a2-9ca5-2ab08c73ada4");
     },
-   
   },
-  
 });
 
-export const { Id } = Idpago.actions;
-export default Idpago.reducer;
+export const { setId } = paymentSlice.actions;
+export default paymentSlice.reducer;
