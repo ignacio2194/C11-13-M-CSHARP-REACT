@@ -53,7 +53,7 @@ const SignIn = () => {
       }
     }
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -93,7 +93,7 @@ const SignIn = () => {
       console.log(error);
     }
   };
-  
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -127,7 +127,7 @@ const SignIn = () => {
               variant="h3"
               sx={{
                 textAlign: "center",
-                fontFamily: "Balsamiq Sans, cursive",
+                fontFamily: 'Open Sans',
                 fontWeight: "700",
               }}
             >

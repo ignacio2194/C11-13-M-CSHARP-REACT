@@ -41,9 +41,9 @@ export default function EventoCard({ img, txt }) {
             transform: 'translate(-50%, -50%)',
             textAlign: 'center',
             fontFamily: 'Open Sans',
-            fontWeight: 10,
-            fontSize: '2.5vw',
-            lineHeight: '4vw',
+            fontWeight: 600,
+            fontSize: "clamp(1rem, 3vw, 4rem)",
+            lineHeight: { lg: "67px" },
             color: '#ffffff',
             zIndex: 1,
           }}
@@ -59,7 +59,7 @@ export default function EventoCard({ img, txt }) {
           }}
         >
           <Link to='/eventos'>
-            <Button variant="yellow" sx={{ fontSize: '1vw', maxWidth: '200px', whiteSpace: 'nowrap'}}>Detalle del evento</Button>
+            <Button variant="yellow" sx={{ fontSize: "clamp(.9rem, 3vw, 1rem)", padding: { xs: "8px 16px", lg: "18px 54px" }, height: { xs: "43px", lg: "63px" }, whiteSpace: 'nowrap' }}>Detalle del evento</Button>
           </Link>
         </Box>
       </Box>
