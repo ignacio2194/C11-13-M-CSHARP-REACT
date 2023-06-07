@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 import Map from "./Map";
 import schema from "../../utils/validateReservations";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Ticket from "./Ticket";
 import Spinner from "./Spinner";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -15,6 +15,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import qs from "qs";
 import AccountMenu from "../../components/navbar/menu";
+import { ToastContainer, toast } from "react-toastify";
 
 const PERSONS_OPTIONS = [
   { text: "Una persona", value: 1 },
@@ -27,10 +28,10 @@ const PERSONS_OPTIONS = [
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const Reservas = () => {
-  const [userName, setUserName] = useState("");
-
   const [token, setToken] = useState(sessionStorage.getItem("token"));
   const [rol, setRol] = useState(sessionStorage.getItem("rol"));
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  let [reserva, setReserva] = useState({});
 
   const closeSession = () => {
     sessionStorage.removeItem("token");
@@ -39,6 +40,14 @@ const Reservas = () => {
     setRol(null);
   };
 
+  reserva = JSON.parse(localStorage.getItem("reserva"));
+
+  const defaultValues = {
+    date: reserva?.FechaHora.split(" ")[0] || "",
+    hour: reserva?.FechaHora.split(" ")[1] || "13:00",
+    numPeople: reserva?.Cantidad || 1
+  }
+
   const {
     control,
     handleSubmit,
@@ -46,33 +55,46 @@ const Reservas = () => {
     reset
   } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: {
-      date: "",
-      hour: "13:00",
-      numPeople: 1
-    }
+    defaultValues
   });
 
   const navigate = useNavigate();
 
   const [showTicket, setShowTicket] = useState(false);
 
-  let [reserva, setReserva] = useState({});
-
   const onSubmit = async (data) => {
+    const FechaHora = `${myFecha(data.date)} ${data.hour}`
+    const Cantidad = data.numPeople;
+
+    reserva = {
+      FechaHora,
+      Precio: 19.99,
+      EventoId: 26,
+      Cantidad
+    }
+
+    if (!token) {
+      setButtonDisabled(true);
+      localStorage.setItem("reserva", JSON.stringify(reserva));
+      toast.error("¡Inicia sesión para poder reservar!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      setTimeout(() => {
+        navigate("/login");
+      }, 5000);
+      return;
+    }
+
     try {
       const api = 'https://sdlt2.azurewebsites.net/api/Reservas/Create';
-      const FechaHora = `${myFecha(data.date)} ${data.hour}`
-      const Cantidad = data.numPeople;
-
-      reserva = {
-        FechaHora,
-        Precio: 19.99,
-        EventoId: 1,
-        Cantidad
-      }
       const encodedData = qs.stringify(reserva);
-
       const response = await axios.post(api, encodedData, {
         headers: {
           "Authorization": "Bearer " + JSON.parse(sessionStorage.getItem("token")),
@@ -83,60 +105,13 @@ const Reservas = () => {
       })
       setReserva(reserva);
       setShowTicket(true);
-      console.log(response);
-      await sleep(2000);
+      await sleep(5000);
       reset();
-    } catch (error) {
-      const errorUtils = {
-        getError: (error) => {
-          let e = error;
-          if (error.response) {
-            e = error.response.data;                   // data, status, headers
-            if (error.response.data && error.response.data.error) {
-              e = error.response.data.error;           // my app specific keys override
-            }
-          } else if (error.message) {
-            e = error.message;
-          } else {
-            e = "Unknown error occured";
-          }
-          return e;
-        },
-      };
-      errorUtils.getError(error);
+    }
+    catch (error) {
+      console.error(error)
     }
   };
-
-  const getAllReservas = async () => {
-    try {
-      const api = 'https://sdlt2.azurewebsites.net/api/Reservas/GetAll'
-      const data = await axios.get(api);
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const getUserInfo = async () => {
-    try {
-      const api = "https://sdlt2.azurewebsites.net/api/Account/UserInfo";
-      const data = await axios.get(api, {
-        headers: {
-          "Authorization": "Bearer " + JSON.parse(sessionStorage.getItem("token")),
-          "Content-Type": "application/x-www-form-urlencoded",
-        }
-      });
-      setUserName(data.Email);
-      return data;
-    } catch (error) {
-      console.error(error.response.data);
-    }
-  }
-
-  useEffect(() => {
-    // getAllReservas();
-    getUserInfo();
-  }, []);
 
   return (
     <Box component="section" sx={{ maxWidth: "1440px", margin: "auto" }}>
@@ -200,15 +175,14 @@ const Reservas = () => {
           </Box>
         )}
       </Box>
-
       <Box sx={{ margin: "0 auto" }}>
         <Typography variant="h3" sx={{ textAlign: "center", fontWight: "bold", fontSize: "clamp(1.5rem, 6vw, 2.5rem)", margin: { lg: "121px 0 146px", md: "48px 0", xs: "32px 0" } }}>
           Reservación
         </Typography>
-        <Box sx={{}}>
+        <Box>
           {isSubmitting
             ? <Spinner />
-            : showTicket ? <Ticket reserva={reserva} userName={userName} /> : (
+            : showTicket ? <Ticket reserva={reserva} /> : (
               <>
                 <Stack
                   direction={{ xs: "column", md: "row" }}
@@ -296,7 +270,8 @@ const Reservas = () => {
                           isSubmitting ||
                           !!(errors.date && touchedFields.date) ||
                           !!(errors.hour && touchedFields.hour) ||
-                          !!(errors.numPeople && touchedFields.numPeople)
+                          !!(errors.numPeople && touchedFields.numPeople) ||
+                          buttonDisabled
                         }
                         type="submit"
                         variant="contained"
@@ -307,41 +282,6 @@ const Reservas = () => {
                     </form>
                   </Box>
                 </Stack>
-                {/* <Box sx={{ margin: { lg: "79px 0 250px", sm: "32px 0", xs: "32px 0" }, padding: { lg: "16px 96px", sm: "16px 32px", xs: "16px" } }}>
-                  <Typography variant="body1" sx={{ textAlign: "left", fontSize: "clamp(1rem, 3vw, 2.5rem)", marginBottom: { lg: "16px", xs: "8px" } }}>
-                    Elige otra sucursal
-                  </Typography>
-                  <Box>
-                    <Stack
-                      direction={{ xs: "column", sm: "row" }}
-                      justifyContent="space-between"
-                      alignItems="center"
-                      spacing={2}
-                      borderRadius={2}
-                      p={2}
-                      sx={{ width: "100%", border: "3px solid #472C1B" }}
-                    >
-                      <Box>
-                        <Typography
-                          variant="h6"
-                          sx={{ textAlign: "left", fontWeight: "bold" }}
-                        >
-                          Sucursal B
-                        </Typography>
-                        <Typography
-                          variant="body2"
-                          sx={{ textAlign: "left", lineHeight: "1.6em", width: "100%" }}
-                        >
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                          Numquam commodi asperiores dolorem dignissimos
-                        </Typography>
-                      </Box>
-                      <Button variant="contained" size="small" sx={{ width: { md: "unset", sm: "50%", xs: "100%" } }}>
-                        Seleccionar
-                      </Button>
-                    </Stack>
-                  </Box>
-                </Box> */}
               </>
             )
           }
@@ -389,6 +329,19 @@ const Reservas = () => {
           </Box>
         </Box>
       </Box>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <ToastContainer />
     </Box >
   );
 };

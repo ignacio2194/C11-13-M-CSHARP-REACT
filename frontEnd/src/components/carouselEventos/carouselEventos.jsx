@@ -20,7 +20,7 @@ const evimg = [
   },
   {
     img: ev4,
-    desc: 'Fiesta Mexicana', 
+    desc: 'Fiesta Mexicana',
   },
   {
     img: ev5,
@@ -61,7 +61,6 @@ export default function CarouselEventos() {
       renderCenterLeftControls={() => null}
       renderCenterRightControls={() => null}
       centerMode={true}
-      centerSlidePercentage={30.33}
       showIndicators={false}
     >
       {evimg.map((item, index) => (
