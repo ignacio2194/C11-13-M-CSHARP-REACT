@@ -9,7 +9,12 @@ const AddressSelector = () => {
   useEffect(() => {
     // Realizar la solicitud a la API para obtener la información
     axios
-      .get('URL_DE_LA_API')
+      .get('', {
+        headers:{
+          "Authorization": "Bearer " + JSON.parse(sessionStorage.getItem("token")),
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      })
       .then(response => {
         setAddressText(response.data.texto);
       })
