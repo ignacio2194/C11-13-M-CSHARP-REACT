@@ -68,6 +68,7 @@ function App() {
             <Route path="/crear-cuenta" element={<CrearCuenta />} />
             <Route path="/recuperar-password" element={<RecuperarPassword />} />
             <Route path="/reservas" element={<Reservas />} />
+            <Route path="/eventos" element={<Eventos />} />
           </>
         )}
         <Route path="/cuenta-creada" element={<AccountCreated />} />
