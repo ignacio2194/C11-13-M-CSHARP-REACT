@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -64,21 +65,18 @@ namespace sdlt.Controllers
             return db.Reserva.FirstOrDefault(c => c.ReservaId == id);
         }
         [HttpPost]
-        [Authorize(Roles ="User,Administrator")]
         [Route("Create")]
+        [Authorize(Roles = "User,Administrator")]
         public async Task<IHttpActionResult> Create(ReservacionDto reservacion)
         {
-            if(reservacion != null)
+            try
             {
-                Reserva laReserva = new Reserva()
-                {
-                    FechaHora = reservacion.FechaHora,
-                    Precio = db.Evento.First(e => e.EventoId == reservacion.EventoId).Precio,
-                    UserId = User.Identity.GetUserId(),
-                    EventoId = reservacion.EventoId,
-                    Cantidad = reservacion.Cantidad
-                };
-                Evento elEventoCorrespondiente = db.Evento.FirstOrDefault(e => e.EventoId == laReserva.EventoId);
+
+           
+            if (reservacion != null)
+            {
+            
+                Evento elEventoCorrespondiente = db.Evento.FirstOrDefault(e => e.EventoId == reservacion.EventoId);
                 if (elEventoCorrespondiente != null)
                 {
                     if(elEventoCorrespondiente.Stock == 0)
@@ -87,12 +85,12 @@ namespace sdlt.Controllers
                     }
                     if (elEventoCorrespondiente.Stock > 0)
                     {
-                        int? diferencia = elEventoCorrespondiente.Stock - laReserva.Cantidad;
+                        int? diferencia = elEventoCorrespondiente.Stock - reservacion.Cantidad;
                         if (diferencia != null)
                         {
                             if (diferencia >= 0)
                             {
-                                elEventoCorrespondiente.Stock -= laReserva.Cantidad;
+                                elEventoCorrespondiente.Stock -= reservacion.Cantidad;
                             }
                             else
                             {
@@ -114,7 +112,17 @@ namespace sdlt.Controllers
                     return Content(HttpStatusCode.BadRequest,
                         "Error, EventoId no coincide con ningún evento");
                 }
-                db.Entry(elEventoCorrespondiente).State = EntityState.Modified;
+                Reserva laReserva = new Reserva()
+                {
+                    FechaHora = reservacion.FechaHora,
+                    Precio = db.Evento.First(e => e.EventoId == reservacion.EventoId).Precio,
+                    UserId = User.Identity.GetUserId(),
+                    EventoId = reservacion.EventoId,
+                    Cantidad = reservacion.Cantidad,
+                    Evento = db.Evento.Find(reservacion.EventoId),
+                    AspNetUsers = db.AspNetUsers.Find(User.Identity.GetUserId())
+                };
+                db.Entry(elEventoCorrespondiente).State = EntityState.Modified;                
                 Reserva reservaNueva = db.Reserva.Add(laReserva);
                 int cambios = await db.SaveChangesAsync();
                 if(cambios > 0)
@@ -129,6 +137,24 @@ namespace sdlt.Controllers
             else
             {
                 return Content(HttpStatusCode.BadRequest, "Error, reserva vacía");
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+                // Recorremos los errores de validación
+                foreach (var error in ex.EntityValidationErrors)
+                {
+                    // Recorremos las propiedades con errores
+                    foreach (var validationError in error.ValidationErrors)
+                    {
+                        string propertyName = validationError.PropertyName;
+                        string errorMessage = validationError.ErrorMessage;
+
+                        // Puedes manejar los errores de validación de acuerdo a tus necesidades
+                        // Por ejemplo, podrías loguearlos o devolverlos en la respuesta de la API
+                    }
+                }
+                return Content(HttpStatusCode.InternalServerError, ex);
             }
         }
         protected override void Dispose(bool disposing)

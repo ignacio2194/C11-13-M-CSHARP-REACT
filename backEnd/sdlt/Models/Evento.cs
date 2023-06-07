@@ -19,7 +19,7 @@ namespace sdlt.Models
         [StringLength(65)]
         public string Nombre { get; set; }
 
-        [StringLength(100)]
+        [StringLength(400)]
         public string Descripcion { get; set; }
 
         [StringLength(200)]
