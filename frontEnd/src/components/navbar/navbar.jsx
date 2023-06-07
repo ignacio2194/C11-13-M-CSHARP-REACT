@@ -91,8 +91,8 @@ export default function Navbar() {
             }
             spacing={2}
           >
-            <Typography sx={{ fontWeight: "bold" }}>ES</Typography>
-            <Typography>EN</Typography>
+           {/*<Typography sx={{ fontWeight: "bold" }}>ES</Typography>
+            <Typography>EN</Typography>*/}
           </Stack>
         </Stack>
         <Box
