@@ -10,6 +10,8 @@ import { clearCart } from "../../store/actions/cartActions";
 import { useDispatch, useSelector } from "react-redux";
 import { payment } from "../../store/actions/payment";
 import { deliverySaveAction } from "../../store/actions/delivery";
+import AddressSelector from './addressSelector'
+import { Add } from "@mui/icons-material";
 
 const Details = () => {
   const navigate = useNavigate();
@@ -109,6 +111,9 @@ const Details = () => {
         <Typography variant="h4" sx={{ textAlign: "center", my: 8 }}>
           Detalles de pedidos
         </Typography>
+        <Box sx={{ display: "flex", justifyContent: "center"}}>
+          <AddressSelector/>
+        </Box>
         <BasicTable isempty={isempty} total={total} />
         <Box
           sx={{

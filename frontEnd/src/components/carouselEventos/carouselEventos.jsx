@@ -11,8 +11,6 @@ import { Box } from '@mui/material';
 
 const evimg = [
   {
-
-
     img: ev2,
     desc: 'Taller de Pizzas',
   },
@@ -22,7 +20,7 @@ const evimg = [
   },
   {
     img: ev4,
-    desc: 'Fiesta Mexicana', 
+    desc: 'Fiesta Mexicana',
   },
   {
     img: ev5,
@@ -39,30 +37,35 @@ export default function CarouselEventos() {
     const currentItemIndex = index % evimg.length;
 
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', paddingLeft: '1%', paddingRight: '1%', maxWidth: "1440px" }} >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          paddingLeft: '1%',
+          paddingRight: '1%',
+        }}
+      >
         <div style={{ margin: '0 10px', width: '100%', height: 'auto' }}>
-          <EventoCard img={evimg[currentItemIndex].img} txt={evimg[currentItemIndex].desc} />
+          <EventoCard img={evimg[currentItemIndex].img} txt={evimg[currentItemIndex].desc}></EventoCard>
         </div>
       </Box>
     );
   };
 
   return (
-        <Carousel
-          showThumbs={false}
-          showStatus={false}
-          infiniteLoop={true}
-          swipeable={true}
-          renderCenterLeftControls={() => null}
-          renderCenterRightControls={() => null}
-          centerMode={true}
-          centerSlidePercentage={30.33}
-        >
-          {evimg.map((item, index) => (
-            <div key={index}>{renderCarouselItem(index)}</div>
-          ))}
-        </Carousel>
+    <Carousel
+      showThumbs={false}
+      showStatus={false}
+      infiniteLoop={true}
+      swipeable={true}
+      renderCenterLeftControls={() => null}
+      renderCenterRightControls={() => null}
+      centerMode={true}
+      showIndicators={false}
+    >
+      {evimg.map((item, index) => (
+        <div key={index}>{renderCarouselItem(index)}</div>
+      ))}
+    </Carousel>
   );
 }
-
-

@@ -76,7 +76,7 @@ namespace sdlt.Controllers
         [Route("Bebidas/GetAllB")]
         public IQueryable<Producto> GetAllB()
         {
-            return db.Producto.Where(p => p.CategoriaId == 1 || p.CategoriaId == 2);
+            return db.Producto.Where(p => p.CategoriaId == 10);
         }
         [HttpGet]
         [Route("Productos/GetByCategory")]
@@ -141,6 +141,9 @@ namespace sdlt.Controllers
                     case "Postres":
                         categoriaIdConvertido = (int)CategoriaEnum.Postre;
                         break;
+                    case "Postres y Bebidas":
+                        categoriaIdConvertido = (int)CategoriaEnum.Postre;
+                        break;
                     default:
                         return null;
                 }
@@ -161,6 +164,7 @@ namespace sdlt.Controllers
             };
             return elProducto;
         }
+     
         [HttpPost]
         [Route("Productos/Create")]
         //[Authorize(Roles ="Administrator")]
@@ -183,11 +187,13 @@ namespace sdlt.Controllers
             }
             
         }
+       
         [HttpPut]
         [Route("Productos/Modify")]
         //[Authorize(Roles ="Administrator")]
-        public async Task<IHttpActionResult> Modify(ProductoDto productoDto)
+        public async Task<IHttpActionResult> Modify([FromUri] int id, [FromBody] ProductoDto productoDto)
         {
+            productoDto.ProductoId = id;
             int? categoriaId = ConvertirDeDescripcionAId(productoDto.CategoriaId);
 
             Producto producto = ConvertirDelDtoAProducto(productoDto, categoriaId);

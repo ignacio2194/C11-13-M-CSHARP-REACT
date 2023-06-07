@@ -128,7 +128,7 @@ const AccountSucces=(data)=>{
               variant="h3"
               sx={{
                 textAlign: "center",
-                fontFamily: "Balsamiq Sans, cursive",
+                fontFamily: 'Open Sans',
                 fontWeight: "700",
               }}
             >
