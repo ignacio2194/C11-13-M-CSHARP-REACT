@@ -101,7 +101,7 @@ const CardMenu = () => {
               textDecoration: selectedOption ? "underline" : "",
               fontWeight: selectedOption ? "900" : "",
               fontSize: "1.25rem",
-              paddingRight: "25%",
+              // paddingRight: "25%",
               fontFamily: "open sans",
             }}
           >
@@ -122,7 +122,7 @@ const CardMenu = () => {
           </div>
         </Grid>}
       </Grid>
-      <Grid container spacing={1} justifyContent="center" alignItems="center">
+      <Grid container spacing={2} justifyContent="center" alignItems="center">
         {selectedOption && (
           <img src={promocion} alt="promocion" style={{ height: "20vw" }} />
         )}
@@ -131,15 +131,15 @@ const CardMenu = () => {
           justifyContent="center"
           alignItems="center"
           spacing={2}
-          sx={{ margin: "auto", maxWidth: "1380px", paddingTop: "10%", paddingLeft:"25px" }}>
+          sx={{ margin: "auto", maxWidth: "100vw", padding:'10px'  }}>
       {categorytype === "menu" && (
         <Grid
           container
           justifyContent="center"
           alignItems="center"
           spacing={2}
-          sx={{ margin: "auto", maxWidth: "1380px"}}
-        >
+          sx={{ margin: "auto", maxWidth: "100vw"  }}>
+        
           {categories.map((e, index) => (
             <Grid item xs={12} sm={6} md={4} key={index} onClick={()=>handleCategoriaId(e.CategoriaId)}>
               <Card
