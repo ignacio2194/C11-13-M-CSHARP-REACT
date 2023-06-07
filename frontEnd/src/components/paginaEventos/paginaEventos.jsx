@@ -121,8 +121,8 @@ const PaginaEventos = () => {
       </Grid>
 
       {/* Fila 5 */}
-      <Grid item xs={12} container justifyContent="center" style={{borderTop: '1px solid black', marginTop: '45px'}}>
-        <Grid item xs={6} container justifyContent="center" style={{marginTop: '25px'}}>
+      <Grid item xs={12} container justifyContent="center" style={{borderTop: '1px solid black', marginTop: '45px', borderBottom: '1px solid black'}}>
+        <Grid item xs={6} container justifyContent="center" style={{marginTop: '25px', marginBottom: '40px'}}>
           <div style={{ position: 'relative' }}>
             <img src={imagen5} alt="Noches de baile" />
             <Typography variant="body1" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: 'white', fontSize: '2.5rem', textAlign: 'center', whiteSpace: 'nowrap' }}>
