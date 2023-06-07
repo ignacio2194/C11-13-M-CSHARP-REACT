@@ -2,46 +2,38 @@ import React from 'react';
 import CarouselEventos from '../carouselEventos/carouselEventos';
 import hojas from '../../img/hojas.svg';
 import './seccionEventos.module.css';
+import { Box, Typography } from '@mui/material';
 
 const seccionEventos = () => {
   return (
-    <div
-      id='eventos'
-      style={{
-        width: '100%',
-        height: '120vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#E5B89B',
-        backgroundImage: `url(${hojas})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'right',
-        backgroundSize: '50%',
-      }}
-    >
-      <h2
-        style={{
+    <Box id='eventos' sx={{
+      width: '100%',
+      // height: '120vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#E5B89B',
+      backgroundImage: `url(${hojas})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'right',
+      backgroundSize: '50%',
+      overflow: 'hidden',
+      padding: { xs: "64px 0", lg: "129px 0 210px" }
+    }}>
+      <Typography
+        sx={{
           textAlign: 'center',
-          color: 'black',
-          marginTop: '-50px',
+          color: 'custom.text',
+          marginBottom: { xs: "32px", lg: "127px" },
           fontFamily: 'Parisienne, cursive',
-          fontSize: '80px',
-          fontWeight: 'normal',
+          fontSize: "clamp(2rem, 5vw, 4.375rem)"
         }}
       >
         Eventos
-      </h2>
-      <div
-        style={{
-          maxWidth: '100%',
-          width: '100%',
-        }}
-      >
-        <CarouselEventos />
-      </div>
-    </div>
+      </Typography>
+      <CarouselEventos />
+    </Box>
   );
 };
 

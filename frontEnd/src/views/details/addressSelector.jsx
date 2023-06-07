@@ -7,20 +7,26 @@ const AddressSelector = () => {
   const [addressText, setAddressText] = useState('');
 
   useEffect(() => {
-    // Realizar la solicitud a la API para obtener la información
-    axios
-      .get('', {
-        headers:{
-          "Authorization": "Bearer " + JSON.parse(sessionStorage.getItem("token")),
-          "Content-Type": "application/x-www-form-urlencoded"
-        }
-      })
-      .then(response => {
-        setAddressText(response.data.texto);
-      })
-      .catch(error => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          'https://sdlt2.azurewebsites.net/api/Account/GetDireccion',
+          {
+            headers: {
+              Authorization: 'Bearer ' + JSON.parse(sessionStorage.getItem('token')),
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+          }
+        );
+        setAddressText(response.data);
+        console.log('addressText:', addressText); // Mostrar addressText en la consola
+      } catch (error) {
         console.error('Error al obtener la información de la API:', error);
-      });
+        // Manejar el error, mostrar un mensaje de error o establecer un valor predeterminado
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
