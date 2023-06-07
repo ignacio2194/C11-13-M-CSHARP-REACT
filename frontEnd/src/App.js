@@ -18,7 +18,7 @@ import EventForm from "./views/admin/eventForm/eventForm";
 import MenuForm from "./views/admin/menuForm/menuForm";
 import AllReservas from "./views/admin/reservas/reservas";
 import AccountCreated from "./components/accountCreated/AccountCreated";
-
+import './GlobalStyles/index.css'
 function App() {
   const isAdmin = JSON.parse(sessionStorage.getItem("rol"));
   const navigate = useNavigate();
@@ -51,6 +51,7 @@ function App() {
             <Route path="/admin/eventForm" element={<EventForm />} />
             <Route path="/admin/createMenu" element={<MenuForm />} />
             <Route path="/admin/allreservas" element={<AllReservas />} />
+            <Route path="/login" element={<Login />} />
           </>
         ) : isAdmin === "user" ? (
           <>
