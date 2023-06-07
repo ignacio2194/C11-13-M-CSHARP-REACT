@@ -11,6 +11,7 @@ import cat3 from "../../img/categorias/menu3.jpg";
 import cat4 from "../../img/categorias/menu4.jpg";
 import cat5 from "../../img/categorias/menu5.jpg";
 import cat6 from "../../img/categorias/menu6.jpg";
+import'../cardMenu/cardMenu.css'
 import { Link } from "react-router-dom";
 
 

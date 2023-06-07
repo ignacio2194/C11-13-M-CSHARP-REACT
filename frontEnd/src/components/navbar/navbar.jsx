@@ -51,9 +51,8 @@ export default function Navbar() {
       });
     }
   }, [token, rol]);
-  
-  return (
 
+  return (
     <Box
       component="nav"
       sx={{
@@ -136,7 +135,7 @@ export default function Navbar() {
                   display: "flex",
                   alignItems: "center",
                   gap: { lg: "64px", sm: "22px", xs: "16px" },
-                  marginRight: "42px"
+                  marginRight: "42px",
                 }}
               >
                 <Link
@@ -179,19 +178,19 @@ export default function Navbar() {
                     {token ? (
                       <AccountMenu closeSession={closeSession} />
                     ) : (
-                      <NavLink
-                        to="/login"
-                      >
-                        <Button variant="yellow" size="small">Iniciar Sesión</Button>
+                      <NavLink to="/login">
+                        <Button variant="yellow" size="small">
+                          Iniciar Sesión
+                        </Button>
                       </NavLink>
                     )}
                   </Box>
                 </Box>
               ) : (
-                <NavLink
-                  to="/login"
-                >
-                  <Button variant="yellow" size="small">Iniciar Sesión</Button>
+                <NavLink to="/login">
+                  <Button variant="yellow" size="small">
+                    Iniciar Sesión
+                  </Button>
                 </NavLink>
               )}
             </Box>
@@ -205,21 +204,23 @@ export default function Navbar() {
         sx={{ display: { xs: "block", sm: "none" } }}
         closeSession={closeSession}
       >
-        <NavListDrawerResponsive onClick={() => setOpen(false)} closeSession={closeSession} />
+        <NavListDrawerResponsive
+          onClick={() => setOpen(false)}
+          closeSession={closeSession}
+        />
       </Drawer>
       <ToastContainer
-position="top-right"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-/>
-<ToastContainer />
-    </Box >
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </Box>
   );
 }
