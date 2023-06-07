@@ -13,7 +13,6 @@ import { deliverySaveAction } from "../../store/actions/delivery";
 import AddressSelector from './addressSelector'
 import { Add } from "@mui/icons-material";
 
-
 const Details = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,18 +20,26 @@ const Details = () => {
   const [empty, setEmpty] = useState(false);
   const [total, setTotal] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [idMP, setIdMP] = useState(0);
+  const [renderedCheckoutButton, setRenderedCheckoutButton] = useState(false);
 
   const data = useSelector((state) => state.shopingCart.data);
-  let idMP = useSelector((state) => state.Idpago.Id);
+  let id = useSelector((state) => state.Idpago?.Id);
 
- 
+  useEffect(() => {
+    setIdMP(id);
+  }, [id]);
+
+  useEffect(() => {
+    if (idMP && !renderedCheckoutButton) {
+      setRenderedCheckoutButton(true);
+    }
+  }, [idMP, renderedCheckoutButton]);
+
   const resetStr = () => {
-
     dispatch(clearCart());
     resetStore();
-    //agregué este:
-    idMP = "";
-    window.walletBrickController?.unmount()
+    window.walletBrickController?.unmount();
     navigate("/");
   };
 
@@ -40,18 +47,31 @@ const Details = () => {
     setEmpty(!empty);
   };
 
-  const botonMP = <Wallet
-    initialization={{ preferenceId: idMP, redirectMode: "modal" }}
-    onSubmit={() => {
-      resetStr();
-    }}
-  />
-  
+  const renderCheckoutButton = (preferenceId) => {
+    if (renderedCheckoutButton && preferenceId) {
+      if ('caches' in window) {
+        caches.keys().then(function(cacheNames) {
+          cacheNames.forEach(function(cacheName) {
+            caches.delete(cacheName);
+          });
+        });
+      }
+      //initMercadoPago("TEST-fc30be2e-cc40-46a2-9ca5-2ab08c73ada4");
+      return (
+        <Wallet
+          initialization={{ preferenceId: preferenceId }}
+          onSubmit={() => {
+            resetStr();
+          }}
+        />
+      );
+    }
+
+    return null;
+  };
+
   const pay = () => {
-
-    setVisible(!visible)
-    initMercadoPago("TEST-fc30be2e-cc40-46a2-9ca5-2ab08c73ada4");
-
+    setVisible(!visible);
     const total = data.reduce((accumulator, currentObject) => {
       const partialResult = currentObject.cantidad * currentObject.Precio;
       return accumulator + partialResult;
@@ -62,13 +82,9 @@ const Details = () => {
       descriptions: "Comidas.",
     };
 
-    
     dispatch(payment(totalcarrito));
 
-    // dispatch(deliverySaveAction(data))
-
-   setVisible(!visible);
-    
+    setVisible(!visible);
   };
 
   return (
@@ -117,13 +133,12 @@ const Details = () => {
             <Button variant="contained" onClick={resetStr}>
               Eliminar pedido
             </Button>
-            {/* agregué este */}
-            {visible && 
+            {visible && (
               <Button variant="contained" onClick={pay} isVisible={visible}>
                 Pagar
               </Button>
-            }
-            {botonMP}
+            )}
+            {renderCheckoutButton(idMP)}
           </Stack>
         </Box>
         <Box>
