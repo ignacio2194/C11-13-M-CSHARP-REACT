@@ -70,7 +70,7 @@ const Reservas = () => {
     reserva = {
       FechaHora,
       Precio: 19.99,
-      EventoId: 23,
+      EventoId: 4,
       Cantidad
     }
 
@@ -110,7 +110,16 @@ const Reservas = () => {
       reset();
     }
     catch (error) {
-      console.error(error)
+      toast.error("¡Ocurrió un error, intenta más tarde!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
