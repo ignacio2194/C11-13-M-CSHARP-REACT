@@ -34,6 +34,7 @@ namespace sdlt.Models
         public string LoginProvider { get; set; }
 
         public string RoleId { get; set; }
+        public string NombreApellido { get; set; }
     }
 
     public class UserLoginInfoViewModel

@@ -53,16 +53,30 @@ namespace sdlt.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
-
+        
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
+        [HttpGet]
+        [Route("GetDireccion")]
+        //[Authorize(Roles = "User")]
+        public string GetDireccion()
+        {
+            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+            var httpContext = HttpContext.Current;
+            SDLTDb db = new SDLTDb();
+            string userId = httpContext.User.Identity.GetUserId();
+            User user = db.AspNetUsers.FirstOrDefault(u => u.Id == userId);
+            return user.Direccion;
+        }
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
-        //[Authorize(Roles = "User,Administrator")]
+        [Authorize(Roles = "User,Administrator")]
         public UserInfoViewModel GetUserInfo()
         {
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
             string nombreDelProcedimiento = "ObtenerRol";
             string elRol = "";
+            string nombreApellido = "";
             using (SqlConnection connection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["SDLTDb"].ToString()))
             {
                 connection.Open();
@@ -75,6 +89,7 @@ namespace sdlt.Controllers
                         while (reader.Read())
                         {
                             elRol = reader[0].ToString();
+                            nombreApellido = reader[1].ToString();
                         }
                     }
                     connection.Close();
@@ -84,7 +99,8 @@ namespace sdlt.Controllers
                 Email = User.Identity.GetUserName(),
                 HasRegistered = externalLogin == null,
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null,
-                RoleId = elRol
+                RoleId = elRol,
+                NombreApellido = nombreApellido
             };
         }
 
