@@ -5,6 +5,8 @@
   import "./menuForm.css"
   import SideBar from '../dashboard/sideBar';
   import Navbar from '../../admin/dashboard/navBar';
+  import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
   const MenuForm = () => {
     const [form, setForm] = useState({
@@ -27,7 +29,19 @@
           'https://sdlt2.azurewebsites.net/api/Productos/Create',
           form
         );
-        alert('Product Created!');
+        toast.success('¡Producto creado!', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+        setTimeout(() => {
+          window.location.replace('/');
+        }, 3000);
        
         // Restablecer los valores del formulario
         setForm({
@@ -39,7 +53,16 @@
           EstaActivo: '',
         });
       } catch (error) {
-       alert(error);
+        toast.error('Ha ocurrido un error', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
       }
     };
 
@@ -110,6 +133,7 @@
               <Button type="submit" variant="contained" color="primary">
                 Guardar
               </Button>
+              <ToastContainer />
             </div>
           </form>
         </div>
