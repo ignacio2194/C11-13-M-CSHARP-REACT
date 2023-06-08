@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, Controller } from 'react-hook-form';
 import Map from "./Map";
 import schema from "../../utils/validateReservations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Ticket from "./Ticket";
 import Spinner from "./Spinner";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -28,6 +28,7 @@ const PERSONS_OPTIONS = [
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const Reservas = () => {
+  const [userName, setUserName] = useState("");
   const [token, setToken] = useState(sessionStorage.getItem("token"));
   const [rol, setRol] = useState(sessionStorage.getItem("rol"));
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -40,12 +41,12 @@ const Reservas = () => {
     setRol(null);
   };
 
-  reserva = JSON.parse(localStorage.getItem("reserva"));
+  // reserva = JSON.parse(localStorage.getItem("reserva"));
 
   const defaultValues = {
-    date: reserva?.FechaHora.split(" ")[0] || "",
-    hour: reserva?.FechaHora.split(" ")[1] || "13:00",
-    numPeople: reserva?.Cantidad || 1
+    date: "",
+    hour: "13:00",
+    numPeople: 1
   }
 
   const {
@@ -69,13 +70,13 @@ const Reservas = () => {
     reserva = {
       FechaHora,
       Precio: 19.99,
-      EventoId: 26,
+      EventoId: 4,
       Cantidad
     }
 
     if (!token) {
       setButtonDisabled(true);
-      localStorage.setItem("reserva", JSON.stringify(reserva));
+      // localStorage.setItem("reserva", JSON.stringify(reserva));
       toast.error("¡Inicia sesión para poder reservar!", {
         position: "top-center",
         autoClose: 5000,
@@ -109,9 +110,39 @@ const Reservas = () => {
       reset();
     }
     catch (error) {
-      console.error(error)
+      toast.error("¡Ocurrió un error, intenta más tarde!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  const getUserInfo = async () => {
+    try {
+      const api = "https://sdlt2.azurewebsites.net/api/Account/UserInfo";
+      const { data } = await axios.get(api, {
+        headers: {
+          "Authorization": "Bearer " + JSON.parse(sessionStorage.getItem("token")),
+          "Content-Type": "application/x-www-form-urlencoded",
+        }
+      });
+      const userNameFiltered = data?.NombreApellido === "" ? data.Email : data.NombreApellido;
+      console.log(userNameFiltered)
+      setUserName(userNameFiltered);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <Box component="section" sx={{ maxWidth: "1440px", margin: "auto" }}>
@@ -182,7 +213,7 @@ const Reservas = () => {
         <Box>
           {isSubmitting
             ? <Spinner />
-            : showTicket ? <Ticket reserva={reserva} /> : (
+            : showTicket ? <Ticket reserva={reserva} userName={userName} /> : (
               <>
                 <Stack
                   direction={{ xs: "column", md: "row" }}

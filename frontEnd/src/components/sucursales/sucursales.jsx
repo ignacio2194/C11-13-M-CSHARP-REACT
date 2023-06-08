@@ -32,11 +32,11 @@ const Sucursales = () => {
       }}
       id='sucursales'
     >
-      <h1
-        style={{
+      <Typography
+        sx={{
           textAlign: "center",
           color: "#ffffff",
-          marginTop: "20px",
+          marginTop: { xs: "32px", lg: "113px" },
           fontFamily: "Parisienne, cursive",
           fontSize: "clamp(2rem, 5vw, 4.375rem)",
           // fontSize: "70px",
@@ -44,7 +44,7 @@ const Sucursales = () => {
         }}
       >
         Nuestras sucursales
-      </h1>
+      </Typography>
       <Box sx={{ marginTop: { lg: "150px" } }}>
         <Box sx={{
           background: "rgba(255, 255, 255, 0.07)",

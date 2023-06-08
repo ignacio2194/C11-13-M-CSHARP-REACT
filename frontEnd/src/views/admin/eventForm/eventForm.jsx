@@ -4,8 +4,13 @@ import { TextField, Button, Grid } from '@mui/material';
 import SideBar from '../dashboard/sideBar';
 import './eventForm.css';
 import Navbar from '../../admin/dashboard/navBar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const EventForm = () => {
+ 
+
   const [form, setForm] = useState({
     Nombre: '',
     Descripcion: '',
@@ -45,9 +50,30 @@ const EventForm = () => {
     event.preventDefault();
     try {
       await axios.post('https://sdlt2.azurewebsites.net/api/Eventos/Create', form);
-      alert('Event Created!');
+      toast.success('¡Evento creado!', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
+      setTimeout(() => {
+        window.location.replace('/');
+      }, 3000);
     } catch (error) {
-      alert(error);
+      toast.error('Ha ocurrido un error', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      });
     }
   };
 
@@ -120,6 +146,7 @@ const EventForm = () => {
             <Button type="submit" variant="contained" color="primary">
               Crear Evento
             </Button>
+            <ToastContainer />
           </Grid>
         </Grid>
       </form>
