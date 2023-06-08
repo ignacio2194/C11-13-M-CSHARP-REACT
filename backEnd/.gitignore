@@ -1,0 +1,8 @@
+.vs
+packages
+sdlt/bin/*
+sdlt/obj/*
+sdlt/Content/*
+sdlt/Scripts/*
+sdlt/fonts/*
+sdlt/Views/*
