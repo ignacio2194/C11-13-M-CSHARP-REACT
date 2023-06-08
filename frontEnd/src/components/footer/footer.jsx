@@ -4,8 +4,9 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import logo from '../../img/logo-sabores@2x.png';
 import { Link } from '../navbar/navlink';
+import scrollToSection from "../../utils/scrollToSection.js";
 
-const Footer = ({ menu, events, sucursales }) => {
+const Footer = ({ menu, seccionEventos, sucursales }) => {
   const [show, setShow] = useState(false);
 
   return (
@@ -17,39 +18,52 @@ const Footer = ({ menu, events, sucursales }) => {
           spacing={2}
           sx={{ margin: { lg: "68px auto 0", sm: "32px auto 0", xs: "16px auto 0" } }}
         >
-          <Link
-            spy={true}
-            duration={500}
-            smooth={true}
-            exact="true"
-            offset={-201}
-            onClick={() => setShow(false)}
-            to="menu"
+          <a
+            href='#menu'
+            style={{
+              color: "#fff",
+              display: "flex",
+              alignItems: "center",
+              textDecoration: "none",
+              padding: "0.5rem 0",
+              height: "100%",
+              cursor: "pointer",
+              fontSize: "18px",
+            }}
           >
             <Typography>Menú</Typography>
-          </Link>
-          <Link
-            spy={true}
-            duration={500}
-            smooth={true}
-            exact="true"
-            offset={-201}
-            onClick={() => setShow(false)}
-            to="eventos"
+          </a
+          >
+          <a
+            href='#seccionEventos'
+            style={{
+              color: "#fff",
+              display: "flex",
+              alignItems: "center",
+              textDecoration: "none",
+              padding: "0.5rem 0",
+              height: "100%",
+              cursor: "pointer",
+              fontSize: "18px",
+            }}
           >
             <Typography>Eventos</Typography>
-          </Link>
-          <Link
-            spy={true}
-            duration={500}
-            smooth={true}
-            exact="true"
-            offset={-201}
-            onClick={() => setShow(false)}
-            to="sucursales"
+          </a>
+          <a
+            href='#sucursales'
+            style={{
+              color: "#fff",
+              display: "flex",
+              alignItems: "center",
+              textDecoration: "none",
+              padding: "0.5rem 0",
+              height: "100%",
+              cursor: "pointer",
+              fontSize: "18px",
+            }}
           >
             <Typography>Sucursales</Typography>
-          </Link>
+          </a>
         </Stack>
       </Toolbar>
       <Box

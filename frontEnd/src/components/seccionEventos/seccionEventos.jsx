@@ -6,7 +6,7 @@ import { Box, Typography } from '@mui/material';
 
 const seccionEventos = () => {
   return (
-    <Box id='eventos' sx={{
+    <Box sx={{
       width: '100%',
       // height: '120vh',
       display: 'flex',

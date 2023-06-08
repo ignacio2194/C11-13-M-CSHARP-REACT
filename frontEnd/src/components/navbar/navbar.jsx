@@ -19,8 +19,9 @@ import { ToastContainer, toast } from "react-toastify";
 import { Link } from "./navlink.jsx";
 
 import AccountMenu from "./menu.jsx";
+import scrollToSection from "../../utils/scrollToSection.js";
 
-export default function Navbar() {
+export default function Navbar({ menu, seccionEventos, sucursales }) {
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
   const [token, setToken] = useState(sessionStorage.getItem("token"));
@@ -91,7 +92,7 @@ export default function Navbar() {
             }
             spacing={2}
           >
-           {/*<Typography sx={{ fontWeight: "bold" }}>ES</Typography>
+            {/*<Typography sx={{ fontWeight: "bold" }}>ES</Typography>
             <Typography>EN</Typography>*/}
           </Stack>
         </Stack>
@@ -138,39 +139,52 @@ export default function Navbar() {
                   marginRight: "42px",
                 }}
               >
-                <Link
-                  spy={true}
-                  duration={500}
-                  smooth={true}
-                  exact="true"
-                  offset={-201}
-                  onClick={() => setShow(false)}
-                  to="menu"
+                <a
+                  href='#menu'
+                  style={{
+                    color: "#fff",
+                    display: "flex",
+                    alignItems: "center",
+                    textDecoration: "none",
+                    padding: "0.5rem 0",
+                    height: "100%",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                  }}
                 >
                   <Typography>Menú</Typography>
-                </Link>
-                <Link
-                  spy={true}
-                  duration={500}
-                  smooth={true}
-                  exact="true"
-                  offset={-201}
-                  onClick={() => setShow(false)}
-                  to="eventos"
+                </a
+                >
+                <a
+                  href='#seccionEventos'
+                  style={{
+                    color: "#fff",
+                    display: "flex",
+                    alignItems: "center",
+                    textDecoration: "none",
+                    padding: "0.5rem 0",
+                    height: "100%",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                  }}
                 >
                   <Typography>Eventos</Typography>
-                </Link>
-                <Link
-                  spy={true}
-                  duration={500}
-                  smooth={true}
-                  exact="true"
-                  offset={-201}
-                  onClick={() => setShow(false)}
-                  to="sucursales"
+                </a>
+                <a
+                  href='#sucursales'
+                  style={{
+                    color: "#fff",
+                    display: "flex",
+                    alignItems: "center",
+                    textDecoration: "none",
+                    padding: "0.5rem 0",
+                    height: "100%",
+                    cursor: "pointer",
+                    fontSize: "18px",
+                  }}
                 >
                   <Typography>Sucursales</Typography>
-                </Link>
+                </a>
               </Box>
               {token ? (
                 <Box>
@@ -207,6 +221,9 @@ export default function Navbar() {
         <NavListDrawerResponsive
           onClick={() => setOpen(false)}
           closeSession={closeSession}
+          menu={menu}
+          secionEventos={seccionEventos}
+          sucursales={sucursales}
         />
       </Drawer>
       <ToastContainer
