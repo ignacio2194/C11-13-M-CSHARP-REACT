@@ -63,7 +63,7 @@ export default class Resenias extends Component {
           <Box sx={{ width: "130px", position: "absolute", top: "0", left: "50%", transform: "translateX(-50%)" }}>
             <img src={hoja} alt="hoja" />
           </Box>
-          <Typography variant="h4" sx={{ textAlign: 'center', color: '#fff', margin: '141px auto 79px', fontFamily: 'Parisienne, cursive', fontSize: "clamp(2rem, 5vw, 6.25rem)", fontWeight: 'normal' }}>Lo que opinan nuestros clientes</Typography>
+          <Typography variant="h4" sx={{ textAlign: 'center', color: '#fff', margin: '234px auto 142px', fontFamily: 'Parisienne, cursive', fontSize: "clamp(2rem, 5vw, 6rem)", fontWeight: 'normal' }}>Reseñas de nuestros clientes</Typography>
           <Slider {...settings}>
             {
               dataResenias.map((resenia, index) => (

@@ -19,15 +19,15 @@ const seccionEventos = () => {
       backgroundPosition: 'right',
       backgroundSize: '50%',
       overflow: 'hidden',
-      padding: { xs: "64px 0", lg: "129px 0 210px" }
+      padding: { xs: "32px 0", lg: "94px 0 167px" }
     }}>
       <Typography
         sx={{
           textAlign: 'center',
           color: 'custom.text',
-          marginBottom: { xs: "32px", lg: "127px" },
+          marginBottom: { xs: "32px", lg: "96px" },
           fontFamily: 'Parisienne, cursive',
-          fontSize: "clamp(2rem, 5vw, 4.375rem)"
+          fontSize: "clamp(2rem, 5vw, 6rem)"
         }}
       >
         Eventos

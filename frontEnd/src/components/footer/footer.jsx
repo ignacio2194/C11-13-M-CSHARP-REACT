@@ -15,7 +15,7 @@ const Footer = ({ menu, events, sucursales }) => {
           direction="row"
           divider={<Divider orientation="vertical" flexItem color={"white"} />}
           spacing={2}
-          sx={{ margin: { lg: "78px auto 0", sm: "32px auto 0", xs: "16px auto 0" } }}
+          sx={{ margin: { lg: "68px auto 0", sm: "32px auto 0", xs: "16px auto 0" } }}
         >
           <Link
             spy={true}

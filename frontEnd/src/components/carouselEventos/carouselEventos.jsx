@@ -62,6 +62,7 @@ export default function CarouselEventos() {
       renderCenterRightControls={() => null}
       centerMode={true}
       showIndicators={false}
+      centerSlidePercentage={60}
     >
       {evimg.map((item, index) => (
         <div key={index}>{renderCarouselItem(index)}</div>
