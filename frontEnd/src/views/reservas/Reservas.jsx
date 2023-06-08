@@ -70,7 +70,7 @@ const Reservas = () => {
     reserva = {
       FechaHora,
       Precio: 19.99,
-      EventoId: 4,
+      EventoId: 24,
       Cantidad
     }
 

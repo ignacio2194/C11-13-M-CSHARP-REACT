@@ -3,8 +3,9 @@ import { Box } from "@mui/system";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { Link } from "./navlink";
+import scrollToSection from "../../utils/scrollToSection.js";
 
-export default function NavListDrawerResponsive({ onClick, closeSession }) {
+export default function NavListDrawerResponsive({ onClick, closeSession, menu, seccionEventos, sucursales }) {
   const [show, setShow] = useState(false);
 
   return (
@@ -32,40 +33,38 @@ export default function NavListDrawerResponsive({ onClick, closeSession }) {
               padding: "32px 0",
             }}
           >
-            <Link
-              spy={true}
-              duration={500}
-              smooth={true}
-              exact="true"
-              offset={-164}
-              onClick={() => setShow(false)}
-              to="menu"
+            <a
+              href='#menu'
+              style={{
+                cursor: "pointer",
+                textDecoration: "none",
+                color: "#fff"
+              }}
             >
-              <Typography variant="h5">Menú</Typography>
-            </Link>
-            <Link
-              spy={true}
-              duration={500}
-              smooth={true}
-              exact="true"
-              offset={-164}
-              onClick={() => setShow(false)}
-              to="eventos"
+              <Typography variante='h5'>Menú</Typography>
+            </a
             >
-              <Typography variant="h5">Eventos</Typography>
-            </Link>
-            <Link
-              spy={true}
-              duration={500}
-              smooth={true}
-              exact="true"
-              offset={-164}
-              onClick={() => setShow(false)}
-              to="sucursales"
+            <a
+              href='#seccionEventos'
+              style={{
+                cursor: "pointer",
+                textDecoration: "none",
+                color: "#fff"
+              }}
             >
-              <Typography variant="h5">Sucursales</Typography>
-            </Link>
-            {sessionStorage.getItem("token")? (
+              <Typography variante='h5'>Eventos</Typography>
+            </a>
+            <a
+              href='#sucursales'
+              style={{
+                cursor: "pointer",
+                textDecoration: "none",
+                color: "#fff"
+              }}
+            >
+              <Typography variante='h5'>Sucursales</Typography>
+            </a>
+            {sessionStorage.getItem("token") ? (
               <NavLink to="/" onClick={closeSession}>
                 <Button variant="yellow" size="small">
                   Cerrar Sesión

@@ -16,7 +16,7 @@ const Menu = () => {
         backgroundColor: "#FFD7BD",
         flexDirection: "column"
       }}
-      id='menu'
+    // id='menu'
     >
       <Menulegend />
       <CardMenu />
