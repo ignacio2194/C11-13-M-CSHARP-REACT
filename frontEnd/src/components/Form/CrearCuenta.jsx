@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { GoogleLogin } from "@react-oauth/google";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -28,32 +27,33 @@ const CrearCuenta = () => {
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
 
-const AccountSucces=(data)=>{
-  if (data.status === 200) {
-    toast.success("¡Tu cuenta se ha creado correctamente. Serás redirigido para iniciar sesión con tu nueva cuenta.! ", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+  const AccountSucces = (data) => {
+    if (data.status === 200) {
+      toast.success(
+        "¡Tu cuenta se ha creado correctamente. Serás redirigido para iniciar sesión con tu nueva cuenta.! ",
+        {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        }
+      );
 
-    setUserData({
-      Email: "",
-      Password: "",
-      ConfirmPassword: "",
-      ConfirmEmail: "",
-    });
-    setTimeout(()=>{
-      navigate("/login")
-    },7000)
-
-   
-  }
-}
+      setUserData({
+        Email: "",
+        Password: "",
+        ConfirmPassword: "",
+        ConfirmEmail: "",
+      });
+      setTimeout(() => {
+        navigate("/login");
+      }, 7000);
+    }
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -78,7 +78,7 @@ const AccountSucces=(data)=>{
         ConfirmPassword: UserData.ConfirmPassword,
       });
 
-      AccountSucces(data)
+      AccountSucces(data);
     } catch (error) {
       const errorMessage = error.errors[0];
       setPasswordError(errorMessage);
@@ -128,7 +128,7 @@ const AccountSucces=(data)=>{
               variant="h3"
               sx={{
                 textAlign: "center",
-                fontFamily: 'Open Sans',
+                fontFamily: "Open Sans",
                 fontWeight: "700",
               }}
             >
@@ -283,14 +283,6 @@ const AccountSucces=(data)=>{
                 </Box>
               </Box>
             </Box>
-            {/* botonsito de google */}
-            {/* <Box sx={{ marginTop: 3 }}>
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  setToken(credentialResponse.credential);
-                }}
-              />
-            </Box> */}
           </Box>
         </Container>
       </ThemeProvider>
