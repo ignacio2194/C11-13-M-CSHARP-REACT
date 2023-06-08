@@ -33,7 +33,7 @@ namespace sdlt.Controllers
         {
             // List<CarritoDto> carrito
             MercadoPagoConfig.AccessToken = "TEST-8745031599738171-050420-9199ef6aa7d3367a72271aec715b20df-57697661";
-            string url = "https://sdlt2.azurewebsites.net";
+            string url = "https://saboresdelatierra.vercel.app/";
             //string url = "https://4600-181-94-248-186.ngrok-free.app";
             //var losItems = new List<PreferenceItemRequest>();
             //foreach (var itemDelCarrito in carrito)
@@ -55,7 +55,7 @@ namespace sdlt.Controllers
                     Failure = $"{url}/Home/",
                     Pending = "" },
                 AutoReturn = "approved",
-                NotificationUrl = $"{url}/api/Orden/Notify/",//mercado pago manda un post a esta url luego de que finalice el pago
+                NotificationUrl = $"https://sdlt2.azurewebsites.net/api/Orden/Notify/",//mercado pago manda un post a esta url luego de que finalice el pago
                 Items = new List<PreferenceItemRequest>
                     {
                         new PreferenceItemRequest
