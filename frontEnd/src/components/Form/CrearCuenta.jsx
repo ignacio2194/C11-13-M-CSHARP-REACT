@@ -255,33 +255,6 @@ const CrearCuenta = () => {
               >
                 Quiero crear mi cuenta
               </Button>
-              <Grid container justifyContent="center">
-                <Grid item xs={12} textAlign="center">
-                  <Typography
-                    variant="body2"
-                    sx={{ display: "inline-block", marginRight: "10px" }}
-                  >
-                    ¿No tienes cuenta?
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  textAlign="center"
-                  sx={{ marginBottom: "10px" }}
-                ></Grid>
-              </Grid>
-              <Box display="flex" alignItems="center" justifyContent="center">
-                <Box flex={1}>
-                  <hr />
-                </Box>
-                <Typography variant="body1" align="center" sx={{ px: 1 }}>
-                  o crea tu cuenta con
-                </Typography>
-                <Box flex={1}>
-                  <hr />
-                </Box>
-              </Box>
             </Box>
           </Box>
         </Container>
